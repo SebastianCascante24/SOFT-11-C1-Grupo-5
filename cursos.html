@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos | Gestor de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/cursos.js" defer></script>
+</head>
+<body>
+  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+  <header class="encabezado">
+    <a class="logo" href="cursos.html">
+      <img src="../img/logo-cenfotec.png" alt="Logo de la Universidad CENFOTEC" width="48" height="48">
+      <span>Gestor de Cursos</span>
+    </a>
+    <nav class="menu-principal" aria-label="Navegación principal">
+      <ul>
+        <li><a href="cursos.html" aria-current="page">Cursos</a></li>
+        <li><a href="curso-form.html">Registrar curso</a></li>
+        <li><a href="usuario-registro.html">Usuarios</a></li>
+        <li><a href="../index.html">Cerrar sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <h1>Catálogo de cursos</h1>
+    <p>Se muestran únicamente los cursos que su rol puede consultar.</p>
+
+    <form id="form-busqueda" class="busqueda" role="search" aria-label="Buscar cursos" novalidate>
+      <div class="campo">
+        <label for="buscar">Buscar por código o nombre</label>
+        <input type="search" id="buscar" name="buscar" maxlength="60" aria-describedby="error-buscar">
+        <span id="error-buscar" class="mensaje-error" aria-live="polite"></span>
+      </div>
+      <div class="campo">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado" name="filtro-estado">
+          <option value="">Todos</option>
+          <option value="borrador">Borrador</option>
+          <option value="en-desarrollo">En desarrollo</option>
+          <option value="en-produccion">En producción</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+      <button type="submit" class="boton">Buscar</button>
+      <a class="boton" href="curso-form.html">Registrar curso</a>
+    </form>
+
+    <div class="tabla-contenedor">
+      <table class="tabla" id="tabla-cursos">
+        <caption class="solo-lectores">Listado de cursos registrados</caption>
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Escuela</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Última modificación</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">SOF-101</th>
+            <td>Fundamentos de programación</td>
+            <td>Escuela de Software</td>
+            <td>Bachillerato en Ingeniería del Software</td>
+            <td><span class="etiqueta">En producción</span></td>
+            <td><time datetime="2026-09-12">12/09/2026</time></td>
+            <td class="acciones-fila"><a href="curso-detalle.html">Ver</a> <a href="curso-form.html">Modificar</a></td>
+          </tr>
+          <tr>
+            <th scope="row">SOF-205</th>
+            <td>Bases de datos NoSQL</td>
+            <td>Escuela de Software</td>
+            <td>Bachillerato en Ingeniería del Software</td>
+            <td><span class="etiqueta">En desarrollo</span></td>
+            <td><time datetime="2026-09-25">25/09/2026</time></td>
+            <td class="acciones-fila"><a href="curso-detalle.html">Ver</a> <a href="curso-form.html">Modificar</a></td>
+          </tr>
+          <tr>
+            <th scope="row">TEL-110</th>
+            <td>Redes y comunicaciones</td>
+            <td>Escuela de Telecomunicaciones</td>
+            <td>Bachillerato en Telecomunicaciones</td>
+            <td><span class="etiqueta">Borrador</span></td>
+            <td><time datetime="2026-09-30">30/09/2026</time></td>
+            <td class="acciones-fila"><a href="curso-detalle.html">Ver</a> <a href="curso-form.html">Modificar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p id="sin-resultados" class="aviso" role="status" hidden>No se encontraron resultados. Puede realizar una nueva búsqueda.</p>
+  </main>
+
+  <footer class="pie">
+    <p><small>&copy; 2026 Universidad CENFOTEC. Gestor de Cursos, Grupo 5, SOFT-11-C1.</small></p>
+  </footer>
+</body>
+</html>

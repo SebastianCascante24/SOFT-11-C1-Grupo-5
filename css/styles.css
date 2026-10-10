@@ -1,0 +1,1001 @@
+
+/* 
+   UNIVERSIDAD CENFOTEC
+   Sistema de Gestión Curricular
+   Grupo 5 - Primera Iteración
+   Hoja de estilos institucional
+    */
+
+/* 1. IDENTIDAD VISUAL */
+
+:root {
+  --azul-oscuro: #06356E;
+  --azul-principal: #0867E8;
+  --azul-intermedio: #1C4F99;
+  --azul-suave: #E3ECFF;
+
+  --gris-fondo: #F4F5F7;
+  --blanco: #FFFFFF;
+
+  --texto-principal: #263445;
+  --texto-secundario: #6B778C;
+
+  --rojo-error: #B42332;
+  --amarillo-advertencia: #FFC107;
+  --rojo-validacion: #DC3545;
+  --celeste-informativo: #0DCAF0;
+
+  --borde: #DCE3EB;
+  --fondo-alterno: #F8FAFD;
+
+  --fuente: "Segoe UI", Arial, Helvetica, sans-serif;
+
+  --radio: 3px;
+  --sombra: 0 2px 10px rgba(6, 53, 110, 0.05);
+}
+
+/* 2. CONFIGURACIÓN GENERAL */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fuente);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texto-principal);
+  background: var(--gris-fondo);
+}
+
+a {
+  color: var(--azul-principal);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--azul-oscuro);
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+  color: var(--azul-oscuro);
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+h1 {
+  font-size: clamp(25px, 3vw, 32px);
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul-principal);
+  outline-offset: 3px;
+}
+
+/* 3. ENLACE DE ACCESIBILIDAD */
+
+.salto-contenido,
+.saltar-contenido,
+a[href="#contenido"] {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--azul-oscuro);
+  color: var(--blanco);
+}
+
+.salto-contenido:focus,
+.saltar-contenido:focus,
+a[href="#contenido"]:focus {
+  top: 10px;
+  color: var(--blanco);
+}
+
+/* 4. ENCABEZADO INSTITUCIONAL */
+
+
+.encabezado,
+header.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+  min-height: 74px;
+  padding: 0 24px 0 0;
+  margin: 0;
+  background: var(--blanco);
+  border: none;
+  box-shadow: 0 4px 12px rgba(38, 52, 69, 0.10);
+}
+
+
+.encabezado .logo,
+.encabezado .logo-institucional,
+.encabezado > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  color: var(--azul-oscuro);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.encabezado img {
+  display: block;
+  width: 130px;
+  height: 74px;
+  max-width: none;
+  flex-shrink: 0;
+  object-fit: fill;
+}
+
+/* 5. MENÚ PRINCIPAL */
+
+.menu-principal ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-principal li {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-principal a {
+  display: inline-block;
+  padding: 9px 12px;
+  color: var(--azul-oscuro);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.menu-principal a:hover,
+.menu-principal a:focus-visible {
+  color: var(--azul-principal);
+  border-bottom-color: var(--azul-principal);
+}
+
+/* 6. CONTENIDO PRINCIPAL */
+
+main,
+.contenido-principal {
+  width: min(100% - 48px, 1280px);
+  margin: 0 auto;
+  padding: 36px 0 48px;
+  flex: 1;
+  min-width: 0;
+}
+
+main > h1 {
+  margin-bottom: 12px;
+}
+
+main > p {
+  color: var(--texto-secundario);
+  margin-bottom: 28px;
+}
+
+/* 7. FORMULARIOS */
+
+
+form {
+  max-width: 100%;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 22px;
+}
+
+
+label {
+  display: inline-block;
+  color: var(--texto-principal);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+select,
+textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  background: var(--blanco);
+  border: 1px solid #CBD5E1;
+  border-radius: var(--radio);
+  color: var(--texto-principal);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--azul-principal);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--azul-suave);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--texto-secundario);
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--rojo-error);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--azul-principal);
+}
+
+/* 8. ÁREAS DE BÚSQUEDA Y FILTROS */
+
+.busqueda,
+.filtros,
+.formulario-busqueda,
+form[id*="buscar"],
+form[id*="filtro"] {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 24px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.busqueda .campo,
+.filtros .campo,
+.formulario-busqueda .campo,
+form[id*="buscar"] .campo,
+form[id*="filtro"] .campo {
+  flex: 1 1 220px;
+  max-width: 360px;
+}
+
+.busqueda label,
+.filtros label,
+.formulario-busqueda label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.busqueda input,
+.busqueda select,
+.filtros input,
+.filtros select {
+  min-width: 0;
+}
+
+/* 9. BOTONES INSTITUCIONALES */
+
+button,
+input[type="submit"],
+input[type="button"],
+.boton,
+a.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 20px;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: 1px solid var(--azul-principal);
+  border-radius: var(--radio);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.boton:hover,
+a.boton:hover {
+  background: var(--azul-oscuro);
+  border-color: var(--azul-oscuro);
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+/* Acciones secundarias */
+
+.boton-secundario,
+.boton--secundario {
+  background: var(--blanco);
+  border-color: var(--azul-intermedio);
+  color: var(--azul-intermedio);
+}
+
+.boton-secundario:hover,
+.boton--secundario:hover {
+  background: var(--azul-suave);
+  color: var(--azul-oscuro);
+}
+
+/* Acciones de registro */
+
+a.boton[href*="form"],
+a.boton[href*="registro"] {
+  background: var(--azul-oscuro);
+  border-color: var(--azul-oscuro);
+  color: var(--blanco);
+}
+
+a.boton[href*="form"]:hover,
+a.boton[href*="registro"]:hover {
+  background: var(--azul-intermedio);
+  border-color: var(--azul-intermedio);
+}
+
+/* Estados deshabilitados */
+
+button:disabled,
+input[type="submit"]:disabled,
+.boton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 10. TABLAS DE INFORMACIÓN */
+
+table,
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--blanco);
+  font-size: 14px;
+}
+
+caption {
+  padding: 14px 18px;
+  background: var(--blanco);
+  color: var(--azul-oscuro);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  caption-side: top;
+}
+
+table thead,
+.tabla thead {
+  background: var(--azul-oscuro);
+}
+
+table th,
+.tabla th {
+  padding: 15px 16px;
+  background: var(--azul-oscuro);
+  color: var(--blanco);
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+table td,
+.tabla td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--borde);
+  vertical-align: middle;
+}
+
+table tbody tr:nth-child(even),
+.tabla tbody tr:nth-child(even) {
+  background: var(--fondo-alterno);
+}
+
+table tbody tr:hover,
+.tabla tbody tr:hover {
+  background: var(--azul-suave);
+}
+
+table td a,
+.tabla td a {
+  display: inline-block;
+  margin-right: 12px;
+  font-weight: 600;
+}
+
+table td a:last-child,
+.tabla td a:last-child {
+  margin-right: 0;
+}
+
+/* 11. TARJETAS Y SECCIONES */
+
+.tarjeta,
+.panel,
+.seccion {
+  padding: 24px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tarjeta h2,
+.panel h2,
+.seccion h2 {
+  margin-bottom: 18px;
+}
+
+/* 12. MENSAJES DEL SISTEMA */
+
+.error,
+.mensaje-error {
+  padding: 12px 16px;
+  color: var(--rojo-error);
+  background: #FFF1F2;
+  border-left: 4px solid var(--rojo-error);
+}
+
+
+/* Mensajes de error: ocultos cuando están vacíos */
+
+.error:empty,
+.mensaje-error:empty {
+  display: none;
+}
+
+/* Mensajes de error visibles cuando contienen texto */
+
+.error:not(:empty),
+.mensaje-error:not(:empty) {
+  display: block;
+  padding: 8px 12px;
+  margin-top: 6px;
+  color: var(--rojo-error);
+  background: #FFF1F2;
+  border-left: 3px solid var(--rojo-error);
+  font-size: 13px;
+}
+
+.advertencia,
+.mensaje-advertencia {
+  padding: 12px 16px;
+  color: var(--texto-principal);
+  background: #FFF8DC;
+  border-left: 4px solid var(--amarillo-advertencia);
+}
+
+.informacion,
+.mensaje-informativo {
+  padding: 12px 16px;
+  color: var(--azul-oscuro);
+  background: var(--azul-suave);
+  border-left: 4px solid var(--celeste-informativo);
+}
+
+/* 13. PIE DE PÁGINA */
+
+footer,
+.pie-pagina {
+  width: 100%;
+  padding: 22px 5%;
+  background: var(--blanco);
+  border-top: 1px solid var(--borde);
+  color: var(--texto-secundario);
+  font-size: 13px;
+  text-align: center;
+}
+
+footer p,
+.pie-pagina p {
+  margin: 0;
+}
+
+/* 14. DISEÑO RESPONSIVO */
+
+@media (max-width: 900px) {
+  .encabezado {
+    padding: 18px 24px;
+  }
+
+  main,
+  .contenido-principal {
+    width: calc(100% - 36px);
+  }
+
+  .busqueda,
+  .filtros,
+  .formulario-busqueda {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .menu-principal ul {
+    gap: 4px;
+  }
+
+  .menu-principal a {
+    padding: 8px;
+  }
+
+  main,
+  .contenido-principal {
+    width: calc(100% - 28px);
+    padding: 26px 0;
+  }
+
+  .busqueda,
+  .filtros,
+  .formulario-busqueda,
+  form[id*="buscar"],
+  form[id*="filtro"] {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .busqueda .campo,
+  .filtros .campo,
+  .formulario-busqueda .campo {
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  .tarjeta,
+  .panel,
+  .seccion {
+    padding: 16px;
+  }
+
+  /* La tabla conserva sus columnas.
+     Si es ancha, se desplaza horizontalmente. */
+  table,
+  .tabla {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  table th,
+  table td,
+  .tabla th,
+  .tabla td {
+    padding: 12px;
+  }
+}
+
+/* UNIVERSIDAD CENFOTEC
+   Sistema de Gestión Curricular
+   Espaciado del formulario de cursos*/
+
+/* Separación entre el último campo y el borde */
+#form-curso fieldset {
+    padding-bottom: 28px;
+}
+
+/* Espacio entre el formulario y sus botones */
+#form-curso .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Botones de estilo institucional */
+#form-curso .acciones .boton {
+    border-radius: 3px;
+}
+
+/* Espacio inferior dentro de los recuadros */
+#form-usuario fieldset {
+    padding-bottom: 28px;
+}
+
+/* Separación de los botones */
+#form-usuario .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Botones institucionales rectangulares */
+#form-usuario .acciones .boton {
+    border-radius: 3px;
+}
+
+/* UNIVERSIDAD CENFOTEC
+   SISTEMA DE GESTIÓN CURRICULAR
+   GRUPO 5 - PRIMERA ITERACIÓN
+
+   DISEÑO INSTITUCIONAL - DETALLE DEL CURSO */
+
+/* CONTENEDOR PRINCIPAL */
+
+main.detalle-curso {
+    width: min(1170px, calc(100% - 48px));
+    max-width: 1170px;
+    margin: 42px auto 70px;
+    padding: 0;
+    color: #263445;
+}
+
+/* RUTA DE NAVEGACIÓN */
+
+.detalle-curso .migas {
+    margin: 0 0 24px;
+    padding: 0;
+}
+
+.detalle-curso .migas ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.detalle-curso .migas li {
+    color: #6B778C;
+    font-size: 13px;
+}
+
+.detalle-curso .migas li + li::before {
+    content: "/";
+    color: #9BA8BA;
+    margin-right: 10px;
+}
+
+.detalle-curso .migas a {
+    color: #0867E8;
+    text-decoration: none;
+}
+
+.detalle-curso .migas a:hover {
+    text-decoration: underline;
+}
+
+/* TÍTULO PRINCIPAL */
+
+.detalle-curso > h1 {
+    color: #06356E;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 28px;
+    padding: 0 0 18px;
+    border-bottom: 1px solid #DCE4EE;
+}
+
+/* TARJETAS INSTITUCIONALES */
+
+.detalle-curso > section {
+    background: #FFFFFF;
+    border: 1px solid #DFE6EF;
+    border-radius: 3px;
+    box-shadow: 0 3px 12px rgba(38, 52, 69, 0.05);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+}
+
+/* TÍTULOS DE SECCIONES */
+
+.detalle-curso section h2 {
+    color: #06356E;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #E3ECF5;
+}
+
+/* INFORMACIÓN GENERAL EN COLUMNAS */
+
+.detalle-curso .detalle {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 28px;
+    row-gap: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+/* CADA DATO INDIVIDUAL */
+
+.detalle-curso .detalle > div {
+    min-width: 0;
+    padding: 14px 16px;
+    background: #F7F9FC;
+    border: 1px solid #E8EDF4;
+    border-left: 3px solid #0867E8;
+    border-radius: 2px;
+}
+
+/* ETIQUETAS */
+
+.detalle-curso .detalle dt {
+    color: #6B778C;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0 0 6px;
+}
+
+/* VALORES */
+
+.detalle-curso .detalle dd {
+    color: #06356E;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+/* DESCRIPCIONES Y REQUISITOS */
+
+.detalle-curso section h3 {
+    color: #1C4F99;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 22px 0 10px;
+}
+
+.detalle-curso section h2 + h3 {
+    margin-top: 0;
+}
+
+.detalle-curso section p {
+    color: #34445A;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 16px;
+}
+
+.detalle-curso section p:last-child {
+    margin-bottom: 0;
+}
+
+/* BOTONES Y ENLACES DE ACCIÓN */
+
+.detalle-curso .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 0;
+    padding: 0;
+}
+
+.detalle-curso .acciones .boton,
+.detalle-curso .acciones button,
+.detalle-curso .acciones a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    padding: 11px 20px;
+    background: #0867E8;
+    border: 1px solid #0867E8;
+    border-radius: 3px;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.detalle-curso .acciones .boton:first-child,
+.detalle-curso .acciones a:first-child {
+    background: #06356E;
+    border-color: #06356E;
+}
+
+.detalle-curso .acciones .boton:hover,
+.detalle-curso .acciones button:hover,
+.detalle-curso .acciones a:hover {
+    background: #1C4F99;
+    border-color: #1C4F99;
+    color: #FFFFFF;
+}
+
+.detalle-curso .acciones a:focus-visible,
+.detalle-curso .acciones button:focus-visible {
+    outline: 3px solid #86B7FE;
+    outline-offset: 3px;
+}
+
+/* ADAPTACIÓN PARA TABLETAS */
+
+@media (max-width: 900px) {
+    .detalle-curso .detalle {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .detalle-curso > section {
+        padding: 24px;
+    }
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+
+@media (max-width: 600px) {
+    main.detalle-curso {
+        width: calc(100% - 28px);
+        margin: 26px auto 48px;
+    }
+
+    .detalle-curso > h1 {
+        font-size: 25px;
+    }
+
+    .detalle-curso > section {
+        padding: 20px 16px;
+    }
+
+    .detalle-curso .detalle {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .detalle-curso .acciones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .detalle-curso .acciones a,
+    .detalle-curso .acciones button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+#form-busqueda {
+    align-items: end;
+}
+
+/* Alinear los botones con los campos */
+#form-busqueda > button,
+#form-busqueda > .boton,
+#form-busqueda > a.boton {
+    align-self: end;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Mantener la misma altura */
+#form-busqueda input,
+#form-busqueda select,
+#form-busqueda button,
+#form-busqueda .boton {
+    min-height: 42px;
+    box-sizing: border-box;
+}
+
+#form-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+#form-busqueda .campo {
+    flex: 0 1 330px;
+    min-width: 200px;
+    margin: 0;
+}
+
+#form-busqueda .campo label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#form-busqueda .campo input,
+#form-busqueda .campo select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+#form-busqueda > .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    min-height: 42px;
+    box-sizing: border-box;
+    margin: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+}
+
+
+
+
+
+
+

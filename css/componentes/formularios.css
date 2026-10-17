@@ -149,3 +149,62 @@ form[id*="filtro"] .campo {
 #form-usuario .acciones .boton {
     border-radius: 3px;
 }
+
+#form-busqueda {
+    align-items: end;
+}
+
+/* Alinear los botones con los campos */
+#form-busqueda>button,
+#form-busqueda>.boton,
+#form-busqueda>a.boton {
+    align-self: end;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Mantener la misma altura */
+#form-busqueda input,
+#form-busqueda select,
+#form-busqueda button,
+#form-busqueda .boton {
+    min-height: 42px;
+    box-sizing: border-box;
+}
+
+#form-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+#form-busqueda .campo {
+    flex: 0 1 330px;
+    min-width: 200px;
+    margin: 0;
+}
+
+#form-busqueda .campo label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#form-busqueda .campo input,
+#form-busqueda .campo select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+#form-busqueda>.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    min-height: 42px;
+    box-sizing: border-box;
+    margin: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+}

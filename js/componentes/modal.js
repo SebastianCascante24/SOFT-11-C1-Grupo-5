@@ -1,10 +1,10 @@
-/**
+/*
  * modal.js
  * componente reutilizable de ventanas emergentes basado en <dialog>
  * usa focus y soporta esc
  */
 const Modal = {
-    /**
+    /*
      * muestra una ventana de confirmacion
      * devuelve true si se confirma y false si se cancela o cierra con esc
      */
@@ -51,7 +51,7 @@ const Modal = {
 
             document.body.appendChild(dialogo);
             dialogo.showModal();
-            botonCancelar.focus(); // focus en l;a opcion segura
+            botonCancelar.focus(); // focus en la opcion segura
         });
     }
 };

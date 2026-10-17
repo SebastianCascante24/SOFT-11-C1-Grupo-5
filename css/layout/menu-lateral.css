@@ -31,3 +31,13 @@
     color: var(--azul-principal);
     border-bottom-color: var(--azul-principal);
 }
+
+@media (max-width: 768px) {
+    .menu-principal ul {
+        gap: 4px;
+    }
+
+    .menu-principal a {
+        padding: 8px;
+    }
+}

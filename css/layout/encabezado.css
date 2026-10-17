@@ -62,3 +62,17 @@ header.encabezado {
     flex-shrink: 0;
     object-fit: fill;
 }
+
+@media (max-width: 900px) {
+  .encabezado {
+    padding: 18px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

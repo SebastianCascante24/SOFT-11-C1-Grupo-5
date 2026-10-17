@@ -35,3 +35,20 @@ footer p,
 .pie-pagina p {
     margin: 0;
 }
+
+@media (max-width: 900px) {
+
+    main,
+    .contenido-principal {
+        width: calc(100% - 36px);
+    }
+}
+
+@media (max-width: 768px) {
+
+    main,
+    .contenido-principal {
+        width: calc(100% - 28px);
+        padding: 26px 0;
+    }
+}

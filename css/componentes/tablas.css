@@ -61,3 +61,23 @@ table td a:last-child,
 .tabla td a:last-child {
     margin-right: 0;
 }
+
+@media (max-width: 768px) {
+
+    /* La tabla conserva sus columnas.
+     Si es ancha, se desplaza horizontalmente. */
+    table,
+    .tabla {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+        white-space: nowrap;
+    }
+
+    table th,
+    table td,
+    .tabla th,
+    .tabla td {
+        padding: 12px;
+    }
+}

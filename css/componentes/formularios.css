@@ -208,3 +208,34 @@ form[id*="filtro"] .campo {
     align-self: flex-end;
     border-radius: 3px;
 }
+
+@media (max-width: 900px) {
+
+    .busqueda,
+    .filtros,
+    .formulario-busqueda {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .busqueda,
+    .filtros,
+    .formulario-busqueda,
+    form[id*="buscar"],
+    form[id*="filtro"] {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .busqueda .campo,
+    .filtros .campo,
+    .formulario-busqueda .campo {
+        width: 100%;
+        max-width: none;
+        flex: 1 1 auto;
+    }
+}

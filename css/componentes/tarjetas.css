@@ -266,3 +266,12 @@ main.detalle-curso {
         box-sizing: border-box;
     }
 }
+
+@media (max-width: 768px) {
+
+    .tarjeta,
+    .panel,
+    .seccion {
+        padding: 16px;
+    }
+}

@@ -8,27 +8,27 @@
 /* 1. IDENTIDAD VISUAL */
 
 :root {
-  --azul-oscuro: #06356E;
-  --azul-principal: #0867E8;
-  --azul-intermedio: #1C4F99;
-  --azul-suave: #E3ECFF;
+    --azul-oscuro: #06356E;
+    --azul-principal: #0867E8;
+    --azul-intermedio: #1C4F99;
+    --azul-suave: #E3ECFF;
 
-  --gris-fondo: #F4F5F7;
-  --blanco: #FFFFFF;
+    --gris-fondo: #F4F5F7;
+    --blanco: #FFFFFF;
 
-  --texto-principal: #263445;
-  --texto-secundario: #6B778C;
+    --texto-principal: #263445;
+    --texto-secundario: #6B778C;
 
-  --rojo-error: #B42332;
-  --amarillo-advertencia: #FFC107;
-  --rojo-validacion: #DC3545;
-  --celeste-informativo: #0DCAF0;
+    --rojo-error: #B42332;
+    --amarillo-advertencia: #FFC107;
+    --rojo-validacion: #DC3545;
+    --celeste-informativo: #0DCAF0;
 
-  --borde: #DCE3EB;
-  --fondo-alterno: #F8FAFD;
+    --borde: #DCE3EB;
+    --fondo-alterno: #F8FAFD;
 
-  --fuente: "Segoe UI", Arial, Helvetica, sans-serif;
+    --fuente: "Segoe UI", Arial, Helvetica, sans-serif;
 
-  --radio: 3px;
-  --sombra: 0 2px 10px rgba(6, 53, 110, 0.05);
+    --radio: 3px;
+    --sombra: 0 2px 10px rgba(6, 53, 110, 0.05);
 }

@@ -1,0 +1,64 @@
+/* 3. ENLACE DE ACCESIBILIDAD */
+
+.salto-contenido,
+.saltar-contenido,
+a[href="#contenido"] {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 1000;
+    padding: 10px 16px;
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+}
+
+.salto-contenido:focus,
+.saltar-contenido:focus,
+a[href="#contenido"]:focus {
+    top: 10px;
+    color: var(--blanco);
+}
+
+/* 4. ENCABEZADO INSTITUCIONAL */
+
+
+.encabezado,
+header.encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 20px;
+    min-height: 74px;
+    padding: 0 24px 0 0;
+    margin: 0;
+    background: var(--blanco);
+    border: none;
+    box-shadow: 0 4px 12px rgba(38, 52, 69, 0.10);
+}
+
+
+.encabezado .logo,
+.encabezado .logo-institucional,
+.encabezado>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    color: var(--azul-oscuro);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+.encabezado img {
+    display: block;
+    width: 130px;
+    height: 74px;
+    max-width: none;
+    flex-shrink: 0;
+    object-fit: fill;
+}

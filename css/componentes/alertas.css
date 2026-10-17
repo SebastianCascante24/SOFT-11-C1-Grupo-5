@@ -1,0 +1,46 @@
+/* 12. MENSAJES DEL SISTEMA */
+
+.error,
+.mensaje-error {
+    padding: 12px 16px;
+    color: var(--rojo-error);
+    background: #FFF1F2;
+    border-left: 4px solid var(--rojo-error);
+}
+
+
+/* Mensajes de error: ocultos cuando están vacíos */
+
+.error:empty,
+.mensaje-error:empty {
+    display: none;
+}
+
+/* Mensajes de error visibles cuando contienen texto */
+
+.error:not(:empty),
+.mensaje-error:not(:empty) {
+    display: block;
+    padding: 8px 12px;
+    margin-top: 6px;
+    color: var(--rojo-error);
+    background: #FFF1F2;
+    border-left: 3px solid var(--rojo-error);
+    font-size: 13px;
+}
+
+.advertencia,
+.mensaje-advertencia {
+    padding: 12px 16px;
+    color: var(--texto-principal);
+    background: #FFF8DC;
+    border-left: 4px solid var(--amarillo-advertencia);
+}
+
+.informacion,
+.mensaje-informativo {
+    padding: 12px 16px;
+    color: var(--azul-oscuro);
+    background: var(--azul-suave);
+    border-left: 4px solid var(--celeste-informativo);
+}

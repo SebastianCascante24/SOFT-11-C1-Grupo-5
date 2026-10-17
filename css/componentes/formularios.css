@@ -1,0 +1,151 @@
+/* 7. FORMULARIOS */
+
+
+form {
+    max-width: 100%;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    margin-bottom: 22px;
+}
+
+
+label {
+    display: inline-block;
+    color: var(--texto-principal);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+select,
+textarea {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    background: var(--blanco);
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radio);
+    color: var(--texto-principal);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--azul-principal);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--azul-suave);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--texto-secundario);
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+    border-color: var(--rojo-error);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--azul-principal);
+}
+
+/* 8. ÁREAS DE BÚSQUEDA Y FILTROS */
+
+.busqueda,
+.filtros,
+.formulario-busqueda,
+form[id*="buscar"],
+form[id*="filtro"] {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 24px;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.busqueda .campo,
+.filtros .campo,
+.formulario-busqueda .campo,
+form[id*="buscar"] .campo,
+form[id*="filtro"] .campo {
+    flex: 1 1 220px;
+    max-width: 360px;
+}
+
+.busqueda label,
+.filtros label,
+.formulario-busqueda label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.busqueda input,
+.busqueda select,
+.filtros input,
+.filtros select {
+    min-width: 0;
+}
+
+/* UNIVERSIDAD CENFOTEC
+   Sistema de Gestión Curricular
+   Espaciado del formulario de cursos*/
+
+/* Separación entre el último campo y el borde */
+#form-curso fieldset {
+    padding-bottom: 28px;
+}
+
+/* Espacio entre el formulario y sus botones */
+#form-curso .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Botones de estilo institucional */
+#form-curso .acciones .boton {
+    border-radius: 3px;
+}
+
+/* Espacio inferior dentro de los recuadros */
+#form-usuario fieldset {
+    padding-bottom: 28px;
+}
+
+/* Separación de los botones */
+#form-usuario .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Botones institucionales rectangulares */
+#form-usuario .acciones .boton {
+    border-radius: 3px;
+}

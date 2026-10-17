@@ -1,0 +1,268 @@
+/* 11. TARJETAS Y SECCIONES */
+
+.tarjeta,
+.panel,
+.seccion {
+    padding: 24px;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.tarjeta h2,
+.panel h2,
+.seccion h2 {
+    margin-bottom: 18px;
+}
+
+/* UNIVERSIDAD CENFOTEC
+   SISTEMA DE GESTIÓN CURRICULAR
+   GRUPO 5 - PRIMERA ITERACIÓN
+
+   DISEÑO INSTITUCIONAL - DETALLE DEL CURSO */
+
+/* CONTENEDOR PRINCIPAL */
+
+main.detalle-curso {
+    width: min(1170px, calc(100% - 48px));
+    max-width: 1170px;
+    margin: 42px auto 70px;
+    padding: 0;
+    color: #263445;
+}
+
+/* RUTA DE NAVEGACIÓN */
+
+.detalle-curso .migas {
+    margin: 0 0 24px;
+    padding: 0;
+}
+
+.detalle-curso .migas ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.detalle-curso .migas li {
+    color: #6B778C;
+    font-size: 13px;
+}
+
+.detalle-curso .migas li+li::before {
+    content: "/";
+    color: #9BA8BA;
+    margin-right: 10px;
+}
+
+.detalle-curso .migas a {
+    color: #0867E8;
+    text-decoration: none;
+}
+
+.detalle-curso .migas a:hover {
+    text-decoration: underline;
+}
+
+/* TÍTULO PRINCIPAL */
+
+.detalle-curso>h1 {
+    color: #06356E;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 28px;
+    padding: 0 0 18px;
+    border-bottom: 1px solid #DCE4EE;
+}
+
+/* TARJETAS INSTITUCIONALES */
+
+.detalle-curso>section {
+    background: #FFFFFF;
+    border: 1px solid #DFE6EF;
+    border-radius: 3px;
+    box-shadow: 0 3px 12px rgba(38, 52, 69, 0.05);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+}
+
+/* TÍTULOS DE SECCIONES */
+
+.detalle-curso section h2 {
+    color: #06356E;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #E3ECF5;
+}
+
+/* INFORMACIÓN GENERAL EN COLUMNAS */
+
+.detalle-curso .detalle {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 28px;
+    row-gap: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+/* CADA DATO INDIVIDUAL */
+
+.detalle-curso .detalle>div {
+    min-width: 0;
+    padding: 14px 16px;
+    background: #F7F9FC;
+    border: 1px solid #E8EDF4;
+    border-left: 3px solid #0867E8;
+    border-radius: 2px;
+}
+
+/* ETIQUETAS */
+
+.detalle-curso .detalle dt {
+    color: #6B778C;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0 0 6px;
+}
+
+/* VALORES */
+
+.detalle-curso .detalle dd {
+    color: #06356E;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+/* DESCRIPCIONES Y REQUISITOS */
+
+.detalle-curso section h3 {
+    color: #1C4F99;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 22px 0 10px;
+}
+
+.detalle-curso section h2+h3 {
+    margin-top: 0;
+}
+
+.detalle-curso section p {
+    color: #34445A;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 16px;
+}
+
+.detalle-curso section p:last-child {
+    margin-bottom: 0;
+}
+
+/* BOTONES Y ENLACES DE ACCIÓN */
+
+.detalle-curso .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 0;
+    padding: 0;
+}
+
+.detalle-curso .acciones .boton,
+.detalle-curso .acciones button,
+.detalle-curso .acciones a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    padding: 11px 20px;
+    background: #0867E8;
+    border: 1px solid #0867E8;
+    border-radius: 3px;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.detalle-curso .acciones .boton:first-child,
+.detalle-curso .acciones a:first-child {
+    background: #06356E;
+    border-color: #06356E;
+}
+
+.detalle-curso .acciones .boton:hover,
+.detalle-curso .acciones button:hover,
+.detalle-curso .acciones a:hover {
+    background: #1C4F99;
+    border-color: #1C4F99;
+    color: #FFFFFF;
+}
+
+.detalle-curso .acciones a:focus-visible,
+.detalle-curso .acciones button:focus-visible {
+    outline: 3px solid #86B7FE;
+    outline-offset: 3px;
+}
+
+/* ADAPTACIÓN PARA TABLETAS */
+
+@media (max-width: 900px) {
+    .detalle-curso .detalle {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .detalle-curso>section {
+        padding: 24px;
+    }
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+
+@media (max-width: 600px) {
+    main.detalle-curso {
+        width: calc(100% - 28px);
+        margin: 26px auto 48px;
+    }
+
+    .detalle-curso>h1 {
+        font-size: 25px;
+    }
+
+    .detalle-curso>section {
+        padding: 20px 16px;
+    }
+
+    .detalle-curso .detalle {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .detalle-curso .acciones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .detalle-curso .acciones a,
+    .detalle-curso .acciones button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

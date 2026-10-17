@@ -1,0 +1,78 @@
+/* 9. BOTONES INSTITUCIONALES */
+
+button,
+input[type="submit"],
+input[type="button"],
+.boton,
+a.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 10px 20px;
+    background: var(--azul-principal);
+    color: var(--blanco);
+    border: 1px solid var(--azul-principal);
+    border-radius: var(--radio);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: none;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.boton:hover,
+a.boton:hover {
+    background: var(--azul-oscuro);
+    border-color: var(--azul-oscuro);
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+/* Acciones secundarias */
+
+.boton-secundario,
+.boton--secundario {
+    background: var(--blanco);
+    border-color: var(--azul-intermedio);
+    color: var(--azul-intermedio);
+}
+
+.boton-secundario:hover,
+.boton--secundario:hover {
+    background: var(--azul-suave);
+    color: var(--azul-oscuro);
+}
+
+/* Acciones de registro */
+
+a.boton[href*="form"],
+a.boton[href*="registro"] {
+    background: var(--azul-oscuro);
+    border-color: var(--azul-oscuro);
+    color: var(--blanco);
+}
+
+a.boton[href*="form"]:hover,
+a.boton[href*="registro"]:hover {
+    background: var(--azul-intermedio);
+    border-color: var(--azul-intermedio);
+}
+
+/* Estados deshabilitados */
+
+button:disabled,
+input[type="submit"]:disabled,
+.boton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}

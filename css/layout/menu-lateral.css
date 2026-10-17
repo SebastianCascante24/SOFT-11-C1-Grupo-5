@@ -1,0 +1,33 @@
+/* 5. MENÚ PRINCIPAL */
+
+.menu-principal ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu-principal li {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-principal a {
+    display: inline-block;
+    padding: 9px 12px;
+    color: var(--azul-oscuro);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.menu-principal a:hover,
+.menu-principal a:focus-visible {
+    color: var(--azul-principal);
+    border-bottom-color: var(--azul-principal);
+}

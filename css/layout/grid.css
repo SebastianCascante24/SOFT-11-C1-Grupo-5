@@ -1,0 +1,37 @@
+/* 6. CONTENIDO PRINCIPAL */
+
+main,
+.contenido-principal {
+    width: min(100% - 48px, 1280px);
+    margin: 0 auto;
+    padding: 36px 0 48px;
+    flex: 1;
+    min-width: 0;
+}
+
+main>h1 {
+    margin-bottom: 12px;
+}
+
+main>p {
+    color: var(--texto-secundario);
+    margin-bottom: 28px;
+}
+
+/* 13. PIE DE PÁGINA */
+
+footer,
+.pie-pagina {
+    width: 100%;
+    padding: 22px 5%;
+    background: var(--blanco);
+    border-top: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    font-size: 13px;
+    text-align: center;
+}
+
+footer p,
+.pie-pagina p {
+    margin: 0;
+}

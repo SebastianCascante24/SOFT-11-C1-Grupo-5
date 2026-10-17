@@ -1,0 +1,63 @@
+/* 10. TABLAS DE INFORMACIÓN */
+
+table,
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--blanco);
+    font-size: 14px;
+}
+
+caption {
+    padding: 14px 18px;
+    background: var(--blanco);
+    color: var(--azul-oscuro);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    caption-side: top;
+}
+
+table thead,
+.tabla thead {
+    background: var(--azul-oscuro);
+}
+
+table th,
+.tabla th {
+    padding: 15px 16px;
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+table td,
+.tabla td {
+    padding: 15px 16px;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: middle;
+}
+
+table tbody tr:nth-child(even),
+.tabla tbody tr:nth-child(even) {
+    background: var(--fondo-alterno);
+}
+
+table tbody tr:hover,
+.tabla tbody tr:hover {
+    background: var(--azul-suave);
+}
+
+table td a,
+.tabla td a {
+    display: inline-block;
+    margin-right: 12px;
+    font-weight: 600;
+}
+
+table td a:last-child,
+.tabla td a:last-child {
+    margin-right: 0;
+}

@@ -1,8 +1,7 @@
 /*
  * validadores.js
  * reglas de validacion reutilizables devuelven booleanos
- * los mensajes de error y la combinación de reglas por campo
- * las reglas se definen en el js de cada modulo y se llaman cuando sean necesarias
+ * las reglas se definen en el js de cada modulo y se llaman estos validadores cuando sean necesarios
  * todo: formato establecido (codigos)?
  */
 const Validadores = {

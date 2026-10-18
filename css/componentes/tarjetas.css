@@ -16,6 +16,12 @@
     margin-bottom: 18px;
 }
 
+.mensaje-vacio {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
 /* UNIVERSIDAD CENFOTEC
    SISTEMA DE GESTIÓN CURRICULAR
    GRUPO 5 - PRIMERA ITERACIÓN
@@ -274,4 +280,39 @@ main.detalle-curso {
     .seccion {
         padding: 16px;
     }
+}
+
+/* estilos de las tarjetas */
+
+.accesos-directos .tarjeta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.accesos-directos .tarjeta h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.accesos-directos .tarjeta a {
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.resumen-notificaciones h2 {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.resumen-notificaciones a {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.mensaje-vacio {
+    margin: 0 0 16px;
+    color: var(--texto-secundario);
+    font-size: 13px;
 }

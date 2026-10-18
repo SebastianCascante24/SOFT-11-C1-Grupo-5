@@ -94,4 +94,31 @@ header.encabezado {
 .encabezado-acciones select {
   width: auto;
   min-width: 120px;
+  padding: 10px 20px;
+  background: var(--blanco);
+  border: 1px solid var(--azul-intermedio);
+  color: var(--azul-intermedio);
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.encabezado-acciones select:hover {
+  background: var(--azul-suave);
+  border-color: var(--azul-oscuro);
+  color: var(--azul-oscuro);
+}
+
+.encabezado-acciones .avatar {
+  width: 42px;
+  height: 42px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--azul-suave);
+  border-color: var(--borde);
+  color: var(--azul-oscuro);
+  font-size: 15px;
+  font-weight: 700;
 }

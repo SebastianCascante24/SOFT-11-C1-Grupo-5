@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="css/base/variables.css">
+    <link rel="stylesheet" href="css/base/reset.css">
+    <link rel="stylesheet" href="css/base/tipografia.css">
+    <link rel="stylesheet" href="css/layout/encabezado.css">
+    <link rel="stylesheet" href="css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="css/layout/grid.css">
+    <link rel="stylesheet" href="css/componentes/formularios.css">
+    <link rel="stylesheet" href="css/componentes/botones.css">
+    <link rel="stylesheet" href="css/componentes/tablas.css">
+    <link rel="stylesheet" href="css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="css/componentes/alertas.css">
+</head>
+
+<body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+    <header class="encabezado">
+        <!-- contenedor para la imagen de la U, pendiente -->
+        <a class="logo" href="index.html" aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+        <div class="encabezado-acciones" role="group" aria-label="Opciones de la cuenta">
+            <button type="button" class="boton-secundario" id="encabezado-notificaciones"
+                aria-label="Notificaciones"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-bell preview-icon">
+                    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                    <path
+                        d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                </svg></button>
+            <select id="encabezado-idioma" aria-label="Idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            <!-- A de admin por ahora -->
+            <button type="button" class="avatar" id="encabezado-avatar" aria-label="Perfil">A</button>
+            <button type="button" class="boton-secundario" id="encabezado-cerrar-sesion"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-log-out preview-icon">
+                    <path d="m16 17 5-5-5-5" />
+                    <path d="M21 12H9" />
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                </svg></button>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+        <nav class="menu-lateral" aria-label="Menú principal">
+            <ul>
+                <li><a href="index.html" aria-current="page">Inicio</a></li>
+                <li><a href="modulos/usuarios/listado.html">Usuarios</a></li>
+                <li><a href="modulos/escuelas/listado.html">Escuelas</a></li>
+                <li><a href="modulos/carreras/listado.html">Carreras</a></li>
+                <li><a href="modulos/cursos/listado.html">Cursos</a></li>
+                <li><a href="modulos/catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
+                <li><a href="modulos/catalogos/listado.html?catalogo=tematicas">Temática</a></li>
+                <li><a href="modulos/catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
+                <li><a href="modulos/catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
+                <li><a href="modulos/catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main id="contenido">
+            <!-- ADMIN, no hay datos de usuario todavia -->
+            <h1>Bienvenido/a</h1>
+            <p>Rol: no disponible &middot; Último acceso: no disponible</p>
+
+            <section aria-label="Accesos directos">
+                <ul class="cuadricula-tarjetas accesos-directos">
+                    <li class="tarjeta">
+                        <h2>Usuarios</h2>
+                        <a href="modulos/usuarios/listado.html" aria-label="Ver listado de usuarios">Ver listado <span
+                                aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li class="tarjeta">
+                        <h2>Escuelas</h2>
+                        <a href="modulos/escuelas/listado.html" aria-label="Ver listado de escuelas">Ver listado <span
+                                aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li class="tarjeta">
+                        <h2>Carreras</h2>
+                        <a href="modulos/carreras/listado.html" aria-label="Ver listado de carreras">Ver listado <span
+                                aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li class="tarjeta">
+                        <h2>Cursos</h2>
+                        <a href="modulos/cursos/listado.html" aria-label="Ver listado de cursos">Ver listado <span
+                                aria-hidden="true">&rarr;</span></a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="inicio-actividad-titulo">
+                <h2 id="inicio-actividad-titulo">Actividad reciente</h2>
+                <!-- no hay actividad reciente en esta iteracion -->
+                <p class="mensaje-vacio">No hay actividad reciente.</p>
+            </section>
+        </main>
+
+        <aside class="resumen-notificaciones tarjeta" aria-labelledby="inicio-notificaciones-titulo">
+            <h2 id="inicio-notificaciones-titulo">Resumen de notificaciones</h2>
+            <!-- no hay notificaciones en esta iteracion -->
+            <p class="mensaje-vacio">No hay notificaciones.</p>
+            <a href="#">Ver todas las notificaciones</a>
+        </aside>
+    </div>
+</body>
+
+</html>

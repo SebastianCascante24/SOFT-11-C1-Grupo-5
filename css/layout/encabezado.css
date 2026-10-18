@@ -110,6 +110,10 @@ header.encabezado {
   color: var(--azul-oscuro);
 }
 
+.encabezado-acciones .boton-secundario {
+  padding: 8px;
+}
+
 .encabezado-acciones .avatar {
   width: 42px;
   height: 42px;

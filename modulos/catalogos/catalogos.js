@@ -20,6 +20,12 @@ const Catalogos = {
       codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una metodología con este código.' },
       descripcion: { visible: true, obligatoria: true }
     },
+    'casas-certificadoras': {
+      titulo: 'Casa certificadora',
+      tituloPlural: 'Casas certificadoras',
+      codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una casa certificadora con este código.' },
+      descripcion: { visible: false, obligatoria: false }
+    },
   },
 
   obtenerConfiguracion(idCatalogo) {

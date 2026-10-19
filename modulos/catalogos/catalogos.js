@@ -7,7 +7,13 @@ const Catalogos = {
       tituloPlural: 'Áreas SFIA',
       codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe un área SFIA con este código.' },
       descripcion: { visible: true, obligatoria: false }
-    }
+    },
+    'tematicas': {
+      titulo: 'Temática',
+      tituloPlural: 'Temáticas',
+      codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una temática con este código.' },
+      descripcion: { visible: true, obligatoria: false }
+    },
   },
 
   obtenerConfiguracion(idCatalogo) {

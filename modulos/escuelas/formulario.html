@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar escuela | Gestor de Cursos CENFOTEC</title>
+
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/tipografia.css">
+  <link rel="stylesheet" href="../../css/layout/encabezado.css">
+  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+  <link rel="stylesheet" href="../../css/layout/grid.css">
+  <link rel="stylesheet" href="../../css/componentes/formularios.css">
+  <link rel="stylesheet" href="../../css/componentes/botones.css">
+  <link rel="stylesheet" href="../../css/componentes/alertas.css">
+</head>
+
+<body>
+  <header class="encabezado">
+    <h2>Gestor de Cursos</h2>
+    <nav aria-label="Navegación principal">
+      <a href="../../index.html">Inicio</a>
+      <a href="listado.html">Escuelas</a>
+      <a href="formulario.html">Registrar escuela</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <h1>Registrar escuela</h1>
+    <p>Complete los datos para registrar una nueva escuela
+       en el sistema de Gestión Curricular y Docente.</p>
+
+    <form id="formularioEscuela" novalidate>
+      <fieldset>
+        <legend>Información de la escuela</legend>
+
+        <label for="codigoEscuela">Código de escuela *</label>
+        <input
+          type="text"
+          id="codigoEscuela"
+          name="codigoEscuela"
+          maxlength="20"
+          required
+        >
+        <p id="errorCodigo" role="alert"></p>
+
+        <label for="nombreEscuela">Nombre de la escuela *</label>
+        <input
+          type="text"
+          id="nombreEscuela"
+          name="nombreEscuela"
+          maxlength="100"
+          required
+        >
+        <p id="errorNombre" role="alert"></p>
+
+        <label for="directorEscuela">Director de escuela *</label>
+        <input
+          type="text"
+          id="directorEscuela"
+          name="directorEscuela"
+          maxlength="100"
+          required
+        >
+        <p id="errorDirector" role="alert"></p>
+      </fieldset>
+
+      <p id="mensajeRegistro" role="status" aria-live="polite"></p>
+
+      <button type="submit">Registrar escuela</button>
+      <button type="reset">Limpiar</button>
+      <a href="listado.html">Cancelar</a>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2026 Universidad CENFOTEC - Gestor de Cursos</p>
+  </footer>
+
+  <script src="escuelas.js" defer></script>
+</body>
+</html>

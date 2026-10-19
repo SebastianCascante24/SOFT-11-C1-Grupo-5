@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escuelas registradas | Gestor de Cursos</title>
+
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/tipografia.css">
+  <link rel="stylesheet" href="../../css/layout/encabezado.css">
+  <link rel="stylesheet" href="../../css/layout/grid.css">
+  <link rel="stylesheet" href="../../css/componentes/tablas.css">
+  <link rel="stylesheet" href="../../css/componentes/botones.css">
+
+  <style>
+    body {
+      background: #f3f4f6;
+      color: #092f62;
+    }
+
+    main {
+      max-width: 1170px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 { margin-bottom: 12px; }
+
+    .descripcion {
+      color: #65758b;
+      margin-bottom: 25px;
+    }
+
+    .acciones { margin-bottom: 20px; }
+
+    .boton-registro {
+      display: inline-block;
+      background: #0a3470;
+      color: white;
+      padding: 13px 20px;
+      text-decoration: none;
+    }
+
+    .total {
+      margin: 15px 0;
+      color: #65758b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    caption {
+      text-align: left;
+      padding: 16px;
+      font-weight: bold;
+      background: white;
+    }
+
+    th {
+      background: #0a3470;
+      color: white;
+      text-align: left;
+      padding: 16px;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #dbe2eb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #65758b;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <strong>Gestor de Cursos</strong>
+    <nav aria-label="Navegación principal">
+      <a href="../../index.html">Inicio</a>
+      <a href="listado.html" aria-current="page">Escuelas</a>
+      <a href="formulario.html">Registrar escuela</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Escuelas registradas</h1>
+
+    <p class="descripcion">
+      Consulte las escuelas registradas en el sistema
+      de Gestión Curricular y Docente.
+    </p>
+
+    <div class="acciones">
+      <a class="boton-registro" href="formulario.html">
+        Registrar nueva escuela
+      </a>
+    </div>
+
+    <p class="total" id="totalEscuelas" role="status">
+      Total de escuelas registradas: 0
+    </p>
+
+    <table>
+      <caption>Listado de escuelas registradas</caption>
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre de escuela</th>
+          <th scope="col">Director</th>
+        </tr>
+      </thead>
+      <tbody id="tablaEscuelas"></tbody>
+    </table>
+  </main>
+
+  <footer>
+    © 2026 Universidad CENFOTEC - Gestor de Cursos
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabla = document.getElementById("tablaEscuelas");
+      const total = document.getElementById("totalEscuelas");
+
+      let escuelas = [];
+
+      try {
+        const datos = JSON.parse(
+          localStorage.getItem("grupo5_escuelas") || "[]"
+        );
+        escuelas = Array.isArray(datos) ? datos : [];
+      } catch (error) {
+        console.error("Error al leer escuelas:", error);
+      }
+
+      total.textContent =
+        `Total de escuelas registradas: ${escuelas.length}`;
+
+      if (escuelas.length === 0) {
+        const fila = tabla.insertRow();
+        const celda = fila.insertCell();
+        celda.colSpan = 3;
+        celda.textContent = "No hay escuelas registradas.";
+        return;
+      }
+
+      escuelas.forEach(escuela => {
+        const fila = tabla.insertRow();
+
+        [escuela.codigo, escuela.nombre, escuela.director]
+          .forEach(valor => {
+            const celda = fila.insertCell();
+            celda.textContent = valor || "";
+          });
+      });
+    });
+  </script>
+</body>
+</html>

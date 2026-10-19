@@ -14,6 +14,12 @@ const Catalogos = {
       codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una temática con este código.' },
       descripcion: { visible: true, obligatoria: false }
     },
+    'metodologias': {
+      titulo: 'Metodología de aprendizaje',
+      tituloPlural: 'Metodologías de aprendizaje',
+      codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una metodología con este código.' },
+      descripcion: { visible: true, obligatoria: true }
+    },
   },
 
   obtenerConfiguracion(idCatalogo) {

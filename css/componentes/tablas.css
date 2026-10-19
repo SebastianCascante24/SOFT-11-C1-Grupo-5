@@ -81,3 +81,62 @@ table td a:last-child,
         padding: 12px;
     }
 }
+
+#listado-catalogo-titulo {
+    text-align: center;
+}
+
+table thead th {
+    vertical-align: middle;
+}
+
+table thead th label {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    color: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+#listado-catalogo-formulario thead input,
+#listado-catalogo-formulario thead select {
+    width: 150px;
+    min-height: 36px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+.columna-acciones {
+    text-align: right;
+    white-space: nowrap;
+}
+
+#listado-catalogo-cuerpo button {
+    min-height: 32px;
+    padding: 4px 12px;
+    font-size: 13px;
+}
+
+#listado-catalogo-cuerpo button+button {
+    margin-left: 8px;
+}
+
+.paginacion {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#listado-catalogo-vacio {
+    margin: 0;
+    padding: 24px 16px;
+    background: var(--blanco);
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    text-align: center;
+}

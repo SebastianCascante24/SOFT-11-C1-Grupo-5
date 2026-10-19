@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de catálogo | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/tipografia.css">
+    <link rel="stylesheet" href="../../css/layout/encabezado.css">
+    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="../../css/layout/grid.css">
+    <link rel="stylesheet" href="../../css/componentes/formularios.css">
+    <link rel="stylesheet" href="../../css/componentes/botones.css">
+    <link rel="stylesheet" href="../../css/componentes/tablas.css">
+    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
+</head>
+
+<body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+    <header class="encabezado">
+        <!-- contenedor para la imagen de la U, pendiente -->
+        <a class="logo" href="../../index.html" aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+        <div class="encabezado-acciones" role="group" aria-label="Opciones de la cuenta">
+            <button type="button" class="boton-secundario" id="encabezado-notificaciones" title="Notificaciones"
+                aria-label="Notificaciones"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                    <path
+                        d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                </svg></button>
+            <select id="encabezado-idioma" aria-label="Idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            <!-- A de admin por ahora -->
+            <button type="button" class="avatar" id="encabezado-avatar" aria-label="Perfil">A</button>
+            <button type="button" class="boton-secundario" id="encabezado-cerrar-sesion" aria-label="Cerrar sesión"
+                title="Cerrar sesión"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" aria-hidden="true" focusable="false" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m16 17 5-5-5-5" />
+                    <path d="M21 12H9" />
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                </svg></button>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+        <nav class="menu-lateral" aria-label="Menú principal">
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../usuarios/listado.html">Usuarios</a></li>
+                <li><a href="../escuelas/listado.html">Escuelas</a></li>
+                <li><a href="../carreras/listado.html">Carreras</a></li>
+                <li><a href="../cursos/listado.html">Cursos</a></li>
+                <li><a href="listado.html?catalogo=areas-sfia" data-catalogo="areas-sfia">Áreas SFIA</a></li>
+                <li><a href="listado.html?catalogo=tematicas" data-catalogo="tematicas">Temática</a></li>
+                <li><a href="listado.html?catalogo=metodologias" data-catalogo="metodologias">Metodologías de
+                        aprendizaje</a></li>
+                <li><a href="listado.html?catalogo=casas-certificadoras" data-catalogo="casas-certificadoras">Casas
+                        certificadoras</a></li>
+                <li><a href="listado.html?catalogo=niveles-complejidad" data-catalogo="niveles-complejidad">Niveles de
+                        complejidad</a></li>
+            </ul>
+        </nav>
+
+        <main id="contenido">
+            <h1 id="listado-catalogo-titulo">Listado de catálogo</h1>
+
+            <section id="listado-catalogo-contenido" class="tarjeta" aria-labelledby="listado-catalogo-titulo">
+                <div class="barra-herramientas">
+                    <p id="listado-catalogo-contador" role="status"></p>
+
+                    <div class="barra-herramientas-acciones">
+                        <button type="button" class="boton-secundario" id="listado-catalogo-limpiar-filtros">Limpiar
+                            filtros</button>
+                        <!-- Exportar csv: solo visual por ahora, sin funcionalidad -->
+                        <button type="button" class="boton-secundario" id="listado-catalogo-exportar-csv">Exportar
+                            csv</button>
+                        <a id="listado-catalogo-agregar" class="boton boton-principal" href="formulario.html">Agregar
+                            registro</a>
+                    </div>
+                </div>
+
+                <div id="listado-catalogo-filtros-activos" hidden>
+                    <span>Filtros activos:</span>
+                    <ul id="listado-catalogo-lista-filtros"></ul>
+                </div>
+
+                <!-- Los filtros viven en el encabezado de la tabla: cada columna tiene su propio campo -->
+                <form id="listado-catalogo-formulario" aria-label="Filtros del listado" novalidate>
+                    <table aria-labelledby="listado-catalogo-titulo">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <label for="listado-catalogo-filtro-codigo">Código</label>
+                                    <input type="text" id="listado-catalogo-filtro-codigo" name="codigo"
+                                        autocomplete="off">
+                                </th>
+                                <th scope="col">
+                                    <label for="listado-catalogo-filtro-nombre">Nombre</label>
+                                    <input type="text" id="listado-catalogo-filtro-nombre" name="nombre"
+                                        autocomplete="off">
+                                </th>
+                                <th scope="col">
+                                    <label for="listado-catalogo-filtro-estado">Estado</label>
+                                    <select id="listado-catalogo-filtro-estado" name="estado">
+                                        <option value="todos">Todos</option>
+                                        <option value="activo">Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </th>
+                                <th scope="col" class="columna-acciones">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listado-catalogo-cuerpo"></tbody>
+                    </table>
+                </form>
+
+                <p id="listado-catalogo-vacio" role="status" hidden></p>
+
+                <nav class="paginacion" aria-label="Paginación del listado">
+                    <button type="button" class="boton-secundario" id="listado-catalogo-anterior">Anterior</button>
+                    <span id="listado-catalogo-pagina" aria-live="polite"></span>
+                    <button type="button" class="boton-secundario" id="listado-catalogo-siguiente">Siguiente</button>
+                </nav>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/utilidades/formateadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="catalogos.js"></script>
+</body>
+
+</html>

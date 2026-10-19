@@ -26,6 +26,12 @@ const Catalogos = {
       codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe una casa certificadora con este código.' },
       descripcion: { visible: false, obligatoria: false }
     },
+    'niveles-complejidad': {
+      titulo: 'Nivel de complejidad',
+      tituloPlural: 'Niveles de complejidad',
+      codigo: { tipo: 'entero', mensajeDuplicado: 'Ya existe un nivel de complejidad con este código.' },
+      descripcion: { visible: true, obligatoria: true }
+    }
   },
 
   obtenerConfiguracion(idCatalogo) {

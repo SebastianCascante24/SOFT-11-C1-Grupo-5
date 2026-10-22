@@ -1,130 +1,178 @@
-
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultar usuarios | Gestor de Cursos CENFOTEC</title>
 
-  <link rel="stylesheet" href="../../css/base/variables.css">
-  <link rel="stylesheet" href="../../css/base/reset.css">
-  <link rel="stylesheet" href="../../css/base/tipografia.css">
-  <link rel="stylesheet" href="../../css/layout/encabezado.css">
-  <link rel="stylesheet" href="../../css/layout/grid.css">
-  <link rel="stylesheet" href="../../css/componentes/tablas.css">
-  <link rel="stylesheet" href="../../css/componentes/botones.css">
-  <link rel="stylesheet" href="../../css/componentes/alertas.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Listado de cursos | Desarrollo Curricular y Docente</title>
+
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/tipografia.css">
+    <link rel="stylesheet" href="../../css/layout/encabezado.css">
+    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="../../css/layout/grid.css">
+    <link rel="stylesheet" href="../../css/componentes/formularios.css">
+    <link rel="stylesheet" href="../../css/componentes/botones.css">
+    <link rel="stylesheet" href="../../css/componentes/tablas.css">
+    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
+    <link rel="stylesheet" href="cursos.css">
 </head>
 
 <body>
-  <a class="salto-contenido" href="#contenido">
-    Saltar al contenido
-  </a>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
 
-  <header class="encabezado">
-    <a class="logo" href="../../index.html">
-      Gestor de Cursos
-    </a>
+    <header class="encabezado">
+        <a class="logo" href="../../index.html"
+           aria-label="Ir al inicio"></a>
 
-    <nav class="menu-principal" aria-label="Navegación principal">
-      <ul>
-        <li><a href="../cursos/cursos.html">Cursos</a></li>
-        <li><a href="usuario-registro.html">Registrar usuario</a></li>
-        <li><a href="listado.html" aria-current="page">Usuarios</a></li>
-        <li><a href="../../index.html">Cerrar sesión</a></li>
-      </ul>
-    </nav>
-  </header>
+        <div class="encabezado-acciones" role="group"
+             aria-label="Opciones de la cuenta">
 
-  <main id="contenido">
-    <h1>Usuarios registrados</h1>
-    <p>
-      Consulte los usuarios registrados en el sistema
-      de Gestión Curricular y Docente.
-    </p>
+            <button type="button" class="boton-secundario"
+                    aria-label="Notificaciones">♧</button>
 
-    <div class="acciones">
-      <a class="boton boton-primario" href="usuario-registro.html">
-        Registrar nuevo usuario
-      </a>
+            <select id="encabezado-idioma" aria-label="Idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+
+            <button type="button" class="avatar"
+                    aria-label="Perfil">A</button>
+
+            <a class="boton-secundario" href="../../index.html"
+               aria-label="Volver al inicio">↪</a>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+
+        <nav class="menu-lateral" aria-label="Menú principal">
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../usuarios/listado.html">Usuarios</a></li>
+                <li><a href="../escuelas/listado.html">Escuelas</a></li>
+                <li><a href="../carreras/listado.html">Carreras</a></li>
+                <li><a href="listado.html" aria-current="page">Cursos</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
+            </ul>
+        </nav>
+
+        <main id="contenido">
+
+            <p class="breadcrumbs">
+                <a href="../../index.html">Inicio</a>
+                <span>›</span>
+                <strong>Cursos</strong>
+            </p>
+
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow">GESTIÓN ACADÉMICA</p>
+                    <h1>Listado de cursos</h1>
+                    <p class="subtitle">
+                        Consulta, busca y administra los cursos registrados.
+                    </p>
+                </div>
+
+                <a href="registro.html" class="boton-principal">
+                    + Registrar curso
+                </a>
+            </section>
+
+            <div id="mensaje" role="status" aria-live="polite"></div>
+
+            <section class="tarjeta" aria-labelledby="filtros-titulo">
+                <h2 id="filtros-titulo">Buscar cursos</h2>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="buscar">Código o nombre del curso</label>
+                        <input
+                            type="search"
+                            id="buscar"
+                            placeholder="Ej. INF-101 o Programación">
+                    </div>
+
+                    <div class="field">
+                        <label for="filtroEstado">Estado</label>
+                        <select id="filtroEstado">
+                            <option value="">Todos los estados</option>
+                            <option value="borrador">Borrador</option>
+                            <option value="revision">En revisión</option>
+                            <option value="aprobado">Aprobado</option>
+                            <option value="publicado">Publicado</option>
+                            <option value="rechazado">Rechazado</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="filtroModalidad">Modalidad</label>
+                        <select id="filtroModalidad">
+                            <option value="">Todas las modalidades</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="virtual">Virtual</option>
+                            <option value="hibrida">Híbrida</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="barra-acciones">
+                    <button type="button" id="limpiarFiltros"
+                            class="boton-secundario">
+                        Limpiar filtros
+                    </button>
+
+                    <button type="button" id="exportarCSV"
+                            class="boton-secundario">
+                        Exportar CSV
+                    </button>
+                </div>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="tabla-titulo">
+                <div class="barra-acciones">
+                    <div>
+                        <h2 id="tabla-titulo">Cursos registrados</h2>
+                        <p id="totalCursos">Cargando cursos...</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre del curso</th>
+                                <th scope="col">Modalidad</th>
+                                <th scope="col">Créditos</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaCursos">
+                            <tr>
+                                <td colspan="6">Cargando cursos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                Sistema de Desarrollo Curricular y Docente
+            </footer>
+
+        </main>
     </div>
 
-    <p id="mensaje" role="status" aria-live="polite"></p>
-
-    <div style="overflow-x:auto">
-      <table>
-        <caption>Listado de usuarios registrados</caption>
-        <thead>
-          <tr>
-            <th scope="col">Nombre completo</th>
-            <th scope="col">Correo institucional</th>
-            <th scope="col">Género</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Fecha de registro</th>
-          </tr>
-        </thead>
-        <tbody id="tabla-usuarios"></tbody>
-      </table>
-    </div>
-  </main>
-
-  <footer class="pie">
-    <p>
-      © 2026 Universidad CENFOTEC.
-      Gestor de Cursos, Grupo 5, SOFT-11-C1.
-    </p>
-  </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const tabla = document.getElementById("tabla-usuarios");
-      const mensaje = document.getElementById("mensaje");
-
-      let usuarios = [];
-
-      try {
-        const datos = JSON.parse(
-          localStorage.getItem("grupo5_usuarios") || "[]"
-        );
-
-        usuarios = Array.isArray(datos) ? datos : [];
-      } catch (error) {
-        mensaje.textContent =
-          "No fue posible leer los usuarios almacenados.";
-        return;
-      }
-
-      if (usuarios.length === 0) {
-        mensaje.textContent =
-          "No existen usuarios registrados.";
-        return;
-      }
-
-      mensaje.textContent =
-        `Total de usuarios registrados: ${usuarios.length}`;
-
-      usuarios.forEach(usuario => {
-        const fila = document.createElement("tr");
-
-        const valores = [
-          usuario.nombre || "No disponible",
-          usuario.correo || "No disponible",
-          usuario.genero || "No disponible",
-          usuario.rol || "No disponible",
-          usuario.fechaRegistro
-            ? new Date(usuario.fechaRegistro).toLocaleDateString("es-CR")
-            : "No disponible"
-        ];
-
-        valores.forEach(valor => {
-          const celda = document.createElement("td");
-          celda.textContent = valor;
-          fila.appendChild(celda);
-        });
-
-        tabla.appendChild(fila);
-      });
-    });
-  </script>
+    <script src="listado.js"></script>
 </body>
 </html>

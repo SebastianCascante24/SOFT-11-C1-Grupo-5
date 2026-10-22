@@ -1,4 +1,4 @@
-```javascript
+
 const CLAVE_CURSOS = "cursos";
 const tabla = document.getElementById("tabla-cursos");
 

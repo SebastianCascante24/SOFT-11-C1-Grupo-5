@@ -1,0 +1,46 @@
+
+/* UNIVERSIDAD CENFOTEC
+   Sistema de Gestión Curricular
+   Estilos exclusivos del registro de usuarios */
+
+#form-usuario {
+    width: 100%;
+    max-width: 760px;
+    margin-top: 24px;
+}
+
+/* Secciones sin marcos interiores */
+#form-usuario fieldset {
+    min-width: 0;
+    margin: 0 0 28px;
+    padding: 0;
+    border: none;
+}
+
+/* Títulos azules institucionales */
+#form-usuario legend {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 0;
+    color: var(--azul-oscuro);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Distribución de botones */
+#form-usuario .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+
+/* Diseño adaptable */
+@media (max-width: 768px) {
+    #form-usuario {
+        max-width: 100%;
+    }
+}

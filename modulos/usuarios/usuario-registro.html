@@ -1,105 +1,313 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar usuario | Gestor de Cursos CENFOTEC</title>
-<link rel="stylesheet" href="../../css/base/variables.css">
-<link rel="stylesheet" href="../../css/base/reset.css">
-<link rel="stylesheet" href="../../css/base/tipografia.css">
-<link rel="stylesheet" href="../../css/layout/encabezado.css">
-<link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-<link rel="stylesheet" href="../../css/layout/grid.css">
-<link rel="stylesheet" href="../../css/componentes/formularios.css">
-<link rel="stylesheet" href="../../css/componentes/botones.css">
-<link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-<link rel="stylesheet" href="../../css/componentes/alertas.css">
- <script src="../../js/nucleo/almacenamiento.js" defer></script>
-<script src="../../js/utilidades/validadores.js" defer></script>
-<script src="usuarios.js" defer></script>
+
+  <!-- Estilos institucionales -->
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/tipografia.css">
+  <link rel="stylesheet" href="../../css/layout/encabezado.css">
+  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+  <link rel="stylesheet" href="../../css/layout/grid.css">
+  <link rel="stylesheet" href="../../css/componentes/formularios.css">
+  <link rel="stylesheet" href="../../css/componentes/botones.css">
+  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+  <link rel="stylesheet" href="../../css/componentes/alertas.css">
+
+  <!-- Estilos exclusivos del formulario de usuarios -->
+  <link rel="stylesheet" href="usuario-registro.css">
+
+  <!-- JavaScript original -->
+  <script src="../../js/nucleo/almacenamiento.js" defer></script>
+  <script src="../../js/utilidades/validadores.js" defer></script>
+  <script src="usuarios.js" defer></script>
 </head>
+
 <body>
-  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+  <a class="salto-contenido" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- ENCABEZADO: MISMO DISEÑO DE INDEX.HTML -->
   <header class="encabezado">
-    <a class="logo" href="cursos.html">
-      <img src="../img/logo-cenfotec.png" alt="Logo de la Universidad CENFOTEC" width="48" height="48">
-      <span>Gestor de Cursos</span>
-    </a>
-    <nav class="menu-principal" aria-label="Navegación principal">
-      <ul>
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="curso-form.html">Registrar curso</a></li>
-        <li><a href="usuario-registro.html" aria-current="page">Usuarios</a></li>
-        <li><a href="../index.html">Cerrar sesión</a></li>
-      </ul>
-    </nav>
+    <a class="logo" href="../../index.html"
+       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+    <div class="encabezado-acciones"
+         role="group"
+         aria-label="Opciones de la cuenta">
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-notificaciones"
+              title="Notificaciones"
+              aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+        </svg>
+      </button>
+
+      <select id="encabezado-idioma"
+              aria-label="Idioma"
+              title="Idioma">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <button type="button"
+              class="avatar"
+              id="encabezado-avatar"
+              aria-label="Perfil"
+              title="Perfil">A</button>
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-cerrar-sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m16 17 5-5-5-5"/>
+          <path d="M21 12H9"/>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <main id="contenido">
-    <h1>Registrar usuario</h1>
-    <p>Solo el Administrador puede registrar usuarios. Los campos con <span aria-hidden="true">*</span><span class="solo-lectores">asterisco</span> son obligatorios.</p>
+  <!-- ESTRUCTURA PRINCIPAL -->
+  <div class="contenedor-principal">
 
-    <form id="form-usuario" action="#" method="post" novalidate>
-      <div id="resumen-errores" class="resumen-errores" role="alert" aria-live="assertive" hidden></div>
-      <fieldset>
-        <legend>Datos personales</legend>
-      <div class="campo">
-        <label for="u-nombre">Nombre completo <span aria-hidden="true">*</span></label>
-        <input id="u-nombre" name="u-nombre" required type="text" maxlength="80" autocomplete="name" aria-describedby="error-u-nombre">
-        <span id="error-u-nombre" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      <div class="campo">
-        <label for="u-correo">Correo institucional <span aria-hidden="true">*</span></label>
-        <input id="u-correo" name="u-correo" required type="email" maxlength="80" autocomplete="email" aria-describedby="error-u-correo">
-        <span id="error-u-correo" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      <div class="campo">
-        <label for="u-nacimiento">Fecha de nacimiento <span aria-hidden="true">*</span></label>
-        <input id="u-nacimiento" name="u-nacimiento" required type="date" autocomplete="bday" aria-describedby="error-u-nacimiento">
-        <span id="error-u-nacimiento" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      <div class="campo">
-        <label for="u-genero">Sexo / género <span aria-hidden="true">*</span></label>
-        <select id="u-genero" name="u-genero" required aria-describedby="error-u-genero">
-          <option value="">Seleccione una opción</option>
-          <option value="f">Femenino</option>
-          <option value="m">Masculino</option>
-          <option value="o">Otro</option>
-          <option value="n">Prefiero no indicarlo</option>
-        </select>
-        <span id="error-u-genero" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      </fieldset>
-      <fieldset>
-        <legend>Acceso al sistema</legend>
-      <div class="campo">
-        <label for="u-rol">Rol <span aria-hidden="true">*</span></label>
-        <select id="u-rol" name="u-rol" required aria-describedby="error-u-rol">
-          <option value="">Seleccione una opción</option>
-          <option value="admin">Administrador</option>
-          <option value="rectoria">Rectoría</option>
-          <option value="vice">Vicerrectoría</option>
-          <option value="dc">Desarrollo Curricular</option>
-          <option value="dir">Dirección de Escuela / Carrera</option>
-        </select>
-        <span id="error-u-rol" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      <div class="campo">
-        <label for="u-password">Contraseña <span aria-hidden="true">*</span></label>
-        <input id="u-password" name="u-password" required type="password" minlength="8" maxlength="15" autocomplete="new-password" aria-describedby="u-password-ayuda error-u-password">
-        <small id="u-password-ayuda">Entre 8 y 15 caracteres, con al menos una mayúscula, una minúscula, un número y un carácter especial.</small>
-        <span id="error-u-password" class="mensaje-error" aria-live="polite"></span>
-      </div>
-      </fieldset>
-      <div class="acciones">
-        <button type="submit" class="boton">Registrar usuario</button>
-        <a class="boton boton-secundario" href="cursos.html">Cancelar</a>
-      </div>
-    </form>
-  </main>
+    <!-- MENÚ LATERAL INSTITUCIONAL -->
+    <nav class="menu-lateral" aria-label="Menú principal">
+      <ul>
+        <li>
+          <a href="../../index.html">Inicio</a>
+        </li>
+        <li>
+          <a href="listado.html" aria-current="page">Usuarios</a>
+        </li>
+        <li>
+          <a href="../escuelas/listado.html">Escuelas</a>
+        </li>
+        <li>
+          <a href="../carreras/listado.html">Carreras</a>
+        </li>
+        <li>
+          <a href="../cursos/listado.html">Cursos</a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=areas-sfia">
+            Áreas SFIA
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=tematicas">
+            Temática
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=metodologias">
+            Metodologías de aprendizaje
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
+            Casas certificadoras
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
+            Niveles de complejidad
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-  <footer class="pie">
-    <p><small>&copy; 2026 Universidad CENFOTEC. Gestor de Cursos, Grupo 5, SOFT-11-C1.</small></p>
-  </footer>
+    <!-- CONTENIDO -->
+    <main id="contenido">
+      <h1>Registrar usuario</h1>
+
+      <p>
+        Solo el Administrador puede registrar usuarios.
+        Los campos con
+        <span aria-hidden="true">*</span>
+        <span class="solo-lectores">asterisco</span>
+        son obligatorios.
+      </p>
+
+      <form id="form-usuario"
+            class="tarjeta"
+            action="#"
+            method="post"
+            novalidate>
+
+        <div id="resumen-errores"
+             class="resumen-errores"
+             role="alert"
+             aria-live="assertive"
+             hidden></div>
+
+        <!-- DATOS PERSONALES -->
+        <fieldset>
+          <legend>Datos personales</legend>
+
+          <div class="campo">
+            <label for="u-nombre">
+              Nombre completo
+              <span aria-hidden="true">*</span>
+            </label>
+            <input id="u-nombre"
+                   name="u-nombre"
+                   required
+                   type="text"
+                   maxlength="80"
+                   autocomplete="name"
+                   aria-describedby="error-u-nombre">
+            <span id="error-u-nombre"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+
+          <div class="campo">
+            <label for="u-correo">
+              Correo institucional
+              <span aria-hidden="true">*</span>
+            </label>
+            <input id="u-correo"
+                   name="u-correo"
+                   required
+                   type="email"
+                   maxlength="80"
+                   autocomplete="email"
+                   aria-describedby="error-u-correo">
+            <span id="error-u-correo"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+
+          <div class="campo">
+            <label for="u-nacimiento">
+              Fecha de nacimiento
+              <span aria-hidden="true">*</span>
+            </label>
+            <input id="u-nacimiento"
+                   name="u-nacimiento"
+                   required
+                   type="date"
+                   autocomplete="bday"
+                   aria-describedby="error-u-nacimiento">
+            <span id="error-u-nacimiento"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+
+          <div class="campo">
+            <label for="u-genero">
+              Sexo / género
+              <span aria-hidden="true">*</span>
+            </label>
+            <select id="u-genero"
+                    name="u-genero"
+                    required
+                    aria-describedby="error-u-genero">
+              <option value="">Seleccione una opción</option>
+              <option value="f">Femenino</option>
+              <option value="m">Masculino</option>
+              <option value="o">Otro</option>
+              <option value="n">Prefiero no indicarlo</option>
+            </select>
+            <span id="error-u-genero"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+        </fieldset>
+
+        <!-- ACCESO AL SISTEMA -->
+        <fieldset>
+          <legend>Acceso al sistema</legend>
+
+          <div class="campo">
+            <label for="u-rol">
+              Rol
+              <span aria-hidden="true">*</span>
+            </label>
+            <select id="u-rol"
+                    name="u-rol"
+                    required
+                    aria-describedby="error-u-rol">
+              <option value="">Seleccione una opción</option>
+              <option value="admin">Administrador</option>
+              <option value="rectoria">Rectoría</option>
+              <option value="vice">Vicerrectoría</option>
+              <option value="dc">Desarrollo Curricular</option>
+              <option value="dir">
+                Dirección de Escuela / Carrera
+              </option>
+            </select>
+            <span id="error-u-rol"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+
+          <div class="campo">
+            <label for="u-password">
+              Contraseña
+              <span aria-hidden="true">*</span>
+            </label>
+            <input id="u-password"
+                   name="u-password"
+                   required
+                   type="password"
+                   minlength="8"
+                   maxlength="15"
+                   autocomplete="new-password"
+                   aria-describedby="u-password-ayuda error-u-password">
+
+            <small id="u-password-ayuda">
+              Entre 8 y 15 caracteres, con al menos una
+              mayúscula, una minúscula, un número y
+              un carácter especial.
+            </small>
+
+            <span id="error-u-password"
+                  class="mensaje-error"
+                  aria-live="polite"></span>
+          </div>
+        </fieldset>
+
+        <!-- BOTONES -->
+        <div class="acciones">
+          <button type="submit" class="boton">
+            Registrar usuario
+          </button>
+
+          <a class="boton boton-secundario" href="listado.html">
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </main>
+  </div>
 </body>
 </html>

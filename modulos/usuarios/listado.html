@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,9 +24,9 @@
 </head>
 
 <body>
-  <a class="salto-contenido" href="#contenido">
-    Saltar al contenido
-  </a>
+    <a class="salto-contenido" href="#contenido">
+        Saltar al contenido
+    </a>
 
   <!-- ENCABEZADO INSTITUCIONAL -->
   <header class="encabezado">
@@ -200,12 +200,12 @@
       const tabla = document.getElementById("tabla-usuarios");
       const mensaje = document.getElementById("mensaje");
 
-      let usuarios = [];
+            let usuarios = [];
 
-      try {
-        const datos = JSON.parse(
-          localStorage.getItem("grupo5_usuarios") || "[]"
-        );
+            try {
+                const datos = JSON.parse(
+                    localStorage.getItem("grupo5_usuarios") || "[]"
+                );
 
         usuarios = Array.isArray(datos) ? datos : [];
       } catch (error) {
@@ -222,8 +222,8 @@
         return;
       }
 
-      mensaje.textContent =
-        `Total de usuarios registrados: ${usuarios.length}`;
+            mensaje.textContent =
+                `Total de usuarios registrados: ${usuarios.length}`;
 
       const generos = {
         f: "Femenino",
@@ -261,15 +261,16 @@
           fecha
         ];
 
-        valores.forEach(valor => {
-          const celda = document.createElement("td");
-          celda.textContent = valor;
-          fila.appendChild(celda);
-        });
+                valores.forEach(valor => {
+                    const celda = document.createElement("td");
+                    celda.textContent = valor;
+                    fila.appendChild(celda);
+                });
 
-        tabla.appendChild(fila);
-      });
-    });
-  </script>
+                tabla.appendChild(fila);
+            });
+        });
+    </script>
 </body>
+
 </html>

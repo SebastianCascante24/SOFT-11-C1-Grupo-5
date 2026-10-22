@@ -1,0 +1,353 @@
+
+/* ==========================================
+   HU-44 · Listado y detalle de cursos
+   ========================================== */
+
+/* Barra de acciones para listado y detalle */
+.barra-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.barra-acciones .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Contenedor de información del curso */
+.detalle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+
+.detalle-grid .field {
+  min-width: 0;
+}
+
+/* Etiquetas de los datos */
+.detalle-grid .field label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Valores del detalle */
+.detalle-grid .field p,
+.detalle-grid .field .detalle-valor {
+  margin: 0;
+  padding: 10px 12px;
+  min-height: 42px;
+  overflow-wrap: anywhere;
+  background: #F7F9FC;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* Campos que ocupan todo el ancho */
+.detalle-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Estado del curso */
+.estado {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+}
+
+.estado.borrador {
+  background: #FFF4D6;
+  color: #8A5B00;
+}
+
+.estado.aprobado {
+  background: #EAF8F0;
+  color: var(--success);
+}
+
+/* Tabla del listado de cursos */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.table-container th,
+.table-container td {
+  padding: 13px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-container th {
+  background: #F7F9FC;
+  color: var(--blue-dark);
+  font-size: 12px;
+}
+
+.table-container td {
+  font-size: 13px;
+}
+
+.table-container tr:last-child td {
+  border-bottom: none;
+}
+
+/* Enlaces de acciones */
+.table-container a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.table-container a:hover {
+  text-decoration: underline;
+}
+
+/* Mensaje cuando no hay cursos */
+.empty-state {
+  padding: 30px 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 767px) {
+  .detalle-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detalle-grid .full-width {
+    grid-column: auto;
+  }
+
+  .barra-acciones {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .barra-acciones .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   Ajustes del listado de cursos
+   ========================================= */
+
+.listado-cursos {
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.listado-cursos .barra-acciones {
+    margin-bottom: 14px;
+    gap: 10px;
+}
+
+.listado-cursos .barra-acciones p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.listado-cursos .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.listado-cursos .boton-principal,
+.listado-cursos .boton-secundario {
+    padding: 8px 12px;
+    min-height: 36px;
+    font-size: 12px;
+}
+
+/* Permite leer todos los encabezados y valores */
+.tabla-contenedor {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+    padding: 9px 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+/* Espacio suficiente para el nombre del curso */
+.tabla th:nth-child(2),
+.tabla td:nth-child(2) {
+    min-width: 180px;
+    max-width: 360px;
+}
+
+/* Evita que los filtros agranden demasiado la tabla */
+.tabla .fila-filtros th {
+    padding: 7px;
+    background: #F7F9FC;
+}
+
+.fila-filtros input,
+.fila-filtros select {
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    padding: 7px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+/* Enlaces y botones dentro de las acciones */
+.tabla td a,
+.tabla td button {
+    display: inline-block;
+    margin: 2px 0;
+    font-size: 12px;
+    white-space: normal;
+}
+
+/* Reduce el espacio superior del título */
+.page-heading {
+    margin-bottom: 16px;
+}
+
+.page-heading h1 {
+    font-size: 25px;
+}
+
+.page-heading .subtitle {
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .listado-cursos {
+        padding: 12px;
+    }
+
+    .listado-cursos .barra-acciones {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .listado-cursos .action-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .listado-cursos .action-buttons a,
+    .listado-cursos .action-buttons button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tabla {
+        min-width: 650px;
+    }
+}
+
+/* Caja azul para Agregar registro */
+.caja-agregar-registro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    min-height: 38px;
+    background-color: #0867E8;
+    color: #FFFFFF;
+    border: 1px solid #0867E8;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.caja-agregar-registro:hover {
+    background-color: #06356E;
+    border-color: #06356E;
+    color: #FFFFFF;
+}
+
+/* Evita que "Acciones" se divida en varias líneas */
+.listado-cursos .tabla th:last-child {
+    min-width: 100px;
+    width: 100px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Mantiene los botones de acciones ordenados */
+.listado-cursos .tabla td:last-child {
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Encabezado azul con texto blanco */
+.listado-cursos .tabla thead tr:first-child th {
+    background-color: #06356E;
+    color: #FFFFFF;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Fila de filtros debajo del encabezado */
+.listado-cursos .tabla thead tr.fila-filtros th {
+    background-color: #E3ECFF;
+    color: #06356E;
+    white-space: normal;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .listado-cursos .tabla {
+        min-width: 650px;
+    }
+
+    .listado-cursos .tabla th:last-child,
+    .listado-cursos .tabla td:last-child {
+        min-width: 100px;
+        width: 100px;
+    }
+}

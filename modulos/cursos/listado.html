@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cursos | Desarrollo Curricular y Docente</title>
+
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/tipografia.css">
+    <link rel="stylesheet" href="../../css/layout/encabezado.css">
+    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="../../css/layout/grid.css">
+    <link rel="stylesheet" href="../../css/componentes/formularios.css">
+    <link rel="stylesheet" href="../../css/componentes/botones.css">
+    <link rel="stylesheet" href="../../css/componentes/tablas.css">
+    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
+    <link rel="stylesheet" href="cursos.css">
+</head>
+
+<body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+    <header class="encabezado">
+        <a class="logo" href="../../index.html"
+           aria-label="Ir al inicio"></a>
+
+        <div class="encabezado-acciones">
+            <button type="button" class="boton-secundario"
+                    aria-label="Notificaciones">♧</button>
+
+            <select id="idioma" aria-label="Idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+
+            <button type="button" class="avatar"
+                    aria-label="Perfil">A</button>
+
+            <a class="boton-secundario" href="../../index.html"
+               aria-label="Volver al inicio">↪</a>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+
+        <nav class="menu-lateral" aria-label="Menú principal">
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../usuarios/listado.html">Usuarios</a></li>
+                <li><a href="../escuelas/listado.html">Escuelas</a></li>
+                <li><a href="../carreras/listado.html">Carreras</a></li>
+                <li><a href="listado.html" aria-current="page">Cursos</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
+            </ul>
+        </nav>
+
+        <main id="contenido">
+
+            <p class="breadcrumbs">
+                <a href="../../index.html">Inicio</a>
+                <span>›</span>
+                <strong>Cursos</strong>
+            </p>
+
+            <section class="page-heading">
+                <div>
+                    <h1>Cursos</h1>
+                    <p class="subtitle">
+                        Consulta y administra los cursos registrados.
+                    </p>
+                </div>
+            </section>
+
+            <section class="tarjeta listado-cursos"
+                     aria-label="Listado de cursos">
+
+                <div class="barra-acciones">
+                    <p id="contador" aria-live="polite">0 registros</p>
+
+                    
+                <div class="action-buttons">
+                    <button type="button"
+                            class="boton-secundario"
+                            id="limpiar-filtros">
+                        Limpiar filtros
+                    </button>
+                
+                   <a href="registro.html" class="caja-agregar-registro">
+                        Agregar registro
+                    </a>
+                </div>
+                </div>
+
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre del curso</th>
+                                <th scope="col">Modalidad</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+
+                            <tr class="fila-filtros">
+                                <th>
+                                    <label class="solo-lectores"
+                                           for="filtro-codigo">
+                                        Filtrar por código
+                                    </label>
+                                    <input id="filtro-codigo"
+                                           type="search"
+                                           placeholder="Código">
+                                </th>
+
+                                <th>
+                                    <label class="solo-lectores"
+                                           for="filtro-nombre">
+                                        Filtrar por nombre
+                                    </label>
+                                    <input id="filtro-nombre"
+                                           type="search"
+                                           placeholder="Nombre del curso">
+                                </th>
+
+                                <th>
+                                    <label class="solo-lectores"
+                                           for="filtro-modalidad">
+                                        Filtrar por modalidad
+                                    </label>
+                                    <select id="filtro-modalidad">
+                                        <option value="">Todas</option>
+                                        <option value="Presencial">Presencial</option>
+                                        <option value="Virtual">Virtual</option>
+                                        <option value="Híbrida">Híbrida</option>
+                                    </select>
+                                </th>
+
+                                <th>
+                                    <label class="solo-lectores"
+                                           for="filtro-estado">
+                                        Filtrar por estado
+                                    </label>
+                                    <select id="filtro-estado">
+                                        <option value="">Todos</option>
+                                        <option value="Borrador">Borrador</option>
+                                        <option value="En revisión">En revisión</option>
+                                        <option value="Aprobado">Aprobado</option>
+                                        <option value="Rechazado">Rechazado</option>
+                                    </select>
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabla-cursos">
+                            <tr>
+                                <td colspan="5">Cargando cursos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p id="mensaje-listado" role="status"
+                   aria-live="polite"></p>
+            </section>
+
+            <footer class="page-footer">
+                Sistema de Desarrollo Curricular y Docente
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="listado.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del curso | Desarrollo Curricular y Docente</title>
+
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/tipografia.css">
+    <link rel="stylesheet" href="../../css/layout/encabezado.css">
+    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="../../css/layout/grid.css">
+    <link rel="stylesheet" href="../../css/componentes/formularios.css">
+    <link rel="stylesheet" href="../../css/componentes/botones.css">
+    <link rel="stylesheet" href="../../css/componentes/tablas.css">
+    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
+    <link rel="stylesheet" href="cursos.css">
+</head>
+
+<body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+    <header class="encabezado">
+        <a class="logo" href="../../index.html"
+           aria-label="Ir al inicio"></a>
+
+        <div class="encabezado-acciones" role="group"
+             aria-label="Opciones de la cuenta">
+            <button type="button" class="boton-secundario"
+                    aria-label="Notificaciones">♧</button>
+
+            <select id="encabezado-idioma" aria-label="Idioma">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+
+            <button type="button" class="avatar"
+                    aria-label="Perfil">A</button>
+
+            <a class="boton-secundario" href="../../index.html"
+               aria-label="Volver al inicio">↪</a>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+
+        <nav class="menu-lateral" aria-label="Menú principal">
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../usuarios/listado.html">Usuarios</a></li>
+                <li><a href="../escuelas/listado.html">Escuelas</a></li>
+                <li><a href="../carreras/listado.html">Carreras</a></li>
+                <li><a href="listado.html" aria-current="page">Cursos</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
+                <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
+            </ul>
+        </nav>
+
+        <main id="contenido">
+            <p><a href="listado.html">← Volver al listado de cursos</a></p>
+
+            <h1>Detalle del curso</h1>
+            <p>Consulta de la información académica y administrativa del curso.</p>
+
+            <div id="mensaje" role="status" aria-live="polite"></div>
+
+            <section class="tarjeta" aria-labelledby="identificacion-titulo">
+                <h2 id="identificacion-titulo">Identificación del curso</h2>
+
+                <dl class="detalle-grid">
+                    <div><dt>Código</dt><dd id="codigo">—</dd></div>
+                    <div><dt>Nombre del curso</dt><dd id="nombre">—</dd></div>
+                    <div><dt>Nombre en Power Accounts</dt><dd id="nombrePower">—</dd></div>
+                    <div><dt>Escuela</dt><dd id="escuela">—</dd></div>
+                    <div><dt>Carrera</dt><dd id="carrera">—</dd></div>
+                    <div><dt>Estado</dt><dd id="estado">—</dd></div>
+                    <div><dt>Última modificación</dt><dd id="fechaModificacion">—</dd></div>
+                </dl>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="academica-titulo">
+                <h2 id="academica-titulo">Información académica</h2>
+
+                <dl class="detalle-grid">
+                    <div><dt>Modalidad</dt><dd id="modalidad">—</dd></div>
+                    <div><dt>Créditos</dt><dd id="creditos">—</dd></div>
+                    <div><dt>Horas de clase</dt><dd id="horasClase">—</dd></div>
+                    <div><dt>Horas extraclase</dt><dd id="horasExtraclase">—</dd></div>
+                    <div><dt>Total de horas</dt><dd id="totalHoras">—</dd></div>
+                    <div><dt>Requisitos indispensables</dt><dd id="requisitosIndispensables">—</dd></div>
+                    <div><dt>Requisitos deseables</dt><dd id="requisitosDeseables">—</dd></div>
+                </dl>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="comercial-titulo">
+                <h2 id="comercial-titulo">Información comercial</h2>
+
+                <dl class="detalle-grid">
+                    <div><dt>¿Es E-commerce?</dt><dd id="ecommerce">—</dd></div>
+                    <div><dt>Fecha de apertura</dt><dd id="fechaApertura">—</dd></div>
+                    <div><dt>Moneda</dt><dd id="moneda">—</dd></div>
+                    <div><dt>Programa</dt><dd id="programa">—</dd></div>
+                </dl>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="descripcion-titulo">
+                <h2 id="descripcion-titulo">Descripción del curso</h2>
+
+                <h3>Descripción corta</h3>
+                <p id="descripcionCorta">—</p>
+
+                <h3>Descripción completa</h3>
+                <p id="descripcionCompleta">—</p>
+            </section>
+
+            <div class="barra-acciones">
+                <a href="listado.html" class="boton-secundario">
+                    Volver
+                </a>
+                <button type="button" id="editar" class="boton-principal">
+                    Editar curso
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="detalle.js"></script>
+</body>
+</html>

@@ -294,3 +294,78 @@ form[id*="filtro"] .campo {
     gap: 12px;
     margin-top: 24px;
 }
+
+.barra-herramientas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background: var(--fondo-alterno);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+}
+
+.barra-herramientas-acciones {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#listado-catalogo-contador {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+#listado-catalogo-filtros-activos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    background: var(--fondo-alterno);
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+#listado-catalogo-lista-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#listado-catalogo-lista-filtros li {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 4px 2px 12px;
+    background: var(--azul-suave);
+    border-radius: 999px;
+    color: var(--azul-oscuro);
+    font-weight: 600;
+}
+
+#listado-catalogo-lista-filtros button {
+    min-height: 24px;
+    padding: 0 8px;
+    background: transparent;
+    border-color: transparent;
+    color: var(--azul-oscuro);
+    font-size: 16px;
+    line-height: 1;
+}
+
+#listado-catalogo-lista-filtros button:hover {
+    background: var(--azul-principal);
+    border-color: var(--azul-principal);
+    color: var(--blanco);
+}

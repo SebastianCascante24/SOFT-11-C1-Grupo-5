@@ -96,4 +96,3 @@ document.getElementById("exportar-csv").addEventListener("click", () => {
 });
 
 mostrarCursos();
-```

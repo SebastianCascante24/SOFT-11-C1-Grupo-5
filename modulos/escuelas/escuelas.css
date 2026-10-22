@@ -49,3 +49,78 @@
     margin-top: 24px;
     margin-bottom: 28px;
 }
+
+/* =========================================
+   VALIDACIONES Y ALERTAS - REGISTRAR ESCUELA
+   ========================================= */
+
+/* Título y descripción de la página */
+#contenido > h1 {
+    color: var(--azul-oscuro);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+#contenido > h1 + p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Campos inválidos */
+#formularioEscuela .campo-invalido {
+    border: 1px solid var(--rojo-validacion);
+    background-color: #FFFDFD;
+}
+
+#formularioEscuela .campo-invalido:focus {
+    outline: 2px solid rgba(220, 53, 69, 0.18);
+    outline-offset: 1px;
+}
+
+/* Mensajes individuales */
+#formularioEscuela .mensaje-error-escuela {
+    display: block;
+    color: var(--rojo-error);
+    background-color: #FFF1F2;
+    border-left: 3px solid var(--rojo-validacion);
+    padding: 9px 12px;
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Ocultar mensajes vacíos */
+#formularioEscuela .mensaje-error-escuela:empty {
+    display: none;
+}
+
+/* Alertas generales */
+#mensajeRegistro.alerta-error {
+    display: block;
+    color: var(--rojo-error);
+    background-color: #FFF1F2;
+    border-left: 4px solid var(--rojo-validacion);
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#mensajeRegistro.alerta-exito {
+    display: block;
+    color: #166534;
+    background-color: #F0FDF4;
+    border-left: 4px solid #16A34A;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#mensajeRegistro[hidden] {
+    display: none !important;
+}
+

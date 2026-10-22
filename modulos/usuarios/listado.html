@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Listado de cursos | Desarrollo Curricular y Docente</title>
+    <title>Detalle del curso | Desarrollo Curricular y Docente</title>
 
     <link rel="stylesheet" href="../../css/base/variables.css">
     <link rel="stylesheet" href="../../css/base/reset.css">
@@ -30,7 +29,6 @@
 
         <div class="encabezado-acciones" role="group"
              aria-label="Opciones de la cuenta">
-
             <button type="button" class="boton-secundario"
                     aria-label="Notificaciones">♧</button>
 
@@ -65,114 +63,73 @@
         </nav>
 
         <main id="contenido">
+            <p><a href="listado.html">← Volver al listado de cursos</a></p>
 
-            <p class="breadcrumbs">
-                <a href="../../index.html">Inicio</a>
-                <span>›</span>
-                <strong>Cursos</strong>
-            </p>
-
-            <section class="page-heading">
-                <div>
-                    <p class="eyebrow">GESTIÓN ACADÉMICA</p>
-                    <h1>Listado de cursos</h1>
-                    <p class="subtitle">
-                        Consulta, busca y administra los cursos registrados.
-                    </p>
-                </div>
-
-                <a href="registro.html" class="boton-principal">
-                    + Registrar curso
-                </a>
-            </section>
+            <h1>Detalle del curso</h1>
+            <p>Consulta de la información académica y administrativa del curso.</p>
 
             <div id="mensaje" role="status" aria-live="polite"></div>
 
-            <section class="tarjeta" aria-labelledby="filtros-titulo">
-                <h2 id="filtros-titulo">Buscar cursos</h2>
+            <section class="tarjeta" aria-labelledby="identificacion-titulo">
+                <h2 id="identificacion-titulo">Identificación del curso</h2>
 
-                <div class="form-grid">
-                    <div class="field">
-                        <label for="buscar">Código o nombre del curso</label>
-                        <input
-                            type="search"
-                            id="buscar"
-                            placeholder="Ej. INF-101 o Programación">
-                    </div>
-
-                    <div class="field">
-                        <label for="filtroEstado">Estado</label>
-                        <select id="filtroEstado">
-                            <option value="">Todos los estados</option>
-                            <option value="borrador">Borrador</option>
-                            <option value="revision">En revisión</option>
-                            <option value="aprobado">Aprobado</option>
-                            <option value="publicado">Publicado</option>
-                            <option value="rechazado">Rechazado</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="filtroModalidad">Modalidad</label>
-                        <select id="filtroModalidad">
-                            <option value="">Todas las modalidades</option>
-                            <option value="presencial">Presencial</option>
-                            <option value="virtual">Virtual</option>
-                            <option value="hibrida">Híbrida</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="barra-acciones">
-                    <button type="button" id="limpiarFiltros"
-                            class="boton-secundario">
-                        Limpiar filtros
-                    </button>
-
-                    <button type="button" id="exportarCSV"
-                            class="boton-secundario">
-                        Exportar CSV
-                    </button>
-                </div>
+                <dl class="detalle-grid">
+                    <div><dt>Código</dt><dd id="codigo">—</dd></div>
+                    <div><dt>Nombre del curso</dt><dd id="nombre">—</dd></div>
+                    <div><dt>Nombre en Power Accounts</dt><dd id="nombrePower">—</dd></div>
+                    <div><dt>Escuela</dt><dd id="escuela">—</dd></div>
+                    <div><dt>Carrera</dt><dd id="carrera">—</dd></div>
+                    <div><dt>Estado</dt><dd id="estado">—</dd></div>
+                    <div><dt>Última modificación</dt><dd id="fechaModificacion">—</dd></div>
+                </dl>
             </section>
 
-            <section class="tarjeta" aria-labelledby="tabla-titulo">
-                <div class="barra-acciones">
-                    <div>
-                        <h2 id="tabla-titulo">Cursos registrados</h2>
-                        <p id="totalCursos">Cargando cursos...</p>
-                    </div>
-                </div>
+            <section class="tarjeta" aria-labelledby="academica-titulo">
+                <h2 id="academica-titulo">Información académica</h2>
 
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Código</th>
-                                <th scope="col">Nombre del curso</th>
-                                <th scope="col">Modalidad</th>
-                                <th scope="col">Créditos</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="tablaCursos">
-                            <tr>
-                                <td colspan="6">Cargando cursos...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <dl class="detalle-grid">
+                    <div><dt>Modalidad</dt><dd id="modalidad">—</dd></div>
+                    <div><dt>Créditos</dt><dd id="creditos">—</dd></div>
+                    <div><dt>Horas de clase</dt><dd id="horasClase">—</dd></div>
+                    <div><dt>Horas extraclase</dt><dd id="horasExtraclase">—</dd></div>
+                    <div><dt>Total de horas</dt><dd id="totalHoras">—</dd></div>
+                    <div><dt>Requisitos indispensables</dt><dd id="requisitosIndispensables">—</dd></div>
+                    <div><dt>Requisitos deseables</dt><dd id="requisitosDeseables">—</dd></div>
+                </dl>
             </section>
 
-            <footer class="page-footer">
-                Sistema de Desarrollo Curricular y Docente
-            </footer>
+            <section class="tarjeta" aria-labelledby="comercial-titulo">
+                <h2 id="comercial-titulo">Información comercial</h2>
 
+                <dl class="detalle-grid">
+                    <div><dt>¿Es E-commerce?</dt><dd id="ecommerce">—</dd></div>
+                    <div><dt>Fecha de apertura</dt><dd id="fechaApertura">—</dd></div>
+                    <div><dt>Moneda</dt><dd id="moneda">—</dd></div>
+                    <div><dt>Programa</dt><dd id="programa">—</dd></div>
+                </dl>
+            </section>
+
+            <section class="tarjeta" aria-labelledby="descripcion-titulo">
+                <h2 id="descripcion-titulo">Descripción del curso</h2>
+
+                <h3>Descripción corta</h3>
+                <p id="descripcionCorta">—</p>
+
+                <h3>Descripción completa</h3>
+                <p id="descripcionCompleta">—</p>
+            </section>
+
+            <div class="barra-acciones">
+                <a href="listado.html" class="boton-secundario">
+                    Volver
+                </a>
+                <button type="button" id="editar" class="boton-principal">
+                    Editar curso
+                </button>
+            </div>
         </main>
     </div>
 
-    <script src="listado.js"></script>
+    <script src="detalle.js"></script>
 </body>
 </html>

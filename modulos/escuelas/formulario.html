@@ -14,71 +14,149 @@
   <link rel="stylesheet" href="../../css/layout/grid.css">
   <link rel="stylesheet" href="../../css/componentes/formularios.css">
   <link rel="stylesheet" href="../../css/componentes/botones.css">
+  <link rel="stylesheet" href="../../css/componentes/tablas.css">
+  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
   <link rel="stylesheet" href="../../css/componentes/alertas.css">
+  <link rel="stylesheet" href="escuelas.css">
+
+  <script src="escuelas.js" defer></script>
 </head>
 
 <body>
+  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ENCABEZADO INSTITUCIONAL -->
   <header class="encabezado">
-    <h2>Gestor de Cursos</h2>
-    <nav aria-label="Navegación principal">
-      <a href="../../index.html">Inicio</a>
-      <a href="listado.html">Escuelas</a>
-      <a href="formulario.html">Registrar escuela</a>
-    </nav>
+    <a class="logo" href="../../index.html"
+       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+    <div class="encabezado-acciones" role="group"
+         aria-label="Opciones de la cuenta">
+
+      <button type="button" class="boton-secundario"
+              id="encabezado-notificaciones"
+              title="Notificaciones" aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+        </svg>
+      </button>
+
+      <select id="encabezado-idioma" aria-label="Idioma" title="Idioma">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <button type="button" class="avatar"
+              id="encabezado-avatar"
+              aria-label="Perfil" title="Perfil">A</button>
+
+      <button type="button" class="boton-secundario"
+              id="encabezado-cerrar-sesion"
+              aria-label="Cerrar sesión" title="Cerrar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m16 17 5-5-5-5"/>
+          <path d="M21 12H9"/>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <main id="contenido">
-    <h1>Registrar escuela</h1>
-    <p>Complete los datos para registrar una nueva escuela
-       en el sistema de Gestión Curricular y Docente.</p>
+  <!-- DISTRIBUCIÓN PRINCIPAL -->
+  <div class="contenedor-principal">
 
-    <form id="formularioEscuela" novalidate>
-      <fieldset>
-        <legend>Información de la escuela</legend>
+    <!-- MENÚ LATERAL -->
+    <nav class="menu-lateral" aria-label="Menú principal">
+      <ul>
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="../usuarios/listado.html">Usuarios</a></li>
+        <li><a href="listado.html" aria-current="page">Escuelas</a></li>
+        <li><a href="../carreras/listado.html">Carreras</a></li>
+        <li><a href="../cursos/listado.html">Cursos</a></li>
+        <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
+        <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
+        <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
+        <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
+        <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
+      </ul>
+    </nav>
 
-        <label for="codigoEscuela">Código de escuela *</label>
-        <input
-          type="text"
-          id="codigoEscuela"
-          name="codigoEscuela"
-          maxlength="20"
-          required
-        >
-        <p id="errorCodigo" role="alert"></p>
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <main id="contenido">
 
-        <label for="nombreEscuela">Nombre de la escuela *</label>
-        <input
-          type="text"
-          id="nombreEscuela"
-          name="nombreEscuela"
-          maxlength="100"
-          required
-        >
-        <p id="errorNombre" role="alert"></p>
+      <h1>Registrar escuela</h1>
+      <p>
+        Complete los datos para registrar una nueva escuela
+        en el Sistema de Gestión Curricular y Docente.
+        Los campos marcados con * son obligatorios.
+      </p>
 
-        <label for="directorEscuela">Director de escuela *</label>
-        <input
-          type="text"
-          id="directorEscuela"
-          name="directorEscuela"
-          maxlength="100"
-          required
-        >
-        <p id="errorDirector" role="alert"></p>
-      </fieldset>
+     <form id="formularioEscuela" class="tarjeta" novalidate>
+        <fieldset>
+          <legend>Información de la escuela</legend>
 
-      <p id="mensajeRegistro" role="status" aria-live="polite"></p>
+          <div class="campo">
+            <label for="codigoEscuela">Código de escuela *</label>
+            <input type="text"
+                   id="codigoEscuela"
+                   name="codigoEscuela"
+                   maxlength="20"
+                   aria-describedby="errorCodigo"
+                   required>
+            <p id="errorCodigo" class="mensaje-error"
+               aria-live="polite"></p>
+          </div>
 
-      <button type="submit">Registrar escuela</button>
-      <button type="reset">Limpiar</button>
-      <a href="listado.html">Cancelar</a>
-    </form>
-  </main>
+          <div class="campo">
+            <label for="nombreEscuela">Nombre de la escuela *</label>
+            <input type="text"
+                   id="nombreEscuela"
+                   name="nombreEscuela"
+                   maxlength="100"
+                   aria-describedby="errorNombre"
+                   required>
+            <p id="errorNombre" class="mensaje-error"
+               aria-live="polite"></p>
+          </div>
 
-  <footer>
-    <p>© 2026 Universidad CENFOTEC - Gestor de Cursos</p>
-  </footer>
+          <div class="campo">
+            <label for="directorEscuela">Director de escuela *</label>
+            <input type="text"
+                   id="directorEscuela"
+                   name="directorEscuela"
+                   maxlength="100"
+                   aria-describedby="errorDirector"
+                   required>
+            <p id="errorDirector" class="mensaje-error"
+               aria-live="polite"></p>
+          </div>
+        </fieldset>
 
-  <script src="escuelas.js" defer></script>
+        <p id="mensajeRegistro" role="status"
+           aria-live="polite"></p>
+
+        <div class="acciones">
+          <button type="submit" class="boton">
+            Registrar escuela
+          </button>
+          <button type="reset" class="boton boton-secundario">
+            Limpiar
+          </button>
+          <a href="listado.html" class="boton boton-secundario">
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </main>
+  </div>
 </body>
 </html>

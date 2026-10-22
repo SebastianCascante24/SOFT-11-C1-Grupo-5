@@ -290,39 +290,64 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     padding: 9px 16px;
     min-height: 38px;
-
     background-color: #0867E8;
     color: #FFFFFF;
-
     border: 1px solid #0867E8;
     border-radius: 7px;
-
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
-
-    box-shadow: 0 3px 8px rgba(8, 103, 232, 0.18);
-    transition: background-color 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
 .caja-agregar-registro:hover {
     background-color: #06356E;
     border-color: #06356E;
     color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(6, 53, 110, 0.22);
 }
 
-.caja-agregar-registro:focus-visible {
-    outline: 3px solid #8CB8FF;
-    outline-offset: 3px;
+/* Evita que "Acciones" se divida en varias líneas */
+.listado-cursos .tabla th:last-child {
+    min-width: 100px;
+    width: 100px;
+    white-space: nowrap;
+    text-align: center;
 }
 
+/* Mantiene los botones de acciones ordenados */
+.listado-cursos .tabla td:last-child {
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Encabezado azul con texto blanco */
+.listado-cursos .tabla thead tr:first-child th {
+    background-color: #06356E;
+    color: #FFFFFF;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Fila de filtros debajo del encabezado */
+.listado-cursos .tabla thead tr.fila-filtros th {
+    background-color: #E3ECFF;
+    color: #06356E;
+    white-space: normal;
+}
+
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 767px) {
-    .caja-agregar-registro {
-        width: 100%;
-        text-align: center;
+    .listado-cursos .tabla {
+        min-width: 650px;
+    }
+
+    .listado-cursos .tabla th:last-child,
+    .listado-cursos .tabla td:last-child {
+        min-width: 100px;
+        width: 100px;
     }
 }

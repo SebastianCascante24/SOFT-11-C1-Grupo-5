@@ -1,11 +1,11 @@
-<a href="registro.html" class="boton-principal">
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos | Desarrollo Curricular y Docente</title>
+
+    <title>Listado de cursos | Desarrollo Curricular y Docente</title>
 
     <link rel="stylesheet" href="../../css/base/variables.css">
     <link rel="stylesheet" href="../../css/base/reset.css">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../css/componentes/botones.css">
     <link rel="stylesheet" href="../../css/componentes/tablas.css">
     <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
     <link rel="stylesheet" href="cursos.css">
 </head>
 
@@ -27,7 +28,9 @@
         <a class="logo" href="../../index.html"
            aria-label="Ir al inicio"></a>
 
-        <div class="encabezado-acciones">
+        <div class="encabezado-acciones" role="group"
+             aria-label="Opciones de la cuenta">
+
             <button type="button" class="boton-secundario"
                     aria-label="Notificaciones">♧</button>
 
@@ -63,19 +66,44 @@
         </nav>
 
         <main id="contenido">
-            <h1>Cursos</h1>
+
+            <p class="breadcrumbs">
+                <a href="../../index.html">Inicio</a>
+                <span>›</span>
+                <strong>Cursos</strong>
+            </p>
+
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow">GESTIÓN ACADÉMICA</p>
+                    <h1>Cursos</h1>
+                    <p class="subtitle">
+                        Consulta, filtra y administra los cursos registrados.
+                    </p>
+                </div>
+
+                <a href="registro.html" class="boton-principal">
+                    + Agregar curso
+                </a>
+            </section>
 
             <section class="tarjeta" aria-label="Listado de cursos">
 
                 <div class="barra-acciones">
-                    <p id="contador">0 registros</p>
+                    <p id="contador" aria-live="polite">0 registros</p>
 
-                    <div>
-                        <button type="button" class="boton-secundario"
-                                id="limpiar-filtros">Limpiar filtros</button>
+                    <div class="action-buttons">
+                        <button type="button"
+                                class="boton-secundario"
+                                id="limpiar-filtros">
+                            Limpiar filtros
+                        </button>
 
-                        <button type="button" class="boton-secundario"
-                                id="exportar-csv">Exportar CSV</button>
+                        <button type="button"
+                                class="boton-secundario"
+                                id="exportar-csv">
+                            Exportar CSV
+                        </button>
 
                         <a href="registro.html" class="boton-principal">
                             Agregar registro
@@ -93,19 +121,33 @@
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
                             </tr>
+
                             <tr>
-                                <th>
-                                    <label class="solo-lectores" for="filtro-codigo">Filtrar por código</label>
-                                    <input id="filtro-codigo" type="search"
+                                <th scope="col">
+                                    <label class="solo-lectores"
+                                           for="filtro-codigo">
+                                        Filtrar por código
+                                    </label>
+                                    <input id="filtro-codigo"
+                                           type="search"
                                            placeholder="Código">
                                 </th>
-                                <th>
-                                    <label class="solo-lectores" for="filtro-nombre">Filtrar por nombre</label>
-                                    <input id="filtro-nombre" type="search"
+
+                                <th scope="col">
+                                    <label class="solo-lectores"
+                                           for="filtro-nombre">
+                                        Filtrar por nombre
+                                    </label>
+                                    <input id="filtro-nombre"
+                                           type="search"
                                            placeholder="Nombre">
                                 </th>
-                                <th>
-                                    <label class="solo-lectores" for="filtro-modalidad">Filtrar por modalidad</label>
+
+                                <th scope="col">
+                                    <label class="solo-lectores"
+                                           for="filtro-modalidad">
+                                        Filtrar por modalidad
+                                    </label>
                                     <select id="filtro-modalidad">
                                         <option value="">Todas</option>
                                         <option value="Presencial">Presencial</option>
@@ -113,8 +155,12 @@
                                         <option value="Híbrida">Híbrida</option>
                                     </select>
                                 </th>
-                                <th>
-                                    <label class="solo-lectores" for="filtro-estado">Filtrar por estado</label>
+
+                                <th scope="col">
+                                    <label class="solo-lectores"
+                                           for="filtro-estado">
+                                        Filtrar por estado
+                                    </label>
                                     <select id="filtro-estado">
                                         <option value="">Todos</option>
                                         <option value="Borrador">Borrador</option>
@@ -123,7 +169,8 @@
                                         <option value="Rechazado">Rechazado</option>
                                     </select>
                                 </th>
-                                <th>Acciones</th>
+
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
 
@@ -135,12 +182,19 @@
                     </table>
                 </div>
 
-                <p id="mensaje-listado" role="status"></p>
+                <p id="mensaje-listado"
+                   role="status"
+                   aria-live="polite"></p>
+
             </section>
+
+            <footer class="page-footer">
+                Sistema de Desarrollo Curricular y Docente
+            </footer>
+
         </main>
     </div>
 
     <script src="listado.js"></script>
 </body>
 </html>
-</a>

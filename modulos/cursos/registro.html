@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>HU-44 | Registrar curso - CENFOTEC</title>
 
     <!-- Estilos base -->
@@ -11,127 +11,434 @@
     <link rel="stylesheet" href="../../css/base/reset.css">
     <link rel="stylesheet" href="../../css/base/tipografia.css">
 
-    <!-- Estilos de estructura -->
+    <!-- Estructura -->
     <link rel="stylesheet" href="../../css/layout/encabezado.css">
     <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
     <link rel="stylesheet" href="../../css/layout/grid.css">
 
-    <!-- Componentes compartidos -->
+    <!-- Componentes -->
     <link rel="stylesheet" href="../../css/componentes/formularios.css">
     <link rel="stylesheet" href="../../css/componentes/botones.css">
     <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
 
-    <!-- Estilos específicos del módulo de cursos -->
+    <!-- CSS específico del módulo -->
     <link rel="stylesheet" href="cursos.css">
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand-mark">C</div>
-    <div class="brand-copy">
-      <strong>Universidad CENFOTEC</strong>
-      <span>Sistema de Gestión Curricular y Docente</span>
-    </div>
-    <div class="user-chip"><span class="avatar">U</span><span>Usuario autorizado</span></div>
-  </header>
 
-  <div class="app-shell">
-    <aside class="sidebar">
-      <p class="nav-caption">MENÚ PRINCIPAL</p>
-      <a href="#" class="nav-link">▦ <span>Panel principal</span></a>
-      <a href="#" class="nav-link">♙ <span>Usuarios</span></a>
-      <a href="#" class="nav-link">▤ <span>Escuelas y carreras</span></a>
-      <a href="#" class="nav-link">☷ <span>Catálogos</span></a>
-      <a href="#" class="nav-link active">▣ <span>Gestión de cursos</span></a>
-      <a href="#" class="nav-link">✓ <span>Revisión de cursos</span></a>
-      <div class="sidebar-footer">SOFT-11-C1 · Grupo 5</div>
-    </aside>
-
-    <main class="main-content">
-      <div class="breadcrumbs">Inicio <span>/</span> Gestión de cursos <span>/</span> <strong>Registrar curso</strong></div>
-      <div class="page-heading">
-        <div>
-          <p class="eyebrow">GESTIÓN DE CURSOS · HU-44</p>
-          <h1>Registrar nuevo curso</h1>
-          <p class="subtitle">Complete la información académica y administrativa del curso.</p>
+    <header class="topbar">
+        <div class="brand-mark">C</div>
+        <div class="brand-copy">
+            <strong>Universidad CENFOTEC</strong>
+            <span>Sistema de Gestión Curricular y Docente</span>
         </div>
-        <span class="priority">Prioridad P1</span>
-      </div>
+        <div class="user-chip">
+            <span class="avatar">U</span>
+            <span>Usuario autorizado</span>
+        </div>
+    </header>
 
-      <div id="globalMessage" class="notice hidden" role="alert" aria-live="polite"></div>
-      <div class="progress-row"><span>Información del curso</span><span id="completionText">0% completado</span></div>
-      <div class="progress-track"><div id="completionBar"></div></div>
+    <div class="app-shell">
 
-      <form id="courseForm" novalidate>
-        <section class="form-card">
-          <div class="section-heading"><span class="section-number">01</span><div><h2>Identificación del curso</h2><p>Datos generales y ubicación académica.</p></div></div>
-          <div class="form-grid">
-            <div class="field"><label for="school">Escuela <em>*</em></label><select id="school" name="school" required><option value="">Seleccione una escuela</option><option>Escuela de Ingeniería de Software</option><option>Escuela de Ciberseguridad</option><option>Escuela de Ciencia de Datos</option></select><small class="error-text"></small></div>
-            <div class="field"><label for="career">Carrera <em>*</em></label><select id="career" name="career" required><option value="">Seleccione una carrera</option><option>Ingeniería del Software</option><option>Desarrollo de Aplicaciones</option><option>Ciberseguridad</option><option>Ciencia de Datos</option></select><small class="help-text">Seleccione la carrera asociada a la escuela.</small><small class="error-text"></small></div>
-            <div class="field"><label for="code">Código del curso <em>*</em></label><input id="code" name="code" type="text" maxlength="30" required placeholder="Ej. SOFT-101" autocomplete="off"><small class="help-text">Debe ser único dentro del sistema.</small><small class="error-text"></small></div>
-            <div class="field"><label for="name">Nombre del curso <em>*</em></label><input id="name" name="name" type="text" minlength="3" maxlength="150" required placeholder="Nombre oficial del curso"><small class="error-text"></small></div>
-            <div class="field"><label for="powerName">Nombre en Power Accounts <em>* al enviar</em></label><input id="powerName" name="powerName" type="text" maxlength="40" placeholder="Máximo 40 caracteres"><small class="error-text"></small></div>
-            <div class="field"><label for="ecommerce">¿Tiene E-commerce? <em>* al enviar</em></label><select id="ecommerce" name="ecommerce"><option value="">Seleccione una opción</option><option value="Sí">Sí</option><option value="No">No</option></select><small class="error-text"></small></div>
-            <div class="field" id="openingDateField"><label for="openingDate">Fecha de apertura <em>* si E-commerce es Sí</em></label><input id="openingDate" name="openingDate" type="date"><small class="error-text"></small></div>
-            <div class="field"><label for="currency">Moneda <em>* al enviar</em></label><select id="currency" name="currency"><option value="">Seleccione una moneda</option><option>Colones</option><option>Dólares</option></select><small class="error-text"></small></div>
-          </div>
-        </section>
+        <aside class="sidebar">
+            <p class="nav-caption">MENÚ PRINCIPAL</p>
+            <a href="../../index.html" class="nav-link">▦ <span>Panel principal</span></a>
+            <a href="#" class="nav-link">♙ <span>Usuarios</span></a>
+            <a href="#" class="nav-link">▤ <span>Escuelas y carreras</span></a>
+            <a href="#" class="nav-link">☷ <span>Catálogos</span></a>
+            <a href="listado.html" class="nav-link active">▣ <span>Gestión de cursos</span></a>
+            <a href="#" class="nav-link">✓ <span>Revisión de cursos</span></a>
 
-        <section class="form-card">
-          <div class="section-heading"><span class="section-number">02</span><div><h2>Clasificación y carga académica</h2><p>Catálogos, modalidad y distribución de horas.</p></div></div>
-          <div class="form-grid">
-            <div class="field"><label for="sfia">Área SFIA <em>*</em></label><select id="sfia" name="sfia" required><option value="">Seleccione un área SFIA</option><option>Desarrollo de sistemas</option><option>Gestión de datos</option><option>Ciberseguridad</option><option>Gestión de proyectos</option></select><small class="error-text"></small></div>
-            <div class="field"><label for="topic">Temática <em>*</em></label><select id="topic" name="topic" required><option value="">Seleccione una temática</option><option>Programación</option><option>Infraestructura</option><option>Datos e inteligencia artificial</option><option>Gestión y calidad</option></select><small class="error-text"></small></div>
-            <div class="field"><label for="credits">Créditos <em>*</em></label><input id="credits" name="credits" type="number" min="1" step="1" required placeholder="Ej. 4"><small class="error-text"></small></div>
-            <div class="field"><label for="classHours">Horas de clase <em>*</em></label><input id="classHours" name="classHours" type="number" min="0" step="1" required value="0"><small class="error-text"></small></div>
-            <div class="field"><label for="extraHours">Horas extraclase <em>*</em></label><input id="extraHours" name="extraHours" type="number" min="0" step="1" required value="0"><small class="error-text"></small></div>
-            <div class="field"><label for="totalHours">Total de horas</label><input id="totalHours" name="totalHours" type="number" readonly value="0"><small class="help-text">Se calcula automáticamente.</small></div>
-            <div class="field"><label for="modality">Modalidad <em>*</em></label><select id="modality" name="modality" required><option value="">Seleccione una modalidad</option><option>Virtual</option><option>Presencial</option><option>Híbrida</option></select><small class="error-text"></small></div>
-            <div class="field"><label for="complexity">Nivel de complejidad <em>* al enviar</em></label><select id="complexity" name="complexity"><option value="">Seleccione un nivel</option><option>Básico</option><option>Intermedio</option><option>Avanzado</option></select><small class="error-text"></small></div>
-          </div>
-          <div class="form-grid one-column">
-            <div class="field"><label for="requirements">Requisitos indispensables <em>* al enviar</em></label><textarea id="requirements" name="requirements" rows="2" placeholder="Describa los requisitos o escriba «Ninguno»."></textarea><small class="error-text"></small></div>
-            <div class="field"><label for="desirable">Requisitos deseables</label><textarea id="desirable" name="desirable" rows="2" placeholder="Requisitos recomendados (opcional)"></textarea></div>
-            <div class="field"><label for="program">Programa</label><input id="program" name="program" type="text" maxlength="100" placeholder="Nombre del programa (opcional)"><small class="error-text"></small></div>
-          </div>
-        </section>
+            <div class="sidebar-footer">SOFT-11-C1 · Grupo 5</div>
+        </aside>
 
-        <section class="form-card">
-          <div class="section-heading"><span class="section-number">03</span><div><h2>Descripción y resultados de aprendizaje</h2><p>Contenido académico y perfiles del curso.</p></div></div>
-          <div class="form-grid one-column">
-            <div class="field"><label for="shortDescription">Descripción corta <em>* al enviar</em></label><textarea id="shortDescription" name="shortDescription" maxlength="250" rows="2" placeholder="Resumen breve del curso (máximo 250 caracteres)"></textarea><div class="field-footer"><small class="error-text"></small><small class="counter"><span id="shortCount">0</span>/250</small></div></div>
-            <div class="field"><label for="metaDescription">Meta descripción <em>* al enviar</em></label><textarea id="metaDescription" name="metaDescription" maxlength="150" rows="2" placeholder="Meta descripción (máximo 150 caracteres)"></textarea><div class="field-footer"><small class="error-text"></small><small class="counter"><span id="metaCount">0</span>/150</small></div></div>
-            <div class="field"><label for="longDescription">Descripción larga <em>* al enviar</em></label><textarea id="longDescription" name="longDescription" rows="4" placeholder="Describa el propósito y contenido del curso."></textarea><small class="error-text"></small></div>
-            <div class="field"><label for="competencies">Competencia</label><textarea id="competencies" name="competencies" rows="3" placeholder="Competencia general que desarrolla el curso."></textarea></div>
-            <div class="field"><label for="capabilities">Capacidades específicas <em>* al enviar</em></label><textarea id="capabilities" name="capabilities" rows="3" placeholder="Enumere las capacidades específicas que desarrollará el estudiante."></textarea><small class="error-text"></small></div>
-            <div class="form-grid">
-              <div class="field"><label for="entryProfile">Perfil de ingreso</label><textarea id="entryProfile" name="entryProfile" rows="3" placeholder="Conocimientos previos del estudiante."></textarea></div>
-              <div class="field"><label for="exitProfile">Perfil de salida</label><textarea id="exitProfile" name="exitProfile" rows="3" placeholder="Competencias al finalizar el curso."></textarea></div>
+        <main class="main-content">
+
+            <div class="breadcrumbs">
+                <a href="../../index.html">Inicio</a>
+                <span>/</span>
+                <a href="listado.html">Gestión de cursos</a>
+                <span>/</span>
+                <strong>Registrar curso</strong>
             </div>
-            <div class="field"><label for="keywords">Palabras clave <em>* al enviar</em></label><input id="keywords" name="keywords" type="text" placeholder="Separe las palabras clave con comas"><small class="help-text">Cada palabra clave debe tener entre 2 y 30 caracteres.</small><small class="error-text"></small></div>
-          </div>
-        </section>
 
-        <section class="form-card">
-          <div class="section-heading"><span class="section-number">04</span><div><h2>Certificación y metadata</h2><p>Información complementaria para la administración del curso.</p></div></div>
-          <div class="form-grid">
-            <div class="field"><label for="certification">¿Incluye certificación?</label><select id="certification" name="certification"><option value="No">No</option><option value="Sí">Sí</option></select></div>
-            <div class="field" id="certifierField"><label for="certifier">Casa certificadora <em>* si hay certificación</em></label><select id="certifier" name="certifier"><option value="">Seleccione una casa certificadora</option><option>Microsoft</option><option>Oracle</option><option>Amazon Web Services</option><option>CompTIA</option><option>Otra</option></select><small class="error-text"></small></div>
-            <div class="field full-width"><label for="metadata">Metadata <em>* al enviar</em></label><textarea id="metadata" name="metadata" rows="3" placeholder="Ingrese la metadata requerida para el curso."></textarea><small class="error-text"></small></div>
-          </div>
-        </section>
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">GESTIÓN DE CURSOS · HU-44</p>
+                    <h1>Registrar nuevo curso</h1>
+                    <p class="subtitle">
+                        Complete la información académica y administrativa del curso.
+                    </p>
+                </div>
+                <span class="priority">Prioridad P1</span>
+            </div>
 
-        <div class="bottom-actions">
-          <p><span class="required-star">*</span> Campos obligatorios indicados para el envío a revisión. Los borradores requieren escuela, código y nombre.</p>
-          <div class="action-buttons">
-            <button type="button" class="btn btn-light" id="cancelBtn">Cancelar</button>
-            <button type="button" class="btn btn-outline" id="draftBtn">Guardar borrador</button>
-            <button type="submit" class="btn btn-primary">Enviar a revisión <span aria-hidden="true">→</span></button>
-          </div>
-        </div>
-      </form>
-      <footer class="page-footer">Universidad CENFOTEC · Sistema de Gestión Curricular y Docente</footer>
-    </main>
-  </div>
-  <script src="cursos.js"></script>
+            <div id="globalMessage" class="notice hidden"
+                 role="alert" aria-live="polite"></div>
+
+            <div class="progress-row">
+                <span>Información del curso</span>
+                <span id="completionText">0% completado</span>
+            </div>
+
+            <div class="progress-track">
+                <div id="completionBar"></div>
+            </div>
+
+            <form id="courseForm" novalidate>
+
+                <!-- SECCIÓN 1 -->
+                <section class="form-card tarjeta">
+                    <div class="section-heading">
+                        <span class="section-number">01</span>
+                        <div>
+                            <h2>Identificación del curso</h2>
+                            <p>Datos generales y ubicación académica.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="school">Escuela <em>*</em></label>
+                            <select id="school" name="school" required>
+                                <option value="">Seleccione una escuela</option>
+                                <option>Escuela de Ingeniería de Software</option>
+                                <option>Escuela de Ciberseguridad</option>
+                                <option>Escuela de Ciencia de Datos</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="career">Carrera <em>*</em></label>
+                            <select id="career" name="career" required>
+                                <option value="">Seleccione una carrera</option>
+                                <option>Ingeniería del Software</option>
+                                <option>Desarrollo de Aplicaciones</option>
+                                <option>Ciberseguridad</option>
+                                <option>Ciencia de Datos</option>
+                            </select>
+                            <small class="help-text">Seleccione la carrera asociada a la escuela.</small>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="code">Código del curso <em>*</em></label>
+                            <input id="code" name="code" type="text"
+                                   maxlength="30" required
+                                   placeholder="Ej. SOFT-101" autocomplete="off">
+                            <small class="help-text">Debe ser único dentro del sistema.</small>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="name">Nombre del curso <em>*</em></label>
+                            <input id="name" name="name" type="text"
+                                   minlength="3" maxlength="150" required
+                                   placeholder="Nombre oficial del curso">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="powerName">Nombre en Power Accounts <em>* al enviar</em></label>
+                            <input id="powerName" name="powerName" type="text"
+                                   maxlength="40" placeholder="Máximo 40 caracteres">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="ecommerce">¿Tiene E-commerce? <em>* al enviar</em></label>
+                            <select id="ecommerce" name="ecommerce">
+                                <option value="">Seleccione una opción</option>
+                                <option value="Sí">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field" id="openingDateField">
+                            <label for="openingDate">Fecha de apertura <em>* si E-commerce es Sí</em></label>
+                            <input id="openingDate" name="openingDate" type="date">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="currency">Moneda <em>* al enviar</em></label>
+                            <select id="currency" name="currency">
+                                <option value="">Seleccione una moneda</option>
+                                <option>Colones</option>
+                                <option>Dólares</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section class="form-card tarjeta">
+                    <div class="section-heading">
+                        <span class="section-number">02</span>
+                        <div>
+                            <h2>Clasificación y carga académica</h2>
+                            <p>Catálogos, modalidad y distribución de horas.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="sfia">Área SFIA <em>*</em></label>
+                            <select id="sfia" name="sfia" required>
+                                <option value="">Seleccione un área SFIA</option>
+                                <option>Desarrollo de sistemas</option>
+                                <option>Gestión de datos</option>
+                                <option>Ciberseguridad</option>
+                                <option>Gestión de proyectos</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="topic">Temática <em>*</em></label>
+                            <select id="topic" name="topic" required>
+                                <option value="">Seleccione una temática</option>
+                                <option>Programación</option>
+                                <option>Infraestructura</option>
+                                <option>Datos e inteligencia artificial</option>
+                                <option>Gestión y calidad</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="credits">Créditos <em>*</em></label>
+                            <input id="credits" name="credits" type="number"
+                                   min="1" step="1" required placeholder="Ej. 4">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="classHours">Horas de clase <em>*</em></label>
+                            <input id="classHours" name="classHours" type="number"
+                                   min="0" step="1" required value="0">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="extraHours">Horas extraclase <em>*</em></label>
+                            <input id="extraHours" name="extraHours" type="number"
+                                   min="0" step="1" required value="0">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="totalHours">Total de horas</label>
+                            <input id="totalHours" name="totalHours"
+                                   type="number" readonly value="0">
+                            <small class="help-text">Se calcula automáticamente.</small>
+                        </div>
+
+                        <div class="field">
+                            <label for="modality">Modalidad <em>*</em></label>
+                            <select id="modality" name="modality" required>
+                                <option value="">Seleccione una modalidad</option>
+                                <option>Virtual</option>
+                                <option>Presencial</option>
+                                <option>Híbrida</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="complexity">Nivel de complejidad <em>* al enviar</em></label>
+                            <select id="complexity" name="complexity">
+                                <option value="">Seleccione un nivel</option>
+                                <option>Básico</option>
+                                <option>Intermedio</option>
+                                <option>Avanzado</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-grid one-column">
+                        <div class="field">
+                            <label for="requirements">Requisitos indispensables <em>* al enviar</em></label>
+                            <textarea id="requirements" name="requirements" rows="2"
+                                      placeholder="Describa los requisitos o escriba «Ninguno»."></textarea>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="desirable">Requisitos deseables</label>
+                            <textarea id="desirable" name="desirable" rows="2"
+                                      placeholder="Requisitos recomendados (opcional)"></textarea>
+                        </div>
+
+                        <div class="field">
+                            <label for="program">Programa</label>
+                            <input id="program" name="program" type="text"
+                                   maxlength="100" placeholder="Nombre del programa (opcional)">
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section class="form-card tarjeta">
+                    <div class="section-heading">
+                        <span class="section-number">03</span>
+                        <div>
+                            <h2>Descripción y resultados de aprendizaje</h2>
+                            <p>Contenido académico y perfiles del curso.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid one-column">
+                        <div class="field">
+                            <label for="shortDescription">Descripción corta <em>* al enviar</em></label>
+                            <textarea id="shortDescription" name="shortDescription"
+                                      maxlength="250" rows="2"
+                                      placeholder="Resumen breve del curso (máximo 250 caracteres)"></textarea>
+                            <div class="field-footer">
+                                <small class="error-text"></small>
+                                <small class="counter"><span id="shortCount">0</span>/250</small>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="metaDescription">Meta descripción <em>* al enviar</em></label>
+                            <textarea id="metaDescription" name="metaDescription"
+                                      maxlength="150" rows="2"
+                                      placeholder="Meta descripción (máximo 150 caracteres)"></textarea>
+                            <div class="field-footer">
+                                <small class="error-text"></small>
+                                <small class="counter"><span id="metaCount">0</span>/150</small>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="longDescription">Descripción larga <em>* al enviar</em></label>
+                            <textarea id="longDescription" name="longDescription"
+                                      rows="4"
+                                      placeholder="Describa el propósito y contenido del curso."></textarea>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field">
+                            <label for="competencies">Competencia</label>
+                            <textarea id="competencies" name="competencies"
+                                      rows="3"
+                                      placeholder="Competencia general que desarrolla el curso."></textarea>
+                        </div>
+
+                        <div class="field">
+                            <label for="capabilities">Capacidades específicas <em>* al enviar</em></label>
+                            <textarea id="capabilities" name="capabilities"
+                                      rows="3"
+                                      placeholder="Enumere las capacidades específicas que desarrollará el estudiante."></textarea>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="entryProfile">Perfil de ingreso</label>
+                                <textarea id="entryProfile" name="entryProfile"
+                                          rows="3"
+                                          placeholder="Conocimientos previos del estudiante."></textarea>
+                            </div>
+
+                            <div class="field">
+                                <label for="exitProfile">Perfil de salida</label>
+                                <textarea id="exitProfile" name="exitProfile"
+                                          rows="3"
+                                          placeholder="Competencias al finalizar el curso."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="keywords">Palabras clave <em>* al enviar</em></label>
+                            <input id="keywords" name="keywords" type="text"
+                                   placeholder="Separe las palabras clave con comas">
+                            <small class="help-text">Cada palabra clave debe tener entre 2 y 30 caracteres.</small>
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section class="form-card tarjeta">
+                    <div class="section-heading">
+                        <span class="section-number">04</span>
+                        <div>
+                            <h2>Certificación y metadata</h2>
+                            <p>Información complementaria para la administración del curso.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="certification">¿Incluye certificación?</label>
+                            <select id="certification" name="certification">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                        </div>
+
+                        <div class="field" id="certifierField">
+                            <label for="certifier">Casa certificadora <em>* si hay certificación</em></label>
+                            <select id="certifier" name="certifier">
+                                <option value="">Seleccione una casa certificadora</option>
+                                <option>Microsoft</option>
+                                <option>Oracle</option>
+                                <option>Amazon Web Services</option>
+                                <option>CompTIA</option>
+                                <option>Otra</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="field full-width">
+                            <label for="metadata">Metadata <em>* al enviar</em></label>
+                            <textarea id="metadata" name="metadata" rows="3"
+                                      placeholder="Ingrese la metadata requerida para el curso."></textarea>
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ACCIONES DEL FORMULARIO -->
+                <div class="bottom-actions">
+                    <p>
+                        <span class="required-star">*</span>
+                        Campos obligatorios indicados para el envío a revisión.
+                        Los borradores requieren escuela, código y nombre.
+                    </p>
+
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-light" id="cancelBtn">
+                            Cancelar
+                        </button>
+
+                        <button type="button" class="btn btn-outline" id="draftBtn">
+                            Guardar borrador
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+                            Enviar a revisión <span aria-hidden="true">→</span>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <footer class="page-footer">
+                Universidad CENFOTEC · Sistema de Gestión Curricular y Docente
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="cursos.js"></script>
 </body>
 </html>

@@ -154,3 +154,133 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================
+   Ajustes del listado de cursos
+   ========================================= */
+
+.listado-cursos {
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.listado-cursos .barra-acciones {
+    margin-bottom: 14px;
+    gap: 10px;
+}
+
+.listado-cursos .barra-acciones p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.listado-cursos .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.listado-cursos .boton-principal,
+.listado-cursos .boton-secundario {
+    padding: 8px 12px;
+    min-height: 36px;
+    font-size: 12px;
+}
+
+/* Permite leer todos los encabezados y valores */
+.tabla-contenedor {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+    padding: 9px 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+/* Espacio suficiente para el nombre del curso */
+.tabla th:nth-child(2),
+.tabla td:nth-child(2) {
+    min-width: 180px;
+    max-width: 360px;
+}
+
+/* Evita que los filtros agranden demasiado la tabla */
+.tabla .fila-filtros th {
+    padding: 7px;
+    background: #F7F9FC;
+}
+
+.fila-filtros input,
+.fila-filtros select {
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    padding: 7px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+/* Enlaces y botones dentro de las acciones */
+.tabla td a,
+.tabla td button {
+    display: inline-block;
+    margin: 2px 0;
+    font-size: 12px;
+    white-space: normal;
+}
+
+/* Reduce el espacio superior del título */
+.page-heading {
+    margin-bottom: 16px;
+}
+
+.page-heading h1 {
+    font-size: 25px;
+}
+
+.page-heading .subtitle {
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .listado-cursos {
+        padding: 12px;
+    }
+
+    .listado-cursos .barra-acciones {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .listado-cursos .action-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .listado-cursos .action-buttons a,
+    .listado-cursos .action-buttons button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tabla {
+        min-width: 650px;
+    }
+}

@@ -284,3 +284,45 @@
         min-width: 650px;
     }
 }
+
+/* Caja azul para Agregar registro */
+.caja-agregar-registro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 16px;
+    min-height: 38px;
+
+    background-color: #0867E8;
+    color: #FFFFFF;
+
+    border: 1px solid #0867E8;
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+
+    box-shadow: 0 3px 8px rgba(8, 103, 232, 0.18);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.caja-agregar-registro:hover {
+    background-color: #06356E;
+    border-color: #06356E;
+    color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(6, 53, 110, 0.22);
+}
+
+.caja-agregar-registro:focus-visible {
+    outline: 3px solid #8CB8FF;
+    outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+    .caja-agregar-registro {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -4,16 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultar usuarios | Gestor de Cursos CENFOTEC</title>
+  <title>Usuarios registrados | Gestor de Cursos CENFOTEC</title>
 
+  <!-- Estilos institucionales -->
   <link rel="stylesheet" href="../../css/base/variables.css">
   <link rel="stylesheet" href="../../css/base/reset.css">
   <link rel="stylesheet" href="../../css/base/tipografia.css">
   <link rel="stylesheet" href="../../css/layout/encabezado.css">
+  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
   <link rel="stylesheet" href="../../css/layout/grid.css">
-  <link rel="stylesheet" href="../../css/componentes/tablas.css">
+  <link rel="stylesheet" href="../../css/componentes/formularios.css">
   <link rel="stylesheet" href="../../css/componentes/botones.css">
+  <link rel="stylesheet" href="../../css/componentes/tablas.css">
+  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
   <link rel="stylesheet" href="../../css/componentes/alertas.css">
+
+  <!-- Estilos propios del listado -->
+  <link rel="stylesheet" href="listado-usuarios.css">
 </head>
 
 <body>
@@ -21,60 +28,173 @@
     Saltar al contenido
   </a>
 
+  <!-- ENCABEZADO INSTITUCIONAL -->
   <header class="encabezado">
-    <a class="logo" href="../../index.html">
-      Gestor de Cursos
-    </a>
+    <a class="logo"
+       href="../../index.html"
+       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
 
-    <nav class="menu-principal" aria-label="Navegación principal">
-      <ul>
-        <li><a href="../cursos/cursos.html">Cursos</a></li>
-        <li><a href="usuario-registro.html">Registrar usuario</a></li>
-        <li><a href="listado.html" aria-current="page">Usuarios</a></li>
-        <li><a href="../../index.html">Cerrar sesión</a></li>
-      </ul>
-    </nav>
+    <div class="encabezado-acciones"
+         role="group"
+         aria-label="Opciones de la cuenta">
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-notificaciones"
+              title="Notificaciones"
+              aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+        </svg>
+      </button>
+
+      <select id="encabezado-idioma"
+              aria-label="Idioma"
+              title="Idioma">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <button type="button"
+              class="avatar"
+              id="encabezado-avatar"
+              aria-label="Perfil"
+              title="Perfil">A</button>
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-cerrar-sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m16 17 5-5-5-5"/>
+          <path d="M21 12H9"/>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <main id="contenido">
-    <h1>Usuarios registrados</h1>
-    <p>
-      Consulte los usuarios registrados en el sistema
-      de Gestión Curricular y Docente.
-    </p>
+  <!-- DISTRIBUCIÓN PRINCIPAL -->
+  <div class="contenedor-principal">
 
-    <div class="acciones">
-      <a class="boton boton-primario" href="usuario-registro.html">
-        Registrar nuevo usuario
-      </a>
-    </div>
+    <!-- MENÚ LATERAL -->
+    <nav class="menu-lateral" aria-label="Menú principal">
+      <ul>
+        <li>
+          <a href="../../index.html">Inicio</a>
+        </li>
+        <li>
+          <a href="listado.html" aria-current="page">Usuarios</a>
+        </li>
+        <li>
+          <a href="../escuelas/listado.html">Escuelas</a>
+        </li>
+        <li>
+          <a href="../carreras/listado.html">Carreras</a>
+        </li>
+        <li>
+          <a href="../cursos/listado.html">Cursos</a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=areas-sfia">
+            Áreas SFIA
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=tematicas">
+            Temática
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=metodologias">
+            Metodologías de aprendizaje
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
+            Casas certificadoras
+          </a>
+        </li>
+        <li>
+          <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
+            Niveles de complejidad
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-    <p id="mensaje" role="status" aria-live="polite"></p>
+    <!-- CONTENIDO -->
+    <main id="contenido">
 
-    <div style="overflow-x:auto">
-      <table>
-        <caption>Listado de usuarios registrados</caption>
-        <thead>
-          <tr>
-            <th scope="col">Nombre completo</th>
-            <th scope="col">Correo institucional</th>
-            <th scope="col">Género</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Fecha de registro</th>
-          </tr>
-        </thead>
-        <tbody id="tabla-usuarios"></tbody>
-      </table>
-    </div>
-  </main>
+      <h1>Usuarios registrados</h1>
 
-  <footer class="pie">
-    <p>
-      © 2026 Universidad CENFOTEC.
-      Gestor de Cursos, Grupo 5, SOFT-11-C1.
-    </p>
-  </footer>
+      <p>
+        Consulte los usuarios registrados en el Sistema
+        de Gestión Curricular y Docente.
+      </p>
 
+      <div class="acciones acciones-usuarios">
+        <a class="boton" href="usuario-registro.html">
+          Registrar nuevo usuario
+        </a>
+      </div>
+
+      <!-- TARJETA INSTITUCIONAL -->
+      <section class="tarjeta listado-usuarios"
+               aria-labelledby="titulo-listado">
+
+        <h2 id="titulo-listado">Listado de usuarios</h2>
+
+        <p id="mensaje"
+           class="mensaje-listado"
+           role="status"
+           aria-live="polite">
+          Cargando usuarios...
+        </p>
+
+        <div class="tabla-contenedor">
+          <table>
+            <caption class="solo-lectores">
+              Listado de usuarios registrados
+            </caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Nombre completo</th>
+                <th scope="col">Correo institucional</th>
+                <th scope="col">Género</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Fecha de registro</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabla-usuarios"></tbody>
+          </table>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- CARGA DE USUARIOS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const tabla = document.getElementById("tabla-usuarios");
@@ -91,29 +211,54 @@
       } catch (error) {
         mensaje.textContent =
           "No fue posible leer los usuarios almacenados.";
+        mensaje.classList.add("mensaje-listado-error");
         return;
       }
 
       if (usuarios.length === 0) {
         mensaje.textContent =
           "No existen usuarios registrados.";
+        mensaje.classList.add("mensaje-listado-vacio");
         return;
       }
 
       mensaje.textContent =
         `Total de usuarios registrados: ${usuarios.length}`;
 
+      const generos = {
+        f: "Femenino",
+        m: "Masculino",
+        o: "Otro",
+        n: "Prefiero no indicarlo"
+      };
+
+      const roles = {
+        admin: "Administrador",
+        rectoria: "Rectoría",
+        vice: "Vicerrectoría",
+        dc: "Desarrollo Curricular",
+        dir: "Dirección de Escuela / Carrera"
+      };
+
       usuarios.forEach(usuario => {
         const fila = document.createElement("tr");
+
+        let fecha = "No disponible";
+
+        if (usuario.fechaRegistro) {
+          const fechaConvertida = new Date(usuario.fechaRegistro);
+
+          if (!Number.isNaN(fechaConvertida.getTime())) {
+            fecha = fechaConvertida.toLocaleDateString("es-CR");
+          }
+        }
 
         const valores = [
           usuario.nombre || "No disponible",
           usuario.correo || "No disponible",
-          usuario.genero || "No disponible",
-          usuario.rol || "No disponible",
-          usuario.fechaRegistro
-            ? new Date(usuario.fechaRegistro).toLocaleDateString("es-CR")
-            : "No disponible"
+          generos[usuario.genero] || usuario.genero || "No disponible",
+          roles[usuario.rol] || usuario.rol || "No disponible",
+          fecha
         ];
 
         valores.forEach(valor => {

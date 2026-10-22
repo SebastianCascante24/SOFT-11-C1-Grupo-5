@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Listado de cursos | Desarrollo Curricular y Docente</title>
+    <title>Cursos | Desarrollo Curricular y Docente</title>
 
     <link rel="stylesheet" href="../../css/base/variables.css">
     <link rel="stylesheet" href="../../css/base/reset.css">
@@ -28,9 +28,7 @@
         <a class="logo" href="../../index.html"
            aria-label="Ir al inicio"></a>
 
-        <div class="encabezado-acciones" role="group"
-             aria-label="Opciones de la cuenta">
-
+        <div class="encabezado-acciones">
             <button type="button" class="boton-secundario"
                     aria-label="Notificaciones">♧</button>
 
@@ -42,8 +40,7 @@
             <button type="button" class="avatar"
                     aria-label="Perfil">A</button>
 
-            <a class="boton-secundario"
-               href="../../index.html"
+            <a class="boton-secundario" href="../../index.html"
                aria-label="Volver al inicio">↪</a>
         </div>
     </header>
@@ -75,19 +72,15 @@
 
             <section class="page-heading">
                 <div>
-                    <p class="eyebrow">GESTIÓN ACADÉMICA</p>
                     <h1>Cursos</h1>
                     <p class="subtitle">
-                        Consulta, filtra y administra los cursos registrados.
+                        Consulta y administra los cursos registrados.
                     </p>
                 </div>
-
-                <a href="registro.html" class="boton-principal">
-                    + Agregar curso
-                </a>
             </section>
 
-            <section class="tarjeta" aria-label="Listado de cursos">
+            <section class="tarjeta listado-cursos"
+                     aria-label="Listado de cursos">
 
                 <div class="barra-acciones">
                     <p id="contador" aria-live="polite">0 registros</p>
@@ -97,12 +90,6 @@
                                 class="boton-secundario"
                                 id="limpiar-filtros">
                             Limpiar filtros
-                        </button>
-
-                        <button type="button"
-                                class="boton-secundario"
-                                id="exportar-csv">
-                            Exportar CSV
                         </button>
 
                         <a href="registro.html" class="boton-principal">
@@ -116,14 +103,14 @@
                         <thead>
                             <tr>
                                 <th scope="col">Código</th>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Nombre del curso</th>
                                 <th scope="col">Modalidad</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
                             </tr>
 
-                            <tr>
-                                <th scope="col">
+                            <tr class="fila-filtros">
+                                <th>
                                     <label class="solo-lectores"
                                            for="filtro-codigo">
                                         Filtrar por código
@@ -133,17 +120,17 @@
                                            placeholder="Código">
                                 </th>
 
-                                <th scope="col">
+                                <th>
                                     <label class="solo-lectores"
                                            for="filtro-nombre">
                                         Filtrar por nombre
                                     </label>
                                     <input id="filtro-nombre"
                                            type="search"
-                                           placeholder="Nombre">
+                                           placeholder="Nombre del curso">
                                 </th>
 
-                                <th scope="col">
+                                <th>
                                     <label class="solo-lectores"
                                            for="filtro-modalidad">
                                         Filtrar por modalidad
@@ -156,7 +143,7 @@
                                     </select>
                                 </th>
 
-                                <th scope="col">
+                                <th>
                                     <label class="solo-lectores"
                                            for="filtro-estado">
                                         Filtrar por estado
@@ -170,7 +157,7 @@
                                     </select>
                                 </th>
 
-                                <th scope="col">Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -182,10 +169,8 @@
                     </table>
                 </div>
 
-                <p id="mensaje-listado"
-                   role="status"
+                <p id="mensaje-listado" role="status"
                    aria-live="polite"></p>
-
             </section>
 
             <footer class="page-footer">

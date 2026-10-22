@@ -7,44 +7,181 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mensaje = document.getElementById("mensajeRegistro");
 
-  formulario.addEventListener("submit", (evento) => {
+  const campos = [
+    {
+      input: document.getElementById("codigoEscuela"),
+      error: document.getElementById("errorCodigo"),
+      nombre: "El código de la escuela"
+    },
+    {
+      input: document.getElementById("nombreEscuela"),
+      error: document.getElementById("errorNombre"),
+      nombre: "El nombre de la escuela"
+    },
+    {
+      input: document.getElementById("directorEscuela"),
+      error: document.getElementById("errorDirector"),
+      nombre: "El nombre del director"
+    }
+  ];
+
+  function mostrarMensaje(texto, tipo = "error") {
+    if (!mensaje) return;
+
+    mensaje.textContent = texto;
+    mensaje.classList.remove("alerta-error", "alerta-exito");
+    mensaje.classList.add(
+      tipo === "exito" ? "alerta-exito" : "alerta-error"
+    );
+    mensaje.hidden = false;
+  }
+
+  function limpiarMensaje() {
+    if (!mensaje) return;
+
+    mensaje.textContent = "";
+    mensaje.classList.remove("alerta-error", "alerta-exito");
+    mensaje.hidden = true;
+  }
+
+  function mostrarError(campo, texto) {
+    if (!campo.input) return;
+
+    campo.input.setAttribute("aria-invalid", "true");
+    campo.input.classList.add("campo-invalido");
+
+    if (campo.error) {
+      campo.error.textContent = texto;
+      campo.error.classList.add("mensaje-error-escuela");
+    }
+  }
+
+  function limpiarError(campo) {
+    if (!campo.input) return;
+
+    campo.input.removeAttribute("aria-invalid");
+    campo.input.classList.remove("campo-invalido");
+
+    if (campo.error) {
+      campo.error.textContent = "";
+    }
+  }
+
+  function obtenerEscuelas() {
+    const datos = JSON.parse(
+      localStorage.getItem("grupo5_escuelas") || "[]"
+    );
+
+    if (!Array.isArray(datos)) {
+      throw new Error("Formato de almacenamiento inválido");
+    }
+
+    return datos;
+  }
+
+  campos.forEach(campo => {
+    if (!campo.input) return;
+
+    campo.input.addEventListener("input", () => {
+      limpiarError(campo);
+      limpiarMensaje();
+    });
+  });
+
+  formulario.addEventListener("submit", evento => {
     evento.preventDefault();
+    limpiarMensaje();
 
-    const campos = [...formulario.querySelectorAll("input[required]")];
+    campos.forEach(limpiarError);
 
-    if (campos.some(campo => !campo.value.trim())) {
-      mostrarMensaje("Todos los campos son obligatorios.", true);
+    let hayErrores = false;
+    let primerCampoInvalido = null;
+
+    campos.forEach(campo => {
+      if (!campo.input) {
+        hayErrores = true;
+        return;
+      }
+
+      if (!campo.input.value.trim()) {
+        mostrarError(
+          campo,
+          `${campo.nombre} es obligatorio.`
+        );
+
+        hayErrores = true;
+
+        if (!primerCampoInvalido) {
+          primerCampoInvalido = campo.input;
+        }
+      }
+    });
+
+    if (hayErrores) {
+      mostrarMensaje(
+        "Revise los campos señalados antes de continuar."
+      );
+
+      if (primerCampoInvalido) {
+        primerCampoInvalido.focus();
+      }
+
       return;
     }
 
     const escuela = {
-      codigo: campos[0].value.trim().toUpperCase(),
-      nombre: campos[1].value.trim(),
-      director: campos[2].value.trim()
+      codigo: campos[0].input.value.trim().toUpperCase(),
+      nombre: campos[1].input.value.trim(),
+      director: campos[2].input.value.trim()
     };
 
-    const escuelas = JSON.parse(
-      localStorage.getItem("grupo5_escuelas") || "[]"
-    );
+    try {
+      const escuelas = obtenerEscuelas();
 
-    if (escuelas.some(e => e.codigo === escuela.codigo)) {
-      mostrarMensaje("Ya existe una escuela con ese código.", true);
-      return;
+      const codigoDuplicado = escuelas.some(
+        item =>
+          String(item.codigo || "").trim().toUpperCase() ===
+          escuela.codigo
+      );
+
+      if (codigoDuplicado) {
+        mostrarError(
+          campos[0],
+          "Ya existe una escuela registrada con este código."
+        );
+
+        mostrarMensaje(
+          "No se pudo registrar la escuela porque el código ya existe."
+        );
+
+        campos[0].input.focus();
+        return;
+      }
+
+      escuelas.push(escuela);
+
+      localStorage.setItem(
+        "grupo5_escuelas",
+        JSON.stringify(escuelas)
+      );
+
+      formulario.reset();
+      campos.forEach(limpiarError);
+
+      mostrarMensaje(
+        "Escuela registrada correctamente.",
+        "exito"
+      );
+    } catch (error) {
+      mostrarMensaje(
+        "No fue posible guardar la escuela. Revise el almacenamiento del navegador."
+      );
+      console.error("Error al registrar escuela:", error);
     }
-
-    escuelas.push(escuela);
-    localStorage.setItem("grupo5_escuelas", JSON.stringify(escuelas));
-
-    formulario.reset();
-    mostrarMensaje("Escuela registrada correctamente.", false);
   });
 
-  function mostrarMensaje(texto, esError) {
-    if (mensaje) {
-      mensaje.textContent = texto;
-      mensaje.style.color = esError ? "#b42318" : "#16703c";
-    } else {
-      alert(texto);
-    }
-  }
+  formulario.addEventListener("reset", () => {
+    campos.forEach(limpiarError);
+    limpiarMensaje();
+  });
 });

@@ -1,0 +1,94 @@
+
+/* ==========================================
+   UNIVERSIDAD CENFOTEC
+   Sistema de Gestión Curricular
+   Listado de usuarios
+   ========================================== */
+
+/* Separación del botón principal */
+#contenido > .acciones-usuarios {
+    margin-top: 24px;
+    margin-bottom: 28px;
+}
+
+/* Tarjeta del listado */
+.listado-usuarios {
+    width: 100%;
+    margin-top: 0;
+}
+
+/* Título de la tarjeta */
+.listado-usuarios h2 {
+    color: var(--azul-oscuro);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* Mensaje con total de usuarios */
+.mensaje-listado {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Mensaje cuando no hay registros */
+.mensaje-listado-vacio {
+    background-color: var(--azul-suave);
+    color: var(--azul-oscuro);
+    border-left: 4px solid var(--azul-principal);
+    padding: 14px 16px;
+}
+
+/* Mensaje de error */
+.mensaje-listado-error {
+    background-color: #FFF1F2;
+    color: var(--rojo-error);
+    border-left: 4px solid var(--rojo-error);
+    padding: 14px 16px;
+}
+
+/* Tabla adaptable */
+.listado-usuarios .tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.listado-usuarios table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.listado-usuarios th,
+.listado-usuarios td {
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .listado-usuarios {
+        padding: 16px;
+    }
+
+    .listado-usuarios table {
+        min-width: 680px;
+    }
+
+    #contenido > .acciones-usuarios {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.listado-usuarios caption.solo-lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

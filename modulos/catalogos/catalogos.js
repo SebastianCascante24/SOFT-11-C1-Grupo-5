@@ -285,12 +285,17 @@ const ListadoCatalogo = (function () {
     });
   }
 
-  function mostrarAvisoModificacionListado() {
+  function mostrarAvisoResultadoListado() {
     const url = new URL(window.location.href);
-    if (url.searchParams.get('modificado') !== '1') return;
+    const mensajes = {
+      creado: 'Registro creado correctamente.',
+      modificado: 'Registro modificado correctamente.'
+    };
+    const mensaje = mensajes[url.searchParams.get('resultado')];
+    if (!mensaje) return;
 
-    Notificacion.mostrar('exito', 'Registro modificado correctamente.');
-    url.searchParams.delete('modificado');
+    Notificacion.mostrar('exito', mensaje);
+    url.searchParams.delete('resultado');
     window.history.replaceState(null, '', url.pathname + url.search + url.hash);
   }
 
@@ -333,7 +338,7 @@ const ListadoCatalogo = (function () {
 
     registrarEventosListado();
     renderizarListado();
-    mostrarAvisoModificacionListado();
+    mostrarAvisoResultadoListado();
   }
 
   return { iniciar };
@@ -351,11 +356,11 @@ const FormularioCatalogo = (function () {
   let registroOriginal = null;
   let formularioCatalogo = null;
   let tituloCatalogo = null;
-  let enlaceVolverCatalogo = null;
   let errorGeneralCatalogo = null;
   let grupoDescripcionCatalogo = null;
   let marcaDescripcionCatalogo = null;
   let botonLimpiarCatalogo = null;
+  let botonCancelarCatalogo = null;
   let botonGuardarCatalogo = null;
   let botonCargarCsvCatalogo = null;
   const camposCatalogo = {};
@@ -448,9 +453,7 @@ const FormularioCatalogo = (function () {
       return;
     }
 
-    Notificacion.mostrar('exito', 'Registro creado correctamente.');
-    limpiarFormularioCatalogo();
-    camposCatalogo.codigo.focus();
+    Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}&resultado=creado`);
   }
 
   function guardarModificacionCatalogo() {
@@ -471,7 +474,7 @@ const FormularioCatalogo = (function () {
       return;
     }
 
-    Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}&modificado=1`);
+    Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}&resultado=modificado`);
   }
 
   // visual
@@ -485,7 +488,6 @@ const FormularioCatalogo = (function () {
   function mostrarVistaRegistroNoDisponible() {
     tituloCatalogo.textContent = 'Registro no disponible';
     formularioCatalogo.hidden = true;
-    enlaceVolverCatalogo.href = `listado.html?catalogo=${encodeURIComponent(idCatalogo)}`;
     Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
     Notificacion.mostrar('error', 'No se encontró el registro que desea modificar.');
   }
@@ -503,7 +505,6 @@ const FormularioCatalogo = (function () {
     tituloCatalogo.textContent = `${accion} ${configuracion.titulo}`;
     botonGuardarCatalogo.textContent = registroOriginal ? 'Guardar cambios' : 'Crear';
     botonCargarCsvCatalogo.hidden = Boolean(registroOriginal);
-    enlaceVolverCatalogo.href = `listado.html?catalogo=${encodeURIComponent(idCatalogo)}`;
     Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
 
     camposCatalogo.codigo.type = 'number';
@@ -538,6 +539,9 @@ const FormularioCatalogo = (function () {
 
     formularioCatalogo.addEventListener('submit', manejarEnvioCatalogo);
     botonLimpiarCatalogo.addEventListener('click', limpiarFormularioCatalogo);
+    botonCancelarCatalogo.addEventListener('click', () => {
+      Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}`);
+    });
   }
 
   // inicio
@@ -547,11 +551,11 @@ const FormularioCatalogo = (function () {
     if (!formularioCatalogo) return;
 
     tituloCatalogo = document.getElementById('catalogo-titulo');
-    enlaceVolverCatalogo = document.getElementById('catalogo-enlace-volver');
     errorGeneralCatalogo = document.getElementById('catalogo-error-general');
     grupoDescripcionCatalogo = document.getElementById('catalogo-grupo-descripcion');
     marcaDescripcionCatalogo = document.getElementById('catalogo-marca-descripcion');
     botonLimpiarCatalogo = document.getElementById('catalogo-boton-limpiar');
+    botonCancelarCatalogo = document.getElementById('catalogo-boton-cancelar');
     botonGuardarCatalogo = document.getElementById('catalogo-boton-guardar');
     botonCargarCsvCatalogo = document.getElementById('catalogo-boton-cargar-csv');
     camposCatalogo.codigo = document.getElementById('catalogo-codigo');

@@ -268,10 +268,6 @@ form[id*="filtro"] .campo {
     text-align: center;
 }
 
-#catalogo-enlace-volver {
-    margin-bottom: 24px;
-}
-
 #catalogo-error-general {
     margin-bottom: 22px;
 }

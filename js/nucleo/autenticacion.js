@@ -19,11 +19,23 @@ const Autenticacion = {
     },
 
     obtenerSesion() {
-        return Almacenamiento.obtener(this.claveSesion, null);
+        try {
+            return JSON.parse(localStorage.getItem(this.claveSesion));
+        } catch (error) {
+            return null;
+        }
     },
 
     estaAutenticado() {
         return this.obtenerSesion() !== null;
+    },
+
+    protegerPagina() {
+        const esLogin = window.location.pathname === new URL(this.rutaLogin).pathname;
+        if (esLogin || this.estaAutenticado()) return;
+
+        document.documentElement.style.display = 'none';
+        window.location.replace(this.rutaLogin);
     },
 
     cerrarSesion() {
@@ -35,6 +47,12 @@ const Autenticacion = {
         window.location.replace(`${this.rutaLogin}?sesion=cerrada`);
     }
 };
+
+Autenticacion.protegerPagina();
+
+window.addEventListener('pageshow', (evento) => {
+    if (evento.persisted) Autenticacion.protegerPagina();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const boton = document.getElementById('encabezado-cerrar-sesion');

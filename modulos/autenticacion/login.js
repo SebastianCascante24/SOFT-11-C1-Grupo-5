@@ -66,6 +66,15 @@ const Login = (function () {
         Enrutador.irA(RUTA_INICIO);
     }
 
+    function mostrarAvisoSesionCerrada() {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('sesion') !== 'cerrada') return;
+
+        Notificacion.mostrar('info', 'Sesión cerrada correctamente.');
+        url.searchParams.delete('sesion');
+        window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+    }
+
     function iniciar() {
         formulario = document.getElementById('login-formulario');
         errorGeneral = document.getElementById('login-error-general');
@@ -76,6 +85,7 @@ const Login = (function () {
         [campoUsuario, campoContrasena].forEach((campo) => {
             campo.addEventListener('input', () => Notificacion.limpiarErrorCampo(campo));
         });
+        mostrarAvisoSesionCerrada();
     }
 
     return { iniciar };

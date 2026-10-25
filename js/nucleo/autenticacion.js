@@ -6,6 +6,8 @@
 const Autenticacion = {
     claveSesion: 'grupo5_sesion',
 
+    rutaLogin: new URL('../../modulos/autenticacion/login.html', document.currentScript.src).href,
+
     iniciarSesion(usuario) {
         return Almacenamiento.guardar(this.claveSesion, {
             id: usuario.id,
@@ -30,5 +32,11 @@ const Autenticacion = {
         } catch (error) {
             console.error('No se pudo cerrar la sesión.', error);
         }
+        window.location.replace(`${this.rutaLogin}?sesion=cerrada`);
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const boton = document.getElementById('encabezado-cerrar-sesion');
+    if (boton) boton.addEventListener('click', () => Autenticacion.cerrarSesion());
+});

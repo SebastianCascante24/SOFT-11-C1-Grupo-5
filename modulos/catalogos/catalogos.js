@@ -53,6 +53,15 @@ const Catalogos = {
     return Almacenamiento.guardar(`catalogo_${idCatalogo}`, registros);
   },
 
+  actualizarRegistro(idCatalogo, codigo, cambios) {
+    const registros = Catalogos.obtenerRegistros(idCatalogo);
+    const indice = registros.findIndex((registro) => String(registro.codigo) === String(codigo));
+    if (indice === -1) return false;
+
+    registros[indice] = { ...registros[indice], ...cambios, codigo: registros[indice].codigo };
+    return Almacenamiento.guardar(`catalogo_${idCatalogo}`, registros);
+  },
+
   normalizarCodigo(idCatalogo, valor) {
     const config = Catalogos.obtenerConfiguracion(idCatalogo);
     return config.codigo.tipo === 'entero' ? Number(valor) : String(valor).trim();
@@ -137,6 +146,12 @@ const ListadoCatalogo = (function () {
     botonModificar.className = 'boton-secundario';
     botonModificar.textContent = 'Modificar';
     botonModificar.setAttribute('aria-label', `Modificar ${registro.nombre}`);
+
+    botonModificar.addEventListener('click', () => {
+      Enrutador.irA(
+        `formulario.html?catalogo=${encodeURIComponent(idCatalogo)}&codigo=${encodeURIComponent(registro.codigo)}`
+      );
+    });
 
     const botonEstado = document.createElement('button');
     botonEstado.type = 'button';
@@ -270,6 +285,15 @@ const ListadoCatalogo = (function () {
     });
   }
 
+  function mostrarAvisoModificacionListado() {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('modificado') !== '1') return;
+
+    Notificacion.mostrar('exito', 'Registro modificado correctamente.');
+    url.searchParams.delete('modificado');
+    window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
   // inicio
 
   function iniciar() {
@@ -309,6 +333,7 @@ const ListadoCatalogo = (function () {
 
     registrarEventosListado();
     renderizarListado();
+    mostrarAvisoModificacionListado();
   }
 
   return { iniciar };
@@ -322,6 +347,8 @@ const FormularioCatalogo = (function () {
   let idCatalogo = null;
   let configuracion = null;
 
+  let codigoModificar = null;
+  let registroOriginal = null;
   let formularioCatalogo = null;
   let tituloCatalogo = null;
   let enlaceVolverCatalogo = null;
@@ -329,6 +356,8 @@ const FormularioCatalogo = (function () {
   let grupoDescripcionCatalogo = null;
   let marcaDescripcionCatalogo = null;
   let botonLimpiarCatalogo = null;
+  let botonGuardarCatalogo = null;
+  let botonCargarCsvCatalogo = null;
   const camposCatalogo = {};
 
   const reglasCatalogo = [];
@@ -378,6 +407,7 @@ const FormularioCatalogo = (function () {
 
   function limpiarFormularioCatalogo() {
     reglasCatalogo.forEach((regla) => {
+      if (regla.campo === camposCatalogo.codigo && registroOriginal) return;
       regla.campo.value = '';
       Notificacion.limpiarErrorCampo(regla.campo);
     });
@@ -396,6 +426,11 @@ const FormularioCatalogo = (function () {
         'Hay datos que necesitan revisión. Corrija los campos señalados.'
       );
       invalidas[0].campo.focus();
+      return;
+    }
+
+    if (registroOriginal) {
+      guardarModificacionCatalogo();
       return;
     }
 
@@ -418,6 +453,27 @@ const FormularioCatalogo = (function () {
     camposCatalogo.codigo.focus();
   }
 
+  function guardarModificacionCatalogo() {
+    const cambios = { nombre: camposCatalogo.nombre.value.trim() };
+    if (configuracion.descripcion.visible) {
+      cambios.descripcion = camposCatalogo.descripcion.value.trim();
+    }
+
+    const huboCambios = Object.keys(cambios)
+      .some((campo) => cambios[campo] !== (registroOriginal[campo] || ''));
+    if (!huboCambios) {
+      Notificacion.mostrar('advertencia', 'No se realizaron cambios en el registro.');
+      return;
+    }
+
+    if (!Catalogos.actualizarRegistro(idCatalogo, codigoModificar, cambios)) {
+      Notificacion.mostrar('error', 'No se pudo guardar la modificación. Intente de nuevo.');
+      return;
+    }
+
+    Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}&modificado=1`);
+  }
+
   // visual
 
   function mostrarVistaCatalogoNoDisponible() {
@@ -426,9 +482,27 @@ const FormularioCatalogo = (function () {
     Notificacion.mostrar('error', 'Este catálogo no está disponible por ahora. Seleccione otro desde el menú lateral.');
   }
 
+  function mostrarVistaRegistroNoDisponible() {
+    tituloCatalogo.textContent = 'Registro no disponible';
+    formularioCatalogo.hidden = true;
+    enlaceVolverCatalogo.href = `listado.html?catalogo=${encodeURIComponent(idCatalogo)}`;
+    Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
+    Notificacion.mostrar('error', 'No se encontró el registro que desea modificar.');
+  }
+
+  function cargarDatosActualesCatalogo() {
+    camposCatalogo.codigo.value = String(registroOriginal.codigo);
+    camposCatalogo.codigo.readOnly = true;
+    camposCatalogo.nombre.value = registroOriginal.nombre;
+    camposCatalogo.descripcion.value = registroOriginal.descripcion || '';
+  }
+
   function configurarVistaCatalogo() {
-    document.title = `Crear ${configuracion.titulo} | Desarrollo Curricular y Docente`;
-    tituloCatalogo.textContent = `Crear ${configuracion.titulo}`;
+    const accion = registroOriginal ? 'Modificar' : 'Crear';
+    document.title = `${accion} ${configuracion.titulo} | Desarrollo Curricular y Docente`;
+    tituloCatalogo.textContent = `${accion} ${configuracion.titulo}`;
+    botonGuardarCatalogo.textContent = registroOriginal ? 'Guardar cambios' : 'Crear';
+    botonCargarCsvCatalogo.hidden = Boolean(registroOriginal);
     enlaceVolverCatalogo.href = `listado.html?catalogo=${encodeURIComponent(idCatalogo)}`;
     Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
 
@@ -444,7 +518,9 @@ const FormularioCatalogo = (function () {
     camposCatalogo.descripcion.required = configuracion.descripcion.obligatoria;
     marcaDescripcionCatalogo.hidden = !configuracion.descripcion.obligatoria;
 
-    reglasCatalogo.push({ campo: camposCatalogo.codigo, validar: validarCodigoCatalogo });
+    if (!registroOriginal) {
+      reglasCatalogo.push({ campo: camposCatalogo.codigo, validar: validarCodigoCatalogo });
+    }
     reglasCatalogo.push({ campo: camposCatalogo.nombre, validar: validarNombreCatalogo });
     if (configuracion.descripcion.visible) {
       reglasCatalogo.push({ campo: camposCatalogo.descripcion, validar: validarDescripcionCatalogo });
@@ -476,6 +552,8 @@ const FormularioCatalogo = (function () {
     grupoDescripcionCatalogo = document.getElementById('catalogo-grupo-descripcion');
     marcaDescripcionCatalogo = document.getElementById('catalogo-marca-descripcion');
     botonLimpiarCatalogo = document.getElementById('catalogo-boton-limpiar');
+    botonGuardarCatalogo = document.getElementById('catalogo-boton-guardar');
+    botonCargarCsvCatalogo = document.getElementById('catalogo-boton-cargar-csv');
     camposCatalogo.codigo = document.getElementById('catalogo-codigo');
     camposCatalogo.nombre = document.getElementById('catalogo-nombre');
     camposCatalogo.descripcion = document.getElementById('catalogo-descripcion');
@@ -488,7 +566,17 @@ const FormularioCatalogo = (function () {
       return;
     }
 
+    codigoModificar = Enrutador.obtenerParametro('codigo');
+    if (codigoModificar !== null) {
+      registroOriginal = Catalogos.buscarRegistro(idCatalogo, codigoModificar);
+      if (!registroOriginal) {
+        mostrarVistaRegistroNoDisponible();
+        return;
+      }
+    }
+
     configurarVistaCatalogo();
+    if (registroOriginal) cargarDatosActualesCatalogo();
     registrarEventosCatalogo();
   }
 

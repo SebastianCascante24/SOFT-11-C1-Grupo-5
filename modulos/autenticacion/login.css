@@ -1,0 +1,59 @@
+/* estilos de login */
+
+main.login {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 24px 16px;
+}
+
+.login-tarjeta {
+    width: min(100%, 440px);
+    padding: 32px;
+}
+
+.login-tarjeta h1 {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.login-subtitulo {
+    margin-bottom: 28px;
+    color: var(--texto-secundario);
+    font-size: 14px;
+    text-align: center;
+}
+
+#login-error-general {
+    margin-bottom: 22px;
+}
+
+#login-formulario button {
+    width: 100%;
+}
+
+.login-separador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.login-separador::before,
+.login-separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--borde);
+}
+
+.login-enlace {
+    display: block;
+    margin-top: 24px;
+    font-size: 13px;
+    text-align: center;
+}

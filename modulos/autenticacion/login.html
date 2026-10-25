@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/tipografia.css">
+    <link rel="stylesheet" href="../../css/layout/encabezado.css">
+    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+    <link rel="stylesheet" href="../../css/layout/grid.css">
+    <link rel="stylesheet" href="../../css/componentes/formularios.css">
+    <link rel="stylesheet" href="../../css/componentes/botones.css">
+    <link rel="stylesheet" href="../../css/componentes/tablas.css">
+    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="../../css/componentes/alertas.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <main id="contenido" class="login">
+        <section class="tarjeta login-tarjeta" aria-labelledby="login-titulo">
+            <h1 id="login-titulo">Iniciar sesión</h1>
+            <p class="login-subtitulo">Ingrese sus credenciales para continuar</p>
+
+            <form id="login-formulario" novalidate>
+                <div id="login-error-general" class="alerta alerta-error" role="alert" hidden></div>
+
+                <div class="campo">
+                    <label for="login-usuario">Usuario <span class="obligatorio" aria-hidden="true">*</span></label>
+                    <input type="text" id="login-usuario" name="usuario" autocomplete="username" required>
+                </div>
+
+                <div class="campo">
+                    <label for="login-contrasena">Contraseña <span class="obligatorio"
+                            aria-hidden="true">*</span></label>
+                    <input type="password" id="login-contrasena" name="contrasena" autocomplete="current-password"
+                        required>
+                </div>
+
+                <button type="submit" id="login-boton-iniciar">Iniciar</button>
+
+                <div class="login-separador" role="separator"><span>o</span></div>
+
+                <!-- sin funcionalidad -->
+                <button type="button" class="boton-secundario" id="login-boton-google">Iniciar con Google</button>
+
+                <a class="login-enlace" id="login-enlace-olvido" href="#">¿Olvidó su contraseña?</a>
+            </form>
+        </section>
+    </main>
+    <footer class="page-footer">
+        Universidad CENFOTEC · Sistema de Gestión Curricular y Docente
+    </footer>
+
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

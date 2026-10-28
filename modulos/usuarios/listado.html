@@ -183,6 +183,7 @@
                 <th scope="col">Género</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Fecha de registro</th>
+                <th>Acciones</th>
               </tr>
             </thead>
 
@@ -268,6 +269,24 @@
                     fila.appendChild(celda);
                 });
 
+        const celdaAcciones = document.createElement("td");
+
+        const enlaceEditar = document.createElement("a");
+        enlaceEditar.href = "editar.html?id=" +
+         encodeURIComponent(usuario.id);
+
+          enlaceEditar.textContent = "Editar";
+             enlaceEditar.className = "boton-secundario";
+
+              celdaAcciones.appendChild(enlaceEditar);
+        const enlacePerfil = document.createElement("a");
+        enlacePerfil.href = "perfil.html";
+        enlacePerfil.textContent = "Mi perfil";
+        enlacePerfil.className = "boton-secundario";
+        celdaAcciones.appendChild(document.createTextNode(" "));
+        celdaAcciones.appendChild(enlacePerfil);
+               fila.appendChild(celdaAcciones);
+ 
                 tabla.appendChild(fila);
             });
         });

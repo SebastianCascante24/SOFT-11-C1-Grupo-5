@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar usuario | Gestor de Cursos CENFOTEC</title>
+
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/tipografia.css">
+  <link rel="stylesheet" href="../../css/layout/encabezado.css">
+  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+  <link rel="stylesheet" href="../../css/layout/grid.css">
+  <link rel="stylesheet" href="../../css/componentes/formularios.css">
+  <link rel="stylesheet" href="../../css/componentes/botones.css">
+  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+  <link rel="stylesheet" href="../../css/componentes/alertas.css">
+</head>
+
+<body>
+  <!-- ENCABEZADO INSTITUCIONAL -->
+  <header class="encabezado">
+    <a class="logo"
+       href="../../index.html"
+       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+    <div class="encabezado-acciones"
+         role="group"
+         aria-label="Opciones de la cuenta">
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-notificaciones"
+              title="Notificaciones"
+              aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+        </svg>
+      </button>
+
+      <select id="encabezado-idioma"
+              aria-label="Idioma"
+              title="Idioma">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <button type="button"
+              class="avatar"
+              id="encabezado-avatar"
+              aria-label="Perfil"
+              title="Perfil">A</button>
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-cerrar-sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m16 17 5-5-5-5"/>
+          <path d="M21 12H9"/>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+
+  <div class="contenedor-principal">
+     
+<!-- MENÚ LATERAL INSTITUCIONAL -->
+<nav class="menu-lateral" aria-label="Menú principal">
+  <ul>
+    <li><a href="../../index.html">Inicio</a></li>
+    <li><a href="listado.html" aria-current="page">Usuarios</a></li>
+    <li><a href="../escuelas/listado.html">Escuelas</a></li>
+    <li><a href="../carreras/listado.html">Carreras</a></li>
+    <li><a href="../cursos/listado.html">Cursos</a></li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=areas-sfia">
+        Áreas SFIA
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=tematicas">
+        Temática
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=metodologias">
+        Metodologías de aprendizaje
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
+        Casas certificadoras
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
+        Niveles de complejidad
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+    <main id="contenido">
+      <h1>Modificar usuario registrado</h1>
+      <p>Actualice los datos permitidos del usuario.</p>
+
+      <section class="tarjeta">
+        <h2>Información del usuario</h2>
+
+        <form id="form-editar-usuario" novalidate>
+          <div class="campo">
+            <label for="editar-nombre">Nombre completo *</label>
+            <input id="editar-nombre" maxlength="80" required>
+          </div>
+
+          <div class="campo">
+            <label for="editar-correo">Correo electrónico *</label>
+            <input id="editar-correo" type="email" maxlength="80" required>
+          </div>
+
+          <div class="campo">
+            <label for="editar-nacimiento">Fecha de nacimiento *</label>
+            <input id="editar-nacimiento" type="date" required>
+          </div>
+
+          <div class="campo">
+            <label for="editar-genero">Género *</label>
+            <select id="editar-genero" required>
+              <option value="">Seleccione una opción</option>
+              <option value="f">Femenino</option>
+              <option value="m">Masculino</option>
+              <option value="o">Otro</option>
+              <option value="n">Prefiero no indicarlo</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="editar-rol">Rol *</label>
+            <select id="editar-rol" required>
+              <option value="">Seleccione un rol</option>
+              <option value="admin">Administrador</option>
+              <option value="rectoria">Rectoría</option>
+              <option value="vice">Vicerrectoría</option>
+              <option value="dc">Desarrollo Curricular</option>
+              <option value="dir">Director</option>
+            </select>
+          </div>
+
+          <p id="mensaje-edicion" role="status" aria-live="polite"></p>
+
+          <div class="acciones">
+            <button type="submit" class="boton">
+              Guardar cambios
+            </button>
+            <a href="listado.html" class="boton-secundario">
+              Cancelar
+            </a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="editar.js"></script>
+</body>
+</html>

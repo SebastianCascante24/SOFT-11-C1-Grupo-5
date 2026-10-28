@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Consultar perfil de usuario | CENFOTEC</title><link rel="stylesheet" href="../../css/base/variables.css">
+<link rel="stylesheet" href="../../css/base/reset.css">
+<link rel="stylesheet" href="../../css/base/tipografia.css">
+<link rel="stylesheet" href="../../css/layout/encabezado.css">
+<link rel="stylesheet" href="../../css/layout/menu-lateral.css">
+<link rel="stylesheet" href="../../css/layout/grid.css">
+<link rel="stylesheet" href="../../css/componentes/formularios.css">
+<link rel="stylesheet" href="../../css/componentes/botones.css">
+<link rel="stylesheet" href="../../css/componentes/tablas.css">
+<link rel="stylesheet" href="../../css/componentes/tarjetas.css">
+<link rel="stylesheet" href="../../css/componentes/alertas.css"><style>
+main .tarjeta{padding:24px;margin-top:18px} .campo{margin:12px 0} .campo label{display:block;margin-bottom:6px;font-weight:600}
+.campo input,.campo select{width:100%;max-width:580px;padding:10px;border:1px solid #c9d5e5;border-radius:3px;background:white}
+.acciones-hu{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
+.tabla-contenedor{overflow-x:auto} table{width:100%;border-collapse:collapse}th,td{padding:11px;text-align:left;border-bottom:1px solid #dce3eb}
+.avatares{display:flex;gap:10px;flex-wrap:wrap}.avatar-opcion{border:2px solid #dce3eb;border-radius:5px;background:#fff;padding:12px;cursor:pointer;font-size:25px}.avatar-opcion[aria-pressed="true"]{border-color:#0867E8;background:#e3ecff}
+.mensaje-hu{margin-top:14px;min-height:24px} .foto-perfil{font-size:52px}
+</style></head><body><a class="salto-contenido" href="#contenido">Saltar al contenido</a><header class="encabezado">
+    <a class="logo"
+       href="../../index.html"
+       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
+
+    <div class="encabezado-acciones"
+         role="group"
+         aria-label="Opciones de la cuenta">
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-notificaciones"
+              title="Notificaciones"
+              aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+        </svg>
+      </button>
+
+      <select id="encabezado-idioma"
+              aria-label="Idioma"
+              title="Idioma">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <button type="button"
+              class="avatar"
+              id="encabezado-avatar"
+              aria-label="Perfil"
+              title="Perfil">A</button>
+
+      <button type="button"
+              class="boton-secundario"
+              id="encabezado-cerrar-sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m16 17 5-5-5-5"/>
+          <path d="M21 12H9"/>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        </svg>
+      </button>
+    </div>
+  </header><div class="contenedor-principal"><nav class="menu-lateral" aria-label="Menú principal">
+  <ul>
+    <li><a href="../../index.html">Inicio</a></li>
+    <li><a href="listado.html" aria-current="page">Usuarios</a></li>
+    <li><a href="../escuelas/listado.html">Escuelas</a></li>
+    <li><a href="../carreras/listado.html">Carreras</a></li>
+    <li><a href="../cursos/listado.html">Cursos</a></li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=areas-sfia">
+        Áreas SFIA
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=tematicas">
+        Temática
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=metodologias">
+        Metodologías de aprendizaje
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
+        Casas certificadoras
+      </a>
+    </li>
+    <li>
+      <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
+        Niveles de complejidad
+      </a>
+    </li>
+  </ul>
+</nav><main id="contenido"><h1>Consultar perfil de usuario</h1><p>Información del usuario que inició sesión y configuración del avatar.</p><section class="tarjeta"><div id="perfil-datos" role="status"></div><div class="acciones-hu"><a class="boton-secundario" href="listado.html">Volver a usuarios</a></div><h2>HU-03 · Asignar avatar</h2><p>Elegí un avatar de demostración para tu perfil.</p><div id="avatares" class="avatares" role="group" aria-label="Elegir avatar"></div><p id="mensaje-avatar" class="mensaje-hu" role="status"></p></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="perfil.js"></script></body></html>

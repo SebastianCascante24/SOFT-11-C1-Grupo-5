@@ -95,7 +95,7 @@ const Usuarios = {
     const formulario = document.getElementById("form-usuario");
     if (!formulario) return;
 
-    formulario.addEventListener("submit", evento => {
+    formulario.addEventListener("submit", async evento => {
       evento.preventDefault();
 
       const datos = {
@@ -133,7 +133,39 @@ const Usuarios = {
         return;
       }
 
-      if (this.registrar(datos)) {
+      
+let registroExitoso = false;
+
+try {
+    const credencialRegistrada =
+        await VerificadorCredenciales.registrar(
+            datos.correo,
+            datos.password
+        );
+
+    if (credencialRegistrada) {
+    registroExitoso = this.registrar(datos);
+
+    if (!registroExitoso) {
+        const clave = VerificadorCredenciales.clave;
+        const credenciales = JSON.parse(
+            localStorage.getItem(clave) || "{}"
+        );
+
+        delete credenciales[datos.correo];
+
+        localStorage.setItem(
+            clave,
+            JSON.stringify(credenciales)
+        );
+    }
+}
+} catch (error) {
+    console.error("Error al registrar usuario:", error);
+}
+
+if (registroExitoso) {
+
         formulario.reset();
         resumen.setAttribute("role", "status");
         resumen.textContent =

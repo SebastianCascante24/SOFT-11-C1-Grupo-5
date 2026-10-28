@@ -29,7 +29,7 @@ const Login = (function () {
         campoUsuario.focus();
     }
 
-    function manejarEnvio(evento) {
+    async function manejarEnvio(evento)  {
         evento.preventDefault();
         Notificacion.limpiarErrorGeneral(errorGeneral);
 
@@ -53,12 +53,45 @@ const Login = (function () {
             return;
         }
 
+       
         if (usuario.activo === false) {
-            mostrarFalloLogin('Su usuario está inactivo. Contacte al administrador.');
-            return;
-        }
+    mostrarFalloLogin(
+        'Su usuario está inactivo. Contacte al administrador.'
+    );
+    return;
+    }
 
-        if (!Autenticacion.iniciarSesion(usuario)) {
+// No iniciar sesión sin verificar la contraseña.
+// El registro actual no almacena credenciales verificables.
+     if (
+    typeof VerificadorCredenciales === 'undefined' ||
+    typeof VerificadorCredenciales.verificar !== 'function'
+       ) {
+    mostrarFalloLogin(
+        'El inicio de sesión todavía no está configurado. ' +
+        'Contacte al administrador del sistema.'
+    );
+    return;
+      }
+
+let credencialValida = false;
+
+try {
+    credencialValida = await VerificadorCredenciales.verificar(
+        usuario.correo,
+        campoContrasena.value
+    );
+} catch (error) {
+    console.error('Error al verificar credenciales:', error);
+}
+
+if (credencialValida !== true) {
+    mostrarFalloLogin('Usuario o contraseña incorrectos.');
+    return;
+}
+
+if (!Autenticacion.iniciarSesion(usuario)) {
+
             mostrarFalloLogin('No se pudo iniciar la sesión. Intente de nuevo.');
             return;
         }
@@ -81,6 +114,31 @@ const Login = (function () {
         campoUsuario = document.getElementById('login-usuario');
         campoContrasena = document.getElementById('login-contrasena');
 
+        // Migración local de registros anteriores a la demostración de credenciales.
+        const activar = document.getElementById('activar-demo');
+        const aviso = document.getElementById('activar-demo-aviso');
+        const existentes = Usuarios.obtenerTodos();
+        let guardadas = {};
+        try { guardadas = JSON.parse(localStorage.getItem(VerificadorCredenciales.clave) || '{}'); } catch { guardadas = {}; }
+        if (activar && existentes.some(u => !Object.hasOwn(guardadas, String(u.correo).toLowerCase()))) {
+            activar.hidden = false;
+            activar.addEventListener('click', async () => {
+                const correo = campoUsuario.value.trim().toLowerCase();
+                const contrasena = campoContrasena.value;
+                const usuario = existentes.find(u => String(u.correo).toLowerCase() === correo);
+                if (!usuario) { aviso.textContent = 'Ingrese el correo de un usuario existente.'; return; }
+                if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,15}$/.test(contrasena)) {
+                    aviso.textContent = 'Ingrese una contraseña ficticia de 8 a 15 caracteres, con mayúscula, minúscula, número y símbolo.'; return;
+                }
+                try {
+                    const actual = JSON.parse(localStorage.getItem(VerificadorCredenciales.clave) || '{}');
+                    if (Object.hasOwn(actual, correo)) { aviso.textContent = 'Esta cuenta ya tiene una credencial. Use Iniciar.'; return; }
+                    await VerificadorCredenciales.registrar(correo, contrasena);
+                    aviso.textContent = 'Cuenta de demostración activada. Ahora pulse Iniciar.';
+                    activar.hidden = true;
+                } catch (error) { aviso.textContent = 'No se pudo activar la cuenta de demostración.'; }
+            });
+        }
         formulario.addEventListener('submit', manejarEnvio);
         [campoUsuario, campoContrasena].forEach((campo) => {
             campo.addEventListener('input', () => Notificacion.limpiarErrorCampo(campo));

@@ -9,7 +9,91 @@
 
   const get = (id) => document.getElementById(id);
   const value = (id) => get(id).value.trim();
+// ==========================================
+// CARGA DE ESCUELAS Y CARRERAS DESDE LOCALSTORAGE
+// ==========================================
 
+const schoolSelect = get("school");
+const careerSelect = get("career");
+
+function readLocalStorage(key) {
+    try {
+        const data = JSON.parse(localStorage.getItem(key) || "[]");
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        console.error("Error leyendo " + key, error);
+        return [];
+    }
+}
+
+// Cargar escuelas registradas
+function loadSchools() {
+    const schools = readLocalStorage("grupo5_escuelas");
+
+    schoolSelect.innerHTML =
+        '<option value="">Seleccione una escuela</option>';
+
+    schools.forEach(school => {
+        const option = document.createElement("option");
+
+        option.value = school.codigo;
+        option.textContent = school.nombre;
+
+        schoolSelect.appendChild(option);
+    });
+
+    if (schools.length === 0) {
+        schoolSelect.innerHTML =
+            '<option value="">No hay escuelas registradas</option>';
+    }
+
+    loadCareers();
+}
+
+// Cargar carreras relacionadas con la escuela seleccionada
+function loadCareers() {
+    const selectedSchool = schoolSelect.value;
+    const careers = readLocalStorage("grupo5_carreras");
+
+    careerSelect.innerHTML =
+        '<option value="">Seleccione una carrera</option>';
+
+    const filteredCareers = careers.filter(career =>
+        career.escuelaCodigo === selectedSchool
+    );
+
+    filteredCareers.forEach(career => {
+        const option = document.createElement("option");
+
+        option.value = career.codigo;
+        option.textContent = career.nombre;
+
+        careerSelect.appendChild(option);
+    });
+
+    careerSelect.disabled = !selectedSchool || filteredCareers.length === 0;
+
+    if (!selectedSchool) {
+        careerSelect.innerHTML =
+            '<option value="">Primero seleccione una escuela</option>';
+    } else if (filteredCareers.length === 0) {
+        careerSelect.innerHTML =
+            '<option value="">No hay carreras para esta escuela</option>';
+    }
+}
+
+// Actualizar las carreras cuando cambia la escuela
+schoolSelect.addEventListener("change", () => {
+    loadCareers();
+
+    setError("school", "");
+    setError("career", "");
+
+    updateProgress();
+});
+
+// Ejecutar la carga inicial
+loadSchools();
   function showMessage(text, type = "info") {
     message.textContent = text;
     message.className = `notice ${type}`;

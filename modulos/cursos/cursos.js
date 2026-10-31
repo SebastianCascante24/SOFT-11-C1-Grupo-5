@@ -263,13 +263,41 @@ loadSchools();
     get("metaCount").textContent = get("metaDescription").value.length;
   }
 
-  function updateProgress() {
-    const fields = ["school", "career", "code", "name", "sfia", "topic", "credits", "classHours", "extraHours", "modality"];
-    const filled = fields.filter(id => value(id) !== "").length;
-    const percent = Math.round(filled / fields.length * 100);
+  
+function updateProgress() {
+    // Obtener todos los campos editables del formulario
+    const fields = [
+        ...form.querySelectorAll(
+            'input:not([readonly]):not([type="hidden"]), select, textarea'
+        )
+    ].filter(field => {
+        // Ignorar campos que estén ocultos
+        const container = field.closest(".field");
+
+        return container && container.getClientRects().length > 0;
+    });
+
+    // Determinar cuántos campos están completos
+    const completed = fields.filter(field => {
+        if (field.tagName === "SELECT") {
+            // No contar la opción inicial como respuesta
+            return field.selectedIndex > 0 && field.value.trim() !== "";
+        }
+
+        return field.value.trim() !== "";
+    }).length;
+
+    // Calcular porcentaje entero
+    const percent = fields.length > 0
+        ? Math.round((completed / fields.length) * 100)
+        : 0;
+
+    // Actualizar barra y texto
     get("completionBar").style.width = `${percent}%`;
-    get("completionText").textContent = `${percent}% completado`;
-  }
+    get("completionText").textContent =
+        `${percent}% completado (${completed}/${fields.length} campos)`;
+}
+
 
   form.addEventListener("submit", event => {
     event.preventDefault();

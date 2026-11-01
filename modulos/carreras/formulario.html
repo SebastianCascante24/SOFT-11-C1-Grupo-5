@@ -110,4 +110,14 @@ main .tarjeta{padding:24px;margin-top:18px} .campo{margin:12px 0} .campo label{d
       </a>
     </li>
   </ul>
-</nav><main id="contenido"><h1>Registrar carrera</h1><p>HU-18 · Registrar carrera y HU-19 · Asociar director a una carrera.</p><section class="tarjeta"><form id="form-carrera" novalidate><div class="campo"><label for="codigo">Código de carrera *</label><input id="codigo" maxlength="20" required></div><div class="campo"><label for="nombre">Nombre de la carrera *</label><input id="nombre" maxlength="100" required></div><div class="campo"><label for="escuela">Escuela *</label><select id="escuela" required><option value="">Seleccione una escuela</option></select></div><div class="campo"><label for="director">Director de carrera *</label><select id="director" required><option value="">Seleccione un usuario con rol Dirección</option></select></div><div class="acciones-hu"><button class="boton" type="submit">Guardar carrera</button><a class="boton-secundario" href="listado.html">Ver carreras</a></div><p id="mensaje-carrera" class="mensaje-hu" role="status"></p></form></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="carreras.js"></script></body></html>
+</nav><main id="contenido"><h1 id="tituloCarrera">Registrar carrera</h1><p>HU-18 · Registrar carrera y HU-19 · Asociar director a una carrera.</p><section class="tarjeta"><form id="form-carrera" novalidate><div class="campo"><label for="codigo">Código de carrera *</label><input id="codigo" maxlength="20" required></div><div class="campo"><label for="nombre">Nombre de la carrera *</label><input id="nombre" maxlength="100" required></div><div class="campo"><label for="escuela">Escuela *</label><select id="escuela" required><option value="">Seleccione una escuela</option></select></div><div class="campo"><label for="director">Director de carrera *</label><select id="director" required><option value="">Seleccione un usuario con rol Dirección</option></select></div><div class="acciones-hu"><button class="boton" type="submit" id="botonGuardarCarrera">
+  Guardar carrera
+</button><button
+  class="boton-secundario"
+  type="reset"
+  id="botonRestablecerCarrera"
+  hidden>
+  Restablecer
+</button><button class="boton" type="submit" id="botonGuardarCarrera">
+  Guardar carrera
+</button><a class="boton-secundario" href="listado.html">Ver carreras</a></div><p id="mensaje-carrera" class="mensaje-hu" role="status"></p></form></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="carreras.js"></script></body></html>

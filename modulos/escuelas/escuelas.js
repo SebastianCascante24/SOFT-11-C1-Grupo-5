@@ -4,6 +4,49 @@
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formularioEscuela");
   if (!formulario) return;
+  const parametros = new URLSearchParams(window.location.search);
+  const codigoEditar = parametros.get("codigo");
+
+  const modoEdicion = codigoEditar !== null;
+
+  const tituloFormulario = document.getElementById("tituloFormularioEscuela");
+  const botonGuardar = document.getElementById("botonGuardarEscuela");
+
+if (modoEdicion) {
+  tituloFormulario.textContent = "Modificar escuela";
+  botonGuardar.textContent = "Guardar cambios";
+}
+
+if (modoEdicion) {
+  try {
+    const escuelas = JSON.parse(
+      localStorage.getItem("grupo5_escuelas") || "[]"
+    );
+
+    const escuelaEditar = escuelas.find(
+      escuela => escuela.codigo === codigoEditar
+    );
+
+    if (escuelaEditar) {
+      const campoCodigo = document.getElementById("codigoEscuela");
+      const campoNombre = document.getElementById("nombreEscuela");
+      const campoDirector = document.getElementById("directorEscuela");
+
+      campoCodigo.value = escuelaEditar.codigo;
+      campoNombre.value = escuelaEditar.nombre;
+      campoDirector.value = escuelaEditar.director;
+
+      campoCodigo.readOnly = true;
+    } else {
+      alert("No se encontró la escuela seleccionada.");
+      window.location.href = "listado.html";
+    }
+  } catch (error) {
+    console.error("Error al cargar la escuela:", error);
+    alert("No fue posible cargar los datos de la escuela.");
+    window.location.href = "listado.html";
+  }
+}
 
   const mensaje = document.getElementById("mensajeRegistro");
 
@@ -137,6 +180,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const escuelas = obtenerEscuelas();
+      if (modoEdicion) {
+  const indiceEscuela = escuelas.findIndex(
+    item => item.codigo === codigoEditar
+  );
+
+  if (indiceEscuela === -1) {
+    mostrarMensaje("No se encontró la escuela que desea modificar.");
+    return;
+  }
+
+  escuelas[indiceEscuela].nombre = escuela.nombre;
+  escuelas[indiceEscuela].director = escuela.director;
+
+  localStorage.setItem(
+    "grupo5_escuelas",
+    JSON.stringify(escuelas)
+  );
+
+  mostrarMensaje(
+    "Escuela modificada correctamente.",
+    "exito"
+  );
+
+  return;
+}
 
       const codigoDuplicado = escuelas.some(
         item =>
@@ -180,8 +248,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  formulario.addEventListener("reset", () => {
-    campos.forEach(limpiarError);
-    limpiarMensaje();
-  });
+ 
+formulario.addEventListener("reset", evento => {
+  if (modoEdicion) {
+    evento.preventDefault();
+
+    try {
+      const escuelas = obtenerEscuelas();
+
+      const escuelaOriginal = escuelas.find(
+        item => item.codigo === codigoEditar
+      );
+
+      if (escuelaOriginal) {
+        campos[0].input.value = escuelaOriginal.codigo;
+        campos[1].input.value = escuelaOriginal.nombre;
+        campos[2].input.value = escuelaOriginal.director;
+      }
+    } catch (error) {
+      console.error("Error al restablecer la escuela:", error);
+      mostrarMensaje("No fue posible recuperar los datos de la escuela.");
+      return;
+    }
+  }
+
+  campos.forEach(limpiarError);
+  limpiarMensaje();
+});
 });

@@ -113,10 +113,11 @@
         <div class="tabla-contenedor">
           <table>
             <thead>
-              <tr>
-                <th scope="col">Código</th>
+             <tr>
+               <th scope="col">Código</th>
                 <th scope="col">Nombre de escuela</th>
-                <th scope="col">Director</th>
+               <th scope="col">Director</th>
+               <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody id="tablaEscuelas"></tbody>
@@ -154,17 +155,31 @@
         return;
       }
 
-      escuelas.forEach(escuela => {
-        const fila = tabla.insertRow();
-
-        [escuela.codigo, escuela.nombre, escuela.director]
-          .forEach(valor => {
-            const celda = fila.insertCell();
-            celda.textContent = valor || "";
-          });
-      });
-    });
     
+escuelas.forEach(escuela => {
+  const fila = tabla.insertRow();
+
+  [escuela.codigo, escuela.nombre, escuela.director]
+    .forEach(valor => {
+      const celda = fila.insertCell();
+      celda.textContent = valor || "";
+    });
+
+  const celdaAcciones = fila.insertCell();
+
+  const botonModificar = document.createElement("button");
+  botonModificar.type = "button";
+  botonModificar.className = "boton-secundario";
+  botonModificar.textContent = "Modificar";
+
+  botonModificar.addEventListener("click", () => {
+    window.location.href =
+      "formulario.html?codigo=" + encodeURIComponent(escuela.codigo);
+  });
+
+  celdaAcciones.appendChild(botonModificar);
+});
+});
   </script>
 </body>
 </html>

@@ -1,72 +1,72 @@
-/*
- * autenticacion.js
- * sesion del usuario que inicio sesion
- * la sesion se guarda en localstorage
- */
-const Autenticacion = {
-    claveSesion: 'grupo5_sesion',
+// /*
+//  * autenticacion.js
+//  * sesion del usuario que inicio sesion
+//  * la sesion se guarda en localstorage
+//  */
+// const Autenticacion = {
+//     claveSesion: 'grupo5_sesion',
 
-    rutaLogin: new URL('../../modulos/autenticacion/login.html', document.currentScript.src).href,
+//     rutaLogin: new URL('../../modulos/autenticacion/login.html', document.currentScript.src).href,
 
-    iniciarSesion(usuario) {
-        return Almacenamiento.guardar(this.claveSesion, {
-            id: usuario.id,
-            nombre: usuario.nombre,
-            correo: usuario.correo,
-            rol: usuario.rol,
-            inicio: new Date().toISOString()
-        });
-    },
+//     iniciarSesion(usuario) {
+//         return Almacenamiento.guardar(this.claveSesion, {
+//             id: usuario.id,
+//             nombre: usuario.nombre,
+//             correo: usuario.correo,
+//             rol: usuario.rol,
+//             inicio: new Date().toISOString()
+//         });
+//     },
 
-    obtenerSesion() {
-        try {
-            return JSON.parse(localStorage.getItem(this.claveSesion));
-        } catch (error) {
-            return null;
-        }
-    },
+//     obtenerSesion() {
+//         try {
+//             return JSON.parse(localStorage.getItem(this.claveSesion));
+//         } catch (error) {
+//             return null;
+//         }
+//     },
 
-    estaAutenticado() {
-        return this.obtenerSesion() !== null;
-    },
+//     estaAutenticado() {
+//         return this.obtenerSesion() !== null;
+//     },
 
-    protegerPagina() {
-        const esLogin = window.location.pathname === new URL(this.rutaLogin).pathname;
-        if (esLogin || this.estaAutenticado()) return;
+//     protegerPagina() {
+//         const esLogin = window.location.pathname === new URL(this.rutaLogin).pathname;
+//         if (esLogin || this.estaAutenticado()) return;
 
-        document.documentElement.style.display = 'none';
-        window.location.replace(this.rutaLogin);
-    },
+//         document.documentElement.style.display = 'none';
+//         window.location.replace(this.rutaLogin);
+//     },
 
-    cerrarSesion() {
-        try {
-            localStorage.removeItem(this.claveSesion);
-        } catch (error) {
-            console.error('No se pudo cerrar la sesión.', error);
-        }
-        window.location.replace(`${this.rutaLogin}?sesion=cerrada`);
-    }
-};
+//     cerrarSesion() {
+//         try {
+//             localStorage.removeItem(this.claveSesion);
+//         } catch (error) {
+//             console.error('No se pudo cerrar la sesión.', error);
+//         }
+//         window.location.replace(`${this.rutaLogin}?sesion=cerrada`);
+//     }
+// };
 
-Autenticacion.protegerPagina();
+// Autenticacion.protegerPagina();
 
-window.addEventListener('pageshow', (evento) => {
-    if (evento.persisted) Autenticacion.protegerPagina();
-});
+// window.addEventListener('pageshow', (evento) => {
+//     if (evento.persisted) Autenticacion.protegerPagina();
+// });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const boton = document.getElementById('encabezado-cerrar-sesion');
-    if (boton) boton.addEventListener('click', () => Autenticacion.cerrarSesion());
-    const avatar = document.getElementById('encabezado-avatar');
-    if (avatar) {
-        const sesion = Autenticacion.obtenerSesion();
-        try {
-            const usuarios = JSON.parse(localStorage.getItem('grupo5_usuarios') || '[]');
-            const usuario = usuarios.find(u => sesion && u.id === sesion.id);
-            if (usuario) avatar.textContent = usuario.avatar || (usuario.nombre || 'A').charAt(0).toUpperCase();
-        } catch (error) { /* El perfil mostrará el error si corresponde. */ }
-        avatar.addEventListener('click', () => {
-            window.location.href = new URL('../../modulos/usuarios/perfil.html', document.currentScript?.src || Autenticacion.rutaLogin).href;
-        });
-    }
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     const boton = document.getElementById('encabezado-cerrar-sesion');
+//     if (boton) boton.addEventListener('click', () => Autenticacion.cerrarSesion());
+//     const avatar = document.getElementById('encabezado-avatar');
+//     if (avatar) {
+//         const sesion = Autenticacion.obtenerSesion();
+//         try {
+//             const usuarios = JSON.parse(localStorage.getItem('grupo5_usuarios') || '[]');
+//             const usuario = usuarios.find(u => sesion && u.id === sesion.id);
+//             if (usuario) avatar.textContent = usuario.avatar || (usuario.nombre || 'A').charAt(0).toUpperCase();
+//         } catch (error) { /* El perfil mostrará el error si corresponde. */ }
+//         avatar.addEventListener('click', () => {
+//             window.location.href = new URL('../../modulos/usuarios/perfil.html', document.currentScript?.src || Autenticacion.rutaLogin).href;
+//         });
+//     }
+// });

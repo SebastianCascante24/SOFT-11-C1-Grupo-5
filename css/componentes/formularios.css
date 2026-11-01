@@ -311,7 +311,8 @@ form[id*="filtro"] .campo {
     gap: 12px;
 }
 
-#listado-catalogo-contador {
+#listado-catalogo-contador,
+#revision-contador {
     margin: 0;
     color: var(--texto-secundario);
     font-size: 13px;

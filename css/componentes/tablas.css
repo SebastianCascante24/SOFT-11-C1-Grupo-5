@@ -82,7 +82,8 @@ table td a:last-child,
     }
 }
 
-#listado-catalogo-titulo {
+#listado-catalogo-titulo,
+#revision-titulo {
     text-align: center;
 }
 
@@ -114,7 +115,8 @@ table thead th label {
     white-space: nowrap;
 }
 
-#listado-catalogo-cuerpo button {
+#listado-catalogo-cuerpo button,
+#revision-cuerpo button {
     min-height: 32px;
     padding: 4px 12px;
     font-size: 13px;
@@ -132,7 +134,8 @@ table thead th label {
     margin-top: 20px;
 }
 
-#listado-catalogo-vacio {
+#listado-catalogo-vacio,
+#revision-vacio {
     margin: 0;
     padding: 24px 16px;
     background: var(--blanco);

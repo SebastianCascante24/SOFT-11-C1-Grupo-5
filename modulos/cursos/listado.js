@@ -1,188 +1,160 @@
 
+"use strict";
+
 document.addEventListener("DOMContentLoaded", () => {
-    const tabla = document.getElementById("tablaCursos");
-    const buscar = document.getElementById("buscar");
-    const filtroEstado = document.getElementById("filtroEstado");
-    const filtroModalidad = document.getElementById("filtroModalidad");
-    const limpiarFiltros = document.getElementById("limpiarFiltros");
-    const exportarCSV = document.getElementById("exportarCSV");
-    const totalCursos = document.getElementById("totalCursos");
-    const mensaje = document.getElementById("mensaje");
+  const tabla = document.getElementById("tabla-cursos");
+  const filtroCodigo = document.getElementById("filtro-codigo");
+  const filtroNombre = document.getElementById("filtro-nombre");
+  const filtroModalidad = document.getElementById("filtro-modalidad");
+  const filtroEstado = document.getElementById("filtro-estado");
+  const filtroCarrera = document.getElementById("filtro-carrera");
+  const limpiarFiltros = document.getElementById("limpiar-filtros");
+  const contador = document.getElementById("contador");
+  const mensaje = document.getElementById("mensaje-listado");
 
-    function cargarCursos() {
-        try {
-            const datos = JSON.parse(localStorage.getItem("cursos") || "[]");
-            return Array.isArray(datos) ? datos : [];
-        } catch (error) {
-            mostrarMensaje("No se pudieron leer los cursos guardados.", "error");
-            return [];
-        }
+  function leerDatos(clave) {
+    try {
+      const datos = JSON.parse(localStorage.getItem(clave) || "[]");
+      return Array.isArray(datos) ? datos : [];
+    } catch {
+      return [];
     }
+  }
 
-    let cursos = cargarCursos();
+  const cursos = leerDatos("cenfotec.hu44.cursos");
+  
+const cursos_normalizados = cursos.map(curso => ({
+  ...curso,
+  codigo: curso.code,
+  nombre: curso.name,
+  modalidad: curso.modality,
+  estado: curso.status,
+  carreraCodigo: curso.career
+}));
 
-    function normalizar(valor) {
-        return String(valor ?? "")
-            .trim()
-            .toLocaleLowerCase("es");
-    }
+  const carreras = leerDatos("grupo5_carreras");
 
-    function mostrarMensaje(texto, tipo = "info") {
-        mensaje.textContent = texto;
-        mensaje.className = texto ? `notice ${tipo}` : "";
-    }
+  function normalizar(valor) {
+    return String(valor ?? "").trim().toLocaleLowerCase("es");
+  }
 
-    function crearCelda(texto) {
-        const celda = document.createElement("td");
-        celda.textContent = texto || "—";
-        return celda;
-    }
+  // HU-23: Cargar las carreras registradas.
+  carreras.forEach(carrera => {
+    const opcion = document.createElement("option");
+    opcion.value = carrera.codigo;
+    opcion.textContent = `${carrera.nombre} (${carrera.codigo})`;
+    filtroCarrera.appendChild(opcion);
+  });
 
-    function obtenerCursosFiltrados() {
-        const texto = normalizar(buscar.value);
-        const estado = normalizar(filtroEstado.value);
-        const modalidad = normalizar(filtroModalidad.value);
+  function filtrarCursos() {
+    const codigo = normalizar(filtroCodigo.value);
+    const nombre = normalizar(filtroNombre.value);
+    const modalidad = normalizar(filtroModalidad.value);
+    const estado = normalizar(filtroEstado.value);
+    const carreraSeleccionada = filtroCarrera.value;
 
-        return cursos.filter(curso => {
-            const coincideTexto =
-                normalizar(curso.codigo).includes(texto) ||
-                normalizar(curso.nombre).includes(texto);
+    return cursos_normalizados.filter(curso => {
+      const coincideCodigo =
+        normalizar(curso.codigo).includes(codigo);
 
-            const coincideEstado =
-                !estado || normalizar(curso.estado) === estado;
+      const coincideNombre =
+        normalizar(curso.nombre).includes(nombre);
 
-            const coincideModalidad =
-                !modalidad || normalizar(curso.modalidad) === modalidad;
+      const coincideModalidad =
+        !modalidad ||
+        normalizar(curso.modalidad) === modalidad;
 
-            return coincideTexto && coincideEstado && coincideModalidad;
-        });
-    }
+      const coincideEstado =
+        !estado ||
+        normalizar(curso.estado || "Borrador") === estado;
 
-    function crearEnlaceDetalle(curso) {
-        const enlace = document.createElement("a");
-        const identificador = curso.id ?? curso.codigo;
+      // Se utiliza la asociación registrada en el curso.
+      const coincideCarrera =
+        !carreraSeleccionada ||
+        String(curso.carreraCodigo ?? "") === carreraSeleccionada;
 
-        enlace.href = `detalle.html?id=${encodeURIComponent(identificador ?? "")}`;
-        enlace.textContent = "Ver detalle";
-        enlace.setAttribute(
-            "aria-label",
-            `Ver detalle del curso ${curso.nombre || curso.codigo || ""}`
-        );
-
-        return enlace;
-    }
-
-    function renderizarCursos() {
-        const filtrados = obtenerCursosFiltrados();
-        tabla.replaceChildren();
-
-        totalCursos.textContent =
-            `${filtrados.length} curso(s) encontrado(s)`;
-
-        if (filtrados.length === 0) {
-            const fila = document.createElement("tr");
-            const celda = document.createElement("td");
-
-            celda.colSpan = 6;
-            celda.className = "empty-state";
-            celda.textContent = cursos.length === 0
-                ? "Todavía no hay cursos registrados."
-                : "No hay cursos que coincidan con los filtros.";
-
-            fila.appendChild(celda);
-            tabla.appendChild(fila);
-            return;
-        }
-
-        filtrados.forEach(curso => {
-            const fila = document.createElement("tr");
-
-            fila.appendChild(crearCelda(curso.codigo));
-            fila.appendChild(crearCelda(curso.nombre));
-            fila.appendChild(crearCelda(curso.modalidad));
-            fila.appendChild(crearCelda(curso.creditos));
-
-            const celdaEstado = document.createElement("td");
-            const etiquetaEstado = document.createElement("span");
-            const estado = curso.estado || "Borrador";
-
-            etiquetaEstado.textContent = estado;
-            etiquetaEstado.className = "estado";
-
-            const estadoNormalizado = normalizar(estado);
-            if (estadoNormalizado === "borrador") {
-                etiquetaEstado.classList.add("borrador");
-            } else if (estadoNormalizado === "aprobado") {
-                etiquetaEstado.classList.add("aprobado");
-            }
-
-            celdaEstado.appendChild(etiquetaEstado);
-            fila.appendChild(celdaEstado);
-
-            const celdaAcciones = document.createElement("td");
-            celdaAcciones.appendChild(crearEnlaceDetalle(curso));
-            fila.appendChild(celdaAcciones);
-
-            tabla.appendChild(fila);
-        });
-    }
-
-    [buscar, filtroEstado, filtroModalidad].forEach(control => {
-        control.addEventListener("input", renderizarCursos);
-        control.addEventListener("change", renderizarCursos);
+      return coincideCodigo &&
+             coincideNombre &&
+             coincideModalidad &&
+             coincideEstado &&
+             coincideCarrera;
     });
+  }
 
-    limpiarFiltros.addEventListener("click", () => {
-        buscar.value = "";
-        filtroEstado.value = "";
-        filtroModalidad.value = "";
-        mostrarMensaje("");
-        renderizarCursos();
+  function crearCelda(valor) {
+    const celda = document.createElement("td");
+    celda.textContent = String(valor ?? "—");
+    return celda;
+  }
+
+  function renderizarCursos() {
+    const filtrados = filtrarCursos();
+    tabla.replaceChildren();
+
+    contador.textContent = `${filtrados.length} registro(s)`;
+
+    if (filtrados.length === 0) {
+      const fila = document.createElement("tr");
+      const celda = document.createElement("td");
+
+      celda.colSpan = 5;
+      celda.textContent = cursos.length === 0
+        ? "Todavía no hay cursos registrados."
+        : "No hay cursos que coincidan con los filtros.";
+
+      fila.appendChild(celda);
+      tabla.appendChild(fila);
+      return;
+    }
+
+    filtrados.forEach(curso => {
+      const fila = document.createElement("tr");
+
+      fila.appendChild(crearCelda(curso.codigo));
+      fila.appendChild(crearCelda(curso.nombre));
+      fila.appendChild(crearCelda(curso.modalidad));
+
+      const celdaEstado = crearCelda(curso.estado || "Borrador");
+      fila.appendChild(celdaEstado);
+
+      const celdaAcciones = document.createElement("td");
+      const enlace = document.createElement("a");
+
+      enlace.href =
+        "detalle.html?id=" +
+        encodeURIComponent(curso.id ?? curso.code ?? curso.codigo ?? "");
+
+      enlace.textContent = "Ver detalle";
+      enlace.className = "boton-secundario";
+
+      celdaAcciones.appendChild(enlace);
+      fila.appendChild(celdaAcciones);
+
+      tabla.appendChild(fila);
     });
+  }
 
-    exportarCSV.addEventListener("click", () => {
-        const filtrados = obtenerCursosFiltrados();
+  [
+    filtroCodigo,
+    filtroNombre,
+    filtroModalidad,
+    filtroEstado,
+    filtroCarrera
+  ].forEach(control => {
+    control.addEventListener("input", renderizarCursos);
+    control.addEventListener("change", renderizarCursos);
+  });
 
-        if (filtrados.length === 0) {
-            mostrarMensaje("No hay cursos para exportar.", "info");
-            return;
-        }
+  limpiarFiltros.addEventListener("click", () => {
+    filtroCodigo.value = "";
+    filtroNombre.value = "";
+    filtroModalidad.value = "";
+    filtroEstado.value = "";
+    filtroCarrera.value = "";
 
-        const columnas = [
-            ["Código", "codigo"],
-            ["Nombre", "nombre"],
-            ["Modalidad", "modalidad"],
-            ["Créditos", "creditos"],
-            ["Estado", "estado"]
-        ];
-
-        const escaparCSV = valor =>
-            `"${String(valor ?? "").replace(/"/g, '""')}"`;
-
-        const contenido = [
-            columnas.map(([titulo]) => escaparCSV(titulo)).join(";"),
-            ...filtrados.map(curso =>
-                columnas
-                    .map(([, campo]) => escaparCSV(curso[campo]))
-                    .join(";")
-            )
-        ].join("\r\n");
-
-        const archivo = new Blob(
-            ["\uFEFF" + contenido],
-            { type: "text/csv;charset=utf-8;" }
-        );
-
-        const url = URL.createObjectURL(archivo);
-        const enlace = document.createElement("a");
-
-        enlace.href = url;
-        enlace.download = "listado-cursos.csv";
-        enlace.click();
-
-        URL.revokeObjectURL(url);
-        mostrarMensaje("Se generó el archivo CSV.", "success");
-    });
-
+    mensaje.textContent = "";
     renderizarCursos();
+  });
+
+  renderizarCursos();
 });

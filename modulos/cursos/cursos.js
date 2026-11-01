@@ -131,6 +131,10 @@ loadSchools();
     let error = "";
     const required = mode === "submit" ||
       (mode === "draft" && ["school", "code", "name"].includes(id));
+      if (mode === "draft" && !["school", "code", "name"].includes(id)) {
+  setError(id, "");
+  return true;
+}
 
     if (required && !v) {
       const labels = {
@@ -195,6 +199,27 @@ loadSchools();
 
   function validate(mode) {
     clearErrors();
+    
+if (mode === "draft") {
+  const camposObligatorios = ["school", "code", "name"];
+  let valido = true;
+
+  camposObligatorios.forEach(id => {
+    if (!validateField(id, "draft")) {
+      valido = false;
+    }
+  });
+
+  if (!valido) {
+    showMessage(
+      "Para guardar el borrador complete escuela, código y nombre.",
+      "error"
+    );
+  }
+
+  return valido;
+}
+
     const ids = [
       "school", "career", "code", "name", "powerName", "ecommerce", "openingDate", "currency",
       "sfia", "topic", "credits", "classHours", "extraHours", "modality", "complexity",
@@ -228,6 +253,7 @@ loadSchools();
   }
 
   function save(status) {
+    console.log("Estado al guardar:", status);
     const valid = validate(status === "draft" ? "draft" : "submit");
     if (!valid) return;
     const course = collectCourse(status);

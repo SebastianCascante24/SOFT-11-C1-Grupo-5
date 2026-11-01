@@ -31,41 +31,12 @@ const Autenticacion = {
     },
 
     protegerPagina() {
-    const rutaActual = window.location.pathname;
-    const esLogin = rutaActual === new URL(this.rutaLogin).pathname;
+        const esLogin = window.location.pathname === new URL(this.rutaLogin).pathname;
+        if (esLogin || this.estaAutenticado()) return;
 
-    const rutaRegistro = new URL(
-        '../../modulos/usuarios/usuario-registro.html',
-        document.currentScript.src
-    ).pathname;
-
-    const rutaRegistroAlterna = new URL('../../modulos/usuarios/registro.html', document.currentScript.src).pathname;
-    const esRegistro = rutaActual === rutaRegistro || rutaActual === rutaRegistroAlterna;
-
-    let usuarios = [];
-
-    try {
-        usuarios = JSON.parse(
-            localStorage.getItem('grupo5_usuarios') || '[]'
-        );
-    } catch (error) {
-        usuarios = [];
-    }
-
-    const sinUsuarios = Array.isArray(usuarios) && usuarios.length === 0;
-
-    // Permitir el registro inicial únicamente si no hay usuarios.
-    if (
-        esLogin ||
-        this.estaAutenticado() ||
-        (esRegistro && sinUsuarios)
-    ) {
-        return;
-    }
-
-    document.documentElement.style.display = 'none';
-    window.location.replace(this.rutaLogin);
-},
+        document.documentElement.style.display = 'none';
+        window.location.replace(this.rutaLogin);
+    },
 
     cerrarSesion() {
         try {

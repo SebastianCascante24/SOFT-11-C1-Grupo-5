@@ -117,13 +117,21 @@ if (!curso) {
   );
 
    if (botonEditar) {
+  if (curso && (curso.code || curso.codigo)) {
+    // El curso existe: permitir editarlo.
     botonEditar.disabled = false;
     botonEditar.removeAttribute("title");
 
     botonEditar.addEventListener("click", () => {
       const codigo = curso.code ?? curso.codigo;
+
       window.location.href =
         `registro.html?id=${encodeURIComponent(codigo)}`;
-     });
+    });
+  } else {
+    // El curso no existe: impedir la edición.
+    botonEditar.disabled = true;
+    botonEditar.title = "No se puede editar un curso que no existe";
   }
+}
 }

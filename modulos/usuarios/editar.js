@@ -42,6 +42,8 @@ const EditarUsuario = {
 
     document.getElementById("editar-nombre").value = usuario.nombre || "";
     document.getElementById("editar-correo").value = usuario.correo || "";
+    document.getElementById("editar-telefono").value =
+    usuario.telefono || "";
     document.getElementById("editar-nacimiento").value =
       usuario.nacimiento || "";
     document.getElementById("editar-genero").value = usuario.genero || "";
@@ -55,12 +57,25 @@ const EditarUsuario = {
 
       const correo = document.getElementById("editar-correo")
         .value.trim().toLowerCase();
+      
+      const telefono = document.getElementById("editar-telefono")
+       .value.trim();
 
       const nacimiento = document.getElementById("editar-nacimiento").value;
       const genero = document.getElementById("editar-genero").value;
       const rol = document.getElementById("editar-rol").value;
 
       mensaje.textContent = "";
+
+      
+const telefonoLimpio = telefono.replace(/[\s-]/g, "");
+
+if (!/^\d{8}$/.test(telefonoLimpio)) {
+  mensaje.textContent =
+    "Ingrese un número telefónico válido de 8 dígitos.";
+  return;
+}
+
 
       if (!nombre || nombre.length > 80) {
         mensaje.textContent = "Ingrese un nombre válido.";
@@ -114,15 +129,18 @@ const EditarUsuario = {
         return;
       }
 
+      
       actuales[indice] = {
-        ...actuales[indice],
-        nombre,
-        correo,
-        nacimiento,
-        genero,
-        rol,
-        fechaModificacion: new Date().toISOString()
+      ...actuales[indice],
+       nombre,
+       correo,
+       telefono: telefonoLimpio,
+       nacimiento,
+       genero,
+       rol,
+      fechaModificacion: new Date().toISOString()
       };
+
 
       try {
         localStorage.setItem(this.clave, JSON.stringify(actuales));

@@ -109,4 +109,88 @@ main .tarjeta{padding:24px;margin-top:18px} .campo{margin:12px 0} .campo label{d
       </a>
     </li>
   </ul>
-</nav><main id="contenido"><h1>Consultar perfil de usuario</h1><p>Información del usuario que inició sesión y configuración del avatar.</p><section class="tarjeta"><div id="perfil-datos" role="status"></div><div class="acciones-hu"><a class="boton-secundario" href="listado.html">Volver a usuarios</a></div><h2>HU-03 · Asignar avatar</h2><p>Elegí un avatar de demostración para tu perfil.</p><div id="avatares" class="avatares" role="group" aria-label="Elegir avatar"></div><p id="mensaje-avatar" class="mensaje-hu" role="status"></p></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="perfil.js"></script></body></html>
+</nav><main id="contenido"><h1>Consultar perfil de usuario</h1><p>Información del usuario que inició sesión y configuración del avatar.</p><section class="tarjeta"><div id="perfil-datos" role="status"></div>
+<div class="acciones-hu">
+  <button
+    type="button"
+    class="boton"
+    id="boton-editar-perfil">
+    Editar mi perfil
+  </button>
+
+  <a class="boton-secundario" href="listado.html">
+    Volver a usuarios
+  </a>
+</div>
+
+<form id="form-editar-perfil" hidden>
+  <h2>Modificar mis datos personales</h2>
+
+  <div class="campo">
+    <label for="perfil-nombre">Nombre completo *</label>
+    <input id="perfil-nombre" maxlength="80" required>
+  </div>
+
+  <div class="campo">
+    <label for="perfil-telefono">Número telefónico *</label>
+    <input id="perfil-telefono" type="tel"
+           placeholder="8888-8888" required>
+  </div>
+
+  <div class="campo">
+    <label for="perfil-correo-personal">Correo personal</label>
+    <input id="perfil-correo-personal" type="email" maxlength="80">
+  </div>
+
+  <div class="campo">
+    <label for="perfil-nacimiento">Fecha de nacimiento *</label>
+    <input id="perfil-nacimiento" type="date" required>
+  </div>
+
+  <div class="campo">
+    <label for="perfil-genero">Género *</label>
+    <select id="perfil-genero" required>
+      <option value="">Seleccione una opción</option>
+      <option value="f">Femenino</option>
+      <option value="m">Masculino</option>
+      <option value="o">Otro</option>
+      <option value="n">Prefiero no indicarlo</option>
+    </select>
+  </div>
+
+  <div class="acciones-hu">
+    <button type="submit" class="boton">
+      Guardar cambios
+    </button>
+    <button type="button" class="boton-secundario"
+            id="cancelar-edicion-perfil">
+      Cancelar
+    </button>
+  </div>
+
+  <p id="mensaje-editar-perfil"
+     class="mensaje-hu"
+     role="status"
+     aria-live="polite"></p>
+</form>
+
+<h2>Personalizar imagen</h2>
+<p>Elegí una imagen para tu perfil.</p>
+
+<div id="avatares"
+     class="avatares"
+     role="group"
+     aria-label="Elegir avatar"></div>
+
+<p id="mensaje-avatar"
+   class="mensaje-hu"
+   role="status"></p>
+
+</section>
+</main>
+</div>
+
+<script src="../../js/nucleo/autenticacion.js"></script>
+<script src="perfil.js"></script>
+</body>
+</html>

@@ -170,7 +170,26 @@
         <fieldset>
           <legend>Datos personales</legend>
 
-          <div class="campo">
+<div class="campo">
+  <label for="u-identificacion">
+    Identificación
+    <span aria-hidden="true">*</span>
+  </label>
+
+  <input
+    id="u-identificacion"
+    name="u-identificacion"
+    type="text"
+    maxlength="20"
+    required
+    autocomplete="off"
+    aria-describedby="error-u-identificacion"
+  >
+
+  <span id="error-u-identificacion" class="mensaje-error" aria-live="polite"></span>
+</div>
+
+     <div class="campo">
             <label for="u-nombre">
               Nombre completo
               <span aria-hidden="true">*</span>
@@ -187,6 +206,47 @@
                   aria-live="polite"></span>
           </div>
 
+<!-- NÚMERO TELEFÓNICO -->
+<div class="campo">
+  <label for="u-telefono">
+    Número telefónico
+    <span aria-hidden="true">*</span>
+  </label>
+
+  <input
+    id="u-telefono"
+    name="u-telefono"
+    type="tel"
+    maxlength="15"
+    required
+    autocomplete="tel"
+    placeholder="Ejemplo: 8888-8888"
+    aria-describedby="error-u-telefono"
+  >
+
+ <span id="error-u-telefono" class="mensaje-error" aria-live="polite"></span>
+</div>
+<!-- CORREO PERSONAL -->
+<div class="campo">
+  <label for="u-correo-personal">
+    Correo personal
+    <span aria-hidden="true">*</span>
+  </label>
+
+  <input
+    id="u-correo-personal"
+    name="u-correo-personal"
+    type="email"
+    maxlength="80"
+    required
+    autocomplete="email"
+    placeholder="ejemplo@gmail.com"
+    aria-describedby="error-u-correo-personal"
+  >
+
+  <span id="error-u-correo-personal" class="mensaje-error" aria-live="polite"></span>
+</div>
+         
           <div class="campo">
             <label for="u-correo">
               Correo institucional

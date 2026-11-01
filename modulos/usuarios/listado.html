@@ -163,6 +163,16 @@
 
         <h2 id="titulo-listado">Listado de usuarios</h2>
 
+        <div class="campo">
+  <label for="buscar-usuario">Buscar usuario</label>
+  <input
+    type="search"
+    id="buscar-usuario"
+    placeholder="Buscar por nombre o correo institucional"
+    autocomplete="off"
+  >
+  </div> 
+
         <p id="mensaje"
            class="mensaje-listado"
            role="status"
@@ -289,6 +299,28 @@
  
                 tabla.appendChild(fila);
             });
+            const buscador = document.getElementById("buscar-usuario");
+
+buscador.addEventListener("input", () => {
+  const texto = buscador.value.trim().toLowerCase();
+  let encontrados = 0;
+
+  tabla.querySelectorAll("tr").forEach(fila => {
+    const nombre = fila.cells[0].textContent.toLowerCase();
+    const correo = fila.cells[1].textContent.toLowerCase();
+
+    const coincide = nombre.includes(texto) || correo.includes(texto);
+
+    fila.hidden = !coincide;
+    fila.style.display = coincide ? "" : "none";
+
+    if (coincide) encontrados++;
+  });
+
+  mensaje.textContent = texto
+    ? `Usuarios encontrados: ${encontrados}`
+    : `Total de usuarios registrados: ${usuarios.length}`;
+});
         });
     </script>
 </body>

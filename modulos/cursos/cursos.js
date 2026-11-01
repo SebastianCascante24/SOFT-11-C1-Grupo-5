@@ -241,32 +241,77 @@ if (mode === "draft") {
     return valid;
   }
 
-  function collectCourse(status) {
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.code = data.code.trim();
-    data.name = data.name.trim();
-    data.totalHours = Number(data.classHours || 0) + Number(data.extraHours || 0);
-    data.keywords = (data.keywords || "").split(",").map(s => s.trim()).filter(Boolean);
-    data.status = status;
-    data.updatedAt = new Date().toISOString();
-    return data;
+ 
+function collectCourse(status) {
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  // Este campo solo identifica el curso que estamos editando.
+  delete data.editingCode;
+
+  data.code = data.code.trim();
+  data.name = data.name.trim();
+  data.totalHours =
+    Number(data.classHours || 0) + Number(data.extraHours || 0);
+
+  data.keywords = (data.keywords || "")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  data.status = status;
+  data.updatedAt = new Date().toISOString();
+
+  return data;
+}
+
+   
+function save(status) {
+  const valid = validate(status === "Borrador" ? "draft" : "submit");
+  if (!valid) return;
+
+  const course = collectCourse(status);
+  const courses = JSON.parse(localStorage.getItem(draftKey) || "[]");
+
+  const originalCode = get("editingCode").value.trim();
+
+  const existingIndex = courses.findIndex(c =>
+    String(c.code).toLowerCase() ===
+    (originalCode || course.code).toLowerCase()
+  );
+
+  if (existingIndex >= 0) {
+    courses[existingIndex] = {
+      ...courses[existingIndex],
+      ...course
+    };
+  } else if (originalCode) {
+    showMessage(
+      "No se encontró el curso original. No se guardaron los cambios.",
+      "error"
+    );
+    return;
+  } else {
+    courses.push(course);
   }
 
-   function save(status) {
-    const valid = validate(status === "Borrador" ? "draft" : "submit");
-    if (!valid) return;
-    const course = collectCourse(status);
-    const courses = JSON.parse(localStorage.getItem(draftKey) || "[]");
-    const existingIndex = courses.findIndex(c => String(c.code).toLowerCase() === course.code.toLowerCase());
-    if (existingIndex >= 0) courses[existingIndex] = course;
-    else courses.push(course);
-    localStorage.setItem(draftKey, JSON.stringify(courses));
-    if (status === "Borrador") {
-      showMessage(`Borrador del curso "${course.name}" guardado en este navegador.`, "success");
-    } else {
-      showMessage(`El curso "${course.name}" quedó registrado localmente con estado "Pendiente de revisión". Esta demostración no envía datos a un servidor.`, "success");
-    }
+  localStorage.setItem(draftKey, JSON.stringify(courses));
+
+  // Recordar el nuevo código si fue modificado.
+  get("editingCode").value = course.code;
+
+  if (status === "Borrador") {
+    showMessage(
+      `Borrador del curso "${course.name}" guardado correctamente.`,
+      "success"
+    );
+  } else {
+    showMessage(
+      `El curso "${course.name}" se guardó con estado "Pendiente de revisión".`,
+      "success"
+    );
   }
+}
+
 
   function updateTotal() {
     const classHours = Number(get("classHours").value || 0);
@@ -365,9 +410,58 @@ function updateProgress() {
     });
   });
 
+  
+function cargarCursoParaEditar() {
+  const parametros = new URLSearchParams(window.location.search);
+  const codigoBuscado = parametros.get("id");
+
+  if (!codigoBuscado) return;
+
+  const cursos = JSON.parse(localStorage.getItem(draftKey) || "[]");
+
+  const curso = cursos.find(c =>
+    String(c.id ?? c.code).toLowerCase() === codigoBuscado.toLowerCase()
+  );
+
+  if (!curso) {
+    showMessage("No se encontró el curso que desea editar.", "error");
+    return;
+  }
+
+  get("editingCode").value = curso.code;
+
+  Object.entries(curso).forEach(([campo, valor]) => {
+    const elemento = form.elements.namedItem(campo);
+
+    if (!elemento || campo === "editingCode") return;
+
+    if (Array.isArray(valor)) {
+      elemento.value = valor.join(", ");
+    } else {
+      elemento.value = valor ?? "";
+    }
+  });
+
+    // Restaurar primero la escuela.
+  schoolSelect.value = curso.school ?? "";
+
+  // Actualizar las carreras disponibles para esa escuela.
+  loadCareers();
+
+  // Restaurar la carrera del curso.
+  careerSelect.value = curso.career ?? "";
+
+  updateTotal();
+  updateConditionalFields();
+  updateCounters();
+  updateProgress();
+}
+
   // Inicialización: los catálogos son ejemplos para maquetación; deberán conectarse a los catálogos reales.
   updateTotal();
   updateConditionalFields();
   updateCounters();
   updateProgress();
+  cargarCursoParaEditar();
 })();
+  

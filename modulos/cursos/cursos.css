@@ -768,3 +768,80 @@
     width: 100%;
   }
 }
+
+/*
+   DETALLE DEL CURSO*/
+  
+
+#contenido .detalle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 28px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+#contenido .detalle-grid > div {
+  min-width: 0;
+  padding: 0 0 12px;
+  border-bottom: 1px solid #e5eaf1;
+}
+
+#contenido .detalle-grid dt {
+  margin: 0 0 5px;
+  color: #52647c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#contenido .detalle-grid dd {
+  margin: 0;
+  padding: 0;
+  color: #17365d;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+#contenido .tarjeta {
+  margin-bottom: 20px;
+}
+
+#contenido .tarjeta h2 {
+  color: #123b70;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+#contenido .tarjeta h3 {
+  color: #17365d;
+  font-size: 15px;
+  margin: 16px 0 6px;
+}
+
+#contenido #descripcionCorta,
+#contenido #descripcionCompleta {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#contenido #fechaModificacion {
+  font-size: 14px;
+}
+
+#contenido .barra-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+@media (max-width: 700px) {
+  #contenido .detalle-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+

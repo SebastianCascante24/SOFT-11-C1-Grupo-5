@@ -21,7 +21,25 @@ td select + button {
     margin-top: 14px;
     min-width: 110px;
 }
-</style></head><body><a class="salto-contenido" href="#contenido">Saltar al contenido</a><header class="encabezado">
+/* Botones de acciones en la tabla */
+#tabla-carreras td:last-child {
+  min-width: 290px;
+  white-space: nowrap;
+}
+
+#tabla-carreras td:last-child button {
+  margin-right: 12px;
+  margin-bottom: 6px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#tabla-carreras td:last-child button:last-child {
+  margin-right: 0;
+}
+</style>
+</head><body><a class="salto-contenido" href="#contenido">Saltar al contenido</a><header class="encabezado">
     <a class="logo"
        href="../../index.html"
        aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
@@ -116,4 +134,26 @@ td select + button {
       </a>
     </li>
   </ul>
-</nav><main id="contenido"><h1>Carreras registradas</h1><p>Consulte las carreras y sus directores asociados.</p><div class="acciones-hu"><a class="boton" href="formulario.html">Registrar carrera</a></div><section class="tarjeta"><p id="total-carreras" role="status"></p><div class="tabla-contenedor"><table><thead><tr><th>Código</th><th>Carrera</th><th>Escuela</th><th>Director</th><th>Acciones</th></tr></thead><tbody id="tabla-carreras"></tbody></table></div><p id="mensaje-carreras" role="status"></p></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="carreras.js"></script></body></html>
+</nav><main id="contenido"><h1>Carreras registradas</h1><p>Consulte las carreras y sus directores asociados.</p><div class="acciones-hu"><a class="boton" href="formulario.html">Registrar carrera</a></div>
+<section class="tarjeta">
+
+  <h2>Consultar carreras</h2>
+
+  <div class="campo">
+    <label for="buscar-carrera">Buscar carrera</label>
+    <input
+      type="search"
+      id="buscar-carrera"
+      placeholder="Buscar por código o nombre"
+    >
+  </div>
+
+  <div class="campo">
+    <label for="filtrar-escuela">Filtrar por escuela</label>
+    <select id="filtrar-escuela">
+      <option value="">Todas las escuelas</option>
+    </select>
+  </div>
+
+  <p id="total-carreras" role="status"></p>
+<div class="tabla-contenedor"><table><thead><tr><th>Código</th><th>Carrera</th><th>Escuela</th><th>Director</th><th>Acciones</th></tr></thead><tbody id="tabla-carreras"></tbody></table></div><p id="mensaje-carreras" role="status"></p></section></main></div><script src="../../js/nucleo/autenticacion.js"></script><script src="carreras.js"></script></body></html>

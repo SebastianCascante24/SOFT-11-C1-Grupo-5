@@ -252,9 +252,8 @@ if (mode === "draft") {
     return data;
   }
 
-  function save(status) {
-    console.log("Estado al guardar:", status);
-    const valid = validate(status === "draft" ? "draft" : "submit");
+   function save(status) {
+    const valid = validate(status === "Borrador" ? "draft" : "submit");
     if (!valid) return;
     const course = collectCourse(status);
     const courses = JSON.parse(localStorage.getItem(draftKey) || "[]");

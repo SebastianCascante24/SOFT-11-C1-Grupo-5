@@ -1,5 +1,96 @@
 # SOFT-11-C1-Grupo-5
-Proyecto Integrador 1 - Sistema de gestion para el departamento de desarrollo curricular y docente
+
+Proyecto Integrador 1 · Sistema de gestión para el Departamento de Desarrollo Curricular y Docente de la Universidad CENFOTEC.
+ 
+## Objetivo
+ 
+Centralizar en un sistema propio el registro, la validación y la consulta de los cursos de la universidad, reemplazando el uso de hojas de Excel y formularios de Google. El sistema busca:
+ 
+- Eliminar la duplicidad de códigos de curso mediante validación automática al registrar.
+- Reducir el tiempo de aprobación de un curso, con una bandeja de revisión para Desarrollo Curricular.
+- Permitir a los directores ingresar un curso por etapas, guardándolo como borrador aunque falte información.
+## Funcionalidades
+ 
+- **Inicio y cierre de sesión:** el acceso se valida contra los usuarios registrados. Las páginas del sistema solo se muestran con una sesión iniciada.
+- **Usuarios:** registro y listado de usuarios.
+- **Escuelas y carreras:** formulario y listado.
+- **Cursos:** formulario de registro (con borrador o envío a revisión), listado y detalle del curso.
+- **Catálogos:** áreas SFIA, temáticas, metodologías de aprendizaje, casas certificadoras y niveles de complejidad, con listado (filtros y paginación), creación y modificación de registros.
+- **Revisión de cursos:** bandeja de cursos pendientes y pantalla de revisión para aprobar un curso o devolverlo con observaciones obligatorias.
+## Tecnologías
+ 
+- HTML5 y CSS3.
+- JavaScript (ES6+) sin frameworks ni librerías externas; scripts normales, sin módulos ni empaquetador.
+- Local Storage del navegador para guardar los datos y la sesión; el proyecto no tiene servidor ni base de datos.
+- Git y GitHub para el control de versiones.
+## Preparación
+ 
+No hay nada que instalar ni compilar.
+ 
+1. Tener un navegador actualizado (Chrome, Edge o Firefox).
+2. Clonar el repositorio: `git clone https://github.com/SebastianCascante24/SOFT-11-C1-Grupo-5.git`
+
+## Ejecución
+ 
+1. Abrir `modulos/autenticacion/login.html` en el navegador (con el servidor local: `http://localhost:8000/modulos/autenticacion/login.html`).
+2. **Crear el primer usuario.** La página de registro de usuarios también exige sesión, y el login solo acepta usuarios registrados. Con el login abierto, abrir la consola del navegador (F12) y pegar:
+```javascript
+localStorage.setItem('grupo5_usuarios', JSON.stringify([{id: crypto.randomUUID(), nombre: 'Administrador', correo: 'admin@cenfotec.ac.cr',nacimiento: '', genero: '', rol: 'admin', fechaRegistro: new Date().toISOString()}]));
+```
+ 
+3. Iniciar sesión con `admin@cenfotec.ac.cr` y cualquier contraseña (en esta iteración la contraseña es obligatoria pero no se compara). Desde ahí se navega con el menú lateral.
+
+```
+
+Los datos viven en el Local Storage de cada navegador; borrarlo elimina los usuarios, cursos y catálogos guardados.
+ 
+## Estructura del proyecto
+ 
+```
+SOFT-11-C1-Grupo-5/
+├── index.html                 Inicio
+├── css/
+│   ├── base/                  Variables, reset y tipografía
+│   ├── layout/                Encabezado, menú lateral y grid
+│   └── componentes/           Botones, formularios, tablas, tarjetas y alertas
+├── js/
+│   ├── nucleo/                Almacenamiento, enrutador y autenticación
+│   ├── utilidades/            Validadores y formateadores
+│   └── componentes/           Notificaciones y modal
+├── modulos/
+│   ├── autenticacion/         Inicio de sesión
+│   ├── usuarios/              Registro y listado de usuarios
+│   ├── escuelas/              Formulario y listado
+│   ├── carreras/              Formulario y listado
+│   ├── cursos/                Registro, listado y detalle
+│   ├── catalogos/             Listado, creación y modificación de catálogos
+│   └── revision/              Cursos pendientes y revisión
+└── Documentos/                ERS y documento de diseño
+```
+ 
+## Equipo
+ 
+- Sebastián Cascante Badilla (Soporte Técnico)
+- Santiago Martínez Ramírez (Coordinador)
+- Manuela Arce Elizondo (Calidad)
+**Institución:** Universidad CENFOTEC
+**Curso:** SOFT-11-C1, Grupo 5
+**Profesor:** Álvaro Cordero Peña
+**Período lectivo:** C3/2026
+ 
+## Estado del producto
+ 
+Prototipo funcional de la primera iteración.
+ 
+**Implementado:** inicio y cierre de sesión con protección de páginas, catálogos (listado, creación y modificación), formulario, listado y detalle de cursos, y revisión de cursos (aprobar o devolver con observaciones).
+ 
+**Pendiente o limitado en esta iteración:**
+ 
+- La contraseña no se compara: el registro de usuarios todavía no la guarda.
+- «Iniciar con Google» y «¿Olvidó su contraseña?» son solo visuales.
+- Activar y desactivar registros de catálogo desde el listado.
+- Notificaciones a los roles involucrados y persistencia en un servidor.
+- La revisión lee los cursos de la clave `cursos` con `status` igual a `en revision`; la integración con el formulario de registro de cursos está pendiente.
 
 ## JavaScript reutilizables
 

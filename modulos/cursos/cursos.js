@@ -375,7 +375,6 @@ function updateProgress() {
   });
   get("draftBtn").addEventListener("click", () => save("Borrador"));
   get("cancelBtn").addEventListener("click", () => {
-    if (formHasData() && !window.confirm("¿Desea cancelar? Los cambios no guardados se perderán.")) return;
     form.reset();
     clearErrors();
     clearMessage();
@@ -383,8 +382,12 @@ function updateProgress() {
     updateConditionalFields();
     updateCounters();
     updateProgress();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 
   function formHasData() {
     return [...form.querySelectorAll("input:not([readonly]), select, textarea")]

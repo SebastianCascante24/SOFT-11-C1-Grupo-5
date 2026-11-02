@@ -1,6 +1,6 @@
-/* ==========================================
+/* 
    HU-44 · Listado y detalle de cursos
-   ========================================== */
+   */
 
 /* Barra de acciones para listado y detalle */
 .barra-acciones {
@@ -367,9 +367,9 @@
   font-size: 12px;
 }
 
-/* ==========================================================
+/* 
    HU-44 - Corrección visual del formulario de registro
-   ========================================================== */
+   */
 
 /* Variables compatibles con el módulo */
 :root {

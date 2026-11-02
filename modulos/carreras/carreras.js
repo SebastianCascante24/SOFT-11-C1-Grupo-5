@@ -8,6 +8,11 @@ const Carreras = {
     const parametros = new URLSearchParams(window.location.search);
 const codigoEditar = parametros.get("codigo");
 const modoEdicion = codigoEditar !== null;
+const botonSalirCarrera = document.getElementById("botonSalirCarrera");
+
+if (botonSalirCarrera && modoEdicion) {
+  botonSalirCarrera.textContent = "Cancelar";
+}
 
 if (formulario && modoEdicion) {
   const carreras = this.leer(this.clave);

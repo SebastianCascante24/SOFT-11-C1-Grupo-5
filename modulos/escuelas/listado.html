@@ -105,6 +105,17 @@
 
       <section class="tarjeta" aria-label="Listado de escuelas">
         <h2>Listado de escuelas registradas</h2>
+        <div class="campo">
+  <label for="buscarEscuela">Buscar escuela</label>
+  <input
+    type="search"
+    id="buscarEscuela"
+    placeholder="Buscar por código, nombre o director"
+    autocomplete="off"
+  >
+</div>
+
+<p id="mensajeBusquedaEscuela" role="status"></p>
 
         <p id="totalEscuelas" role="status">
           Total de escuelas registradas: 0
@@ -178,6 +189,33 @@ escuelas.forEach(escuela => {
   });
 
   celdaAcciones.appendChild(botonModificar);
+});
+
+// Buscador de escuelas en tiempo real
+const buscador = document.getElementById("buscarEscuela");
+const mensajeBusqueda = document.getElementById("mensajeBusquedaEscuela");
+
+buscador.addEventListener("input", () => {
+  const texto = buscador.value.trim().toLocaleLowerCase("es");
+
+  let coincidencias = 0;
+
+  tabla.querySelectorAll("tr").forEach(fila => {
+    const columnas = Array.from(fila.cells)
+      .slice(0, 3)
+      .map(celda => celda.textContent.toLocaleLowerCase("es"));
+
+    const coincide = columnas.some(valor => valor.includes(texto));
+
+    fila.hidden = !coincide;
+
+    if (coincide) coincidencias++;
+  });
+
+  mensajeBusqueda.textContent =
+    coincidencias === 0
+      ? "No se encontraron escuelas con ese criterio."
+      : "";
 });
 });
   </script>

@@ -11,6 +11,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tituloFormulario = document.getElementById("tituloFormularioEscuela");
   const botonGuardar = document.getElementById("botonGuardarEscuela");
+  // Cargar usuarios registrados en el selector de directores
+const selectorDirector = document.getElementById("directorEscuela");
+
+function cargarDirectores() {
+  if (!selectorDirector) return;
+
+  let usuarios = [];
+
+  try {
+    const datos = JSON.parse(
+      localStorage.getItem("grupo5_usuarios") || "[]"
+    );
+
+    usuarios = Array.isArray(datos) ? datos : [];
+  } catch (error) {
+    console.error("Error al cargar los usuarios:", error);
+  }
+
+  selectorDirector.innerHTML =
+    '<option value="">Seleccione un director</option>';
+
+  usuarios.forEach(usuario => {
+    const nombre = String(usuario.nombre || "").trim();
+
+    if (!nombre) return;
+
+    const opcion = document.createElement("option");
+    opcion.value = nombre;
+    opcion.textContent = nombre;
+
+    selectorDirector.appendChild(opcion);
+  });
+
+  // Conservar directores ya asignados al editar escuelas antiguas
+  if (modoEdicion) {
+    try {
+      const escuelas = JSON.parse(
+        localStorage.getItem("grupo5_escuelas") || "[]"
+      );
+
+      const escuela = escuelas.find(
+        item => item.codigo === codigoEditar
+      );
+
+      if (escuela && escuela.director) {
+        const directorActual = escuela.director;
+
+        const existe = Array.from(selectorDirector.options).some(
+          opcion => opcion.value === directorActual
+        );
+
+        if (!existe) {
+          const opcion = document.createElement("option");
+          opcion.value = directorActual;
+          opcion.textContent = directorActual;
+          selectorDirector.appendChild(opcion);
+        }
+      }
+    } catch (error) {
+      console.error("Error al recuperar el director:", error);
+    }
+  }
+}
+
+cargarDirectores();
 
 if (modoEdicion) {
   tituloFormulario.textContent = "Modificar escuela";

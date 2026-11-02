@@ -116,30 +116,36 @@
             <p id="errorCodigo" class="mensaje-error"
                aria-live="polite"></p>
           </div>
-
+  <div class="campo">
+  <label for="nombreEscuela">Nombre de la escuela *</label>
+  <input
+    type="text"
+    id="nombreEscuela"
+    name="nombreEscuela"
+    maxlength="100"
+    aria-describedby="errorNombre"
+    required
+  >
+  <p
+    id="errorNombre"
+    class="mensaje-error"
+    aria-live="polite"></p>
+</div>
           <div class="campo">
-            <label for="nombreEscuela">Nombre de la escuela *</label>
-            <input type="text"
-                   id="nombreEscuela"
-                   name="nombreEscuela"
-                   maxlength="100"
-                   aria-describedby="errorNombre"
-                   required>
-            <p id="errorNombre" class="mensaje-error"
-               aria-live="polite"></p>
-          </div>
+  <label for="directorEscuela">Director de escuela *</label>
 
-          <div class="campo">
-            <label for="directorEscuela">Director de escuela *</label>
-            <input type="text"
-                   id="directorEscuela"
-                   name="directorEscuela"
-                   maxlength="100"
-                   aria-describedby="errorDirector"
-                   required>
-            <p id="errorDirector" class="mensaje-error"
-               aria-live="polite"></p>
-          </div>
+  <select
+    id="directorEscuela"
+    name="directorEscuela"
+    aria-describedby="errorDirector"
+    required>
+    <option value="">Seleccione un director</option>
+  </select>
+
+  <p id="errorDirector"
+     class="mensaje-error"
+     aria-live="polite"></p>
+</div>
         </fieldset>
 
         <p id="mensajeRegistro" role="status"

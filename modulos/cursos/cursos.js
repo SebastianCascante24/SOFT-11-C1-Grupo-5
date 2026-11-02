@@ -9,9 +9,9 @@
 
   const get = (id) => document.getElementById(id);
   const value = (id) => get(id).value.trim();
-// ==========================================
-// CARGA DE ESCUELAS Y CARRERAS DESDE LOCALSTORAGE
-// ==========================================
+
+// CARGA DE ESCUELAS Y CARRERAS DESDE LOCALSTORAGE//
+
 
 const schoolSelect = get("school");
 const careerSelect = get("career");

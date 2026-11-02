@@ -197,6 +197,7 @@ const datos = {
         });
 
         resumen.textContent = "Revise los campos señalados.";
+        resumen.className = "mensaje-error";
         resumen.hidden = false;
         document.getElementById(Object.keys(errores)[0]).focus();
         return;

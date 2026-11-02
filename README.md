@@ -90,7 +90,7 @@ Prototipo funcional de la primera iteración.
 - «Iniciar con Google» y «¿Olvidó su contraseña?» son solo visuales.
 - Activar y desactivar registros de catálogo desde el listado.
 - Notificaciones a los roles involucrados y persistencia en un servidor.
-- La revisión lee los cursos de la clave `cursos` con `status` igual a `en revision`; la integración con el formulario de registro de cursos está pendiente.
+- La revisión lee los cursos de la clave `cenfotec.hu44.cursos` con `status` igual a `en revision`; la integración con el formulario de registro de cursos está pendiente.
 
 ## JavaScript reutilizables
 

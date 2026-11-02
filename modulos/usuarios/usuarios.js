@@ -160,7 +160,7 @@ const nuevo = {
     const formulario = document.getElementById("form-usuario");
     if (!formulario) return;
 
-    formulario.addEventListener("submit", async evento => {
+    formulario.addEventListener("submit", evento => {
       evento.preventDefault();
 
       
@@ -197,42 +197,12 @@ const datos = {
         });
 
         resumen.textContent = "Revise los campos señalados.";
-        resumen.className = "mensaje-error";
         resumen.hidden = false;
         document.getElementById(Object.keys(errores)[0]).focus();
         return;
       }
 
-      
-let registroExitoso = false;
-
-try {
-    const credencialRegistrada =
-        await VerificadorCredenciales.registrar(
-            datos.correo,
-            datos.password
-        );
-
-    if (credencialRegistrada) {
-    registroExitoso = this.registrar(datos);
-
-    if (!registroExitoso) {
-        const clave = VerificadorCredenciales.clave;
-        const credenciales = JSON.parse(
-            localStorage.getItem(clave) || "{}"
-        );
-
-        delete credenciales[datos.correo];
-
-        localStorage.setItem(
-            clave,
-            JSON.stringify(credenciales)
-        );
-    }
-}
-} catch (error) {
-    console.error("Error al registrar usuario:", error);
-}
+const registroExitoso = this.registrar(datos);
 
 if (registroExitoso) {
 

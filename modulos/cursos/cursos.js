@@ -28,6 +28,53 @@ function readLocalStorage(key) {
 
 // Cargar escuelas registradas
 function loadSchools() {
+  
+// ==========================================
+// CARGAR CATÁLOGOS DESDE LOCALSTORAGE
+// ==========================================
+
+function loadCatalogSelect(selectId, catalogId, placeholder) {
+    const select = get(selectId);
+
+    if (!select) return;
+
+    const registros = readLocalStorage(`catalogo_${catalogId}`);
+
+    select.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = placeholder;
+
+    select.appendChild(defaultOption);
+
+    const registrosActivos = registros.filter(
+        registro => registro.activo !== false
+    );
+
+    registrosActivos.forEach(registro => {
+        const option = document.createElement("option");
+
+        option.value = registro.codigo;
+        option.textContent = registro.nombre;
+
+        select.appendChild(option);
+    });
+
+    if (registrosActivos.length === 0) {
+        defaultOption.textContent = "No hay opciones registradas";
+    }
+}
+
+// Cargar cada catálogo
+loadCatalogSelect("sfia", "areas-sfia", "Seleccione un área SFIA");
+
+loadCatalogSelect("topic", "tematicas", "Seleccione una temática");
+
+loadCatalogSelect("complexity", "niveles-complejidad", "Seleccione un nivel");
+
+loadCatalogSelect("certifier", "casas-certificadoras", "Seleccione una casa certificadora");
+
     const schools = readLocalStorage("grupo5_escuelas");
 
     schoolSelect.innerHTML =

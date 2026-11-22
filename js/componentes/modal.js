@@ -1,57 +1,62 @@
 /*
  * modal.js
- * componente reutilizable de ventanas emergentes basado en <dialog>
- * usa focus y soporta esc
+ * componente reutilizable de ventanas emergentes basado en el modal de Bootstrap
+ * (requiere bootstrap.bundle.min.js cargado antes)
  */
 const Modal = {
     /*
      * muestra una ventana de confirmacion
      * devuelve true si se confirma y false si se cancela o cierra con esc
+     * estiloConfirmar: 'primary' (por defecto) o 'danger' para acciones sensibles
      */
-    confirmar({ titulo, mensaje, textoConfirmar = 'Aceptar', textoCancelar = 'Cancelar' }) {
+    confirmar({ titulo, mensaje, textoConfirmar = 'Aceptar', textoCancelar = 'Cancelar', estiloConfirmar = 'primary' }) {
         return new Promise((resolver) => {
-            const dialogo = document.createElement('dialog');
-            dialogo.className = 'modal';
-            dialogo.setAttribute('aria-labelledby', 'modal-titulo');     // accesibilidad
-            dialogo.setAttribute('aria-describedby', 'modal-mensaje');   // accesibilidad
+            const elemento = document.createElement('div');
+            elemento.className = 'modal fade';
+            elemento.tabIndex = -1;
+            elemento.setAttribute('aria-labelledby', 'modal-titulo');
+            elemento.setAttribute('aria-describedby', 'modal-mensaje');
 
-            const encabezado = document.createElement('h2');
-            encabezado.id = 'modal-titulo';
-            encabezado.textContent = titulo;
+            elemento.innerHTML = `
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="modal-titulo"></h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body" id="modal-mensaje"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"></button>
+                            <button type="button" class="btn btn-${estiloConfirmar}" data-confirmar></button>
+                        </div>
+                    </div>
+                </div>`;
 
-            const parrafo = document.createElement('p');
-            parrafo.id = 'modal-mensaje';
-            parrafo.textContent = mensaje;
-
-            const acciones = document.createElement('div');
-            acciones.className = 'modal-acciones';
-
-            const botonCancelar = document.createElement('button');
-            botonCancelar.type = 'button';
-            botonCancelar.className = 'boton-secundario';
+            // textContent para que el texto nunca se interprete como HTML
+            elemento.querySelector('#modal-titulo').textContent = titulo;
+            elemento.querySelector('#modal-mensaje').textContent = mensaje;
+            const botonCancelar = elemento.querySelector('.modal-footer .btn-secondary');
+            const botonConfirmar = elemento.querySelector('[data-confirmar]');
             botonCancelar.textContent = textoCancelar;
-
-            const botonConfirmar = document.createElement('button');
-            botonConfirmar.type = 'button';
             botonConfirmar.textContent = textoConfirmar;
 
-            acciones.append(botonCancelar, botonConfirmar);
-            dialogo.append(encabezado, parrafo, acciones);
+            document.body.appendChild(elemento);
+            const modal = new bootstrap.Modal(elemento);
 
             let confirmado = false;
             botonConfirmar.addEventListener('click', () => {
                 confirmado = true;
-                dialogo.close();
+                modal.hide();
             });
-            botonCancelar.addEventListener('click', () => dialogo.close());
-            dialogo.addEventListener('close', () => {
-                dialogo.remove();
+
+            elemento.addEventListener('shown.bs.modal', () => botonCancelar.focus()); // focus en la opcion segura
+            elemento.addEventListener('hidden.bs.modal', () => {
+                modal.dispose();
+                elemento.remove();
                 resolver(confirmado);
             });
 
-            document.body.appendChild(dialogo);
-            dialogo.showModal();
-            botonCancelar.focus(); // focus en la opcion segura
+            modal.show();
         });
     }
 };

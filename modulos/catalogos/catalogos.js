@@ -67,11 +67,6 @@ const Catalogos = {
     return config.codigo.tipo === 'entero' ? Number(valor) : String(valor).trim();
   },
 
-  marcarCatalogoActivoEnMenu(idCatalogo) {
-    const enlace = document.querySelector(`nav a[data-catalogo="${idCatalogo}"]`);
-    if (enlace) enlace.setAttribute('aria-current', 'page');
-  },
-
   esActivo(registro) {
     return registro.activo !== false;
   },
@@ -130,20 +125,29 @@ const ListadoCatalogo = (function () {
     return celda;
   }
 
+  function crearCeldaEstadoListado(activo) {
+    const celda = document.createElement('td');
+    const insignia = document.createElement('span');
+    insignia.className = activo ? 'badge text-bg-success' : 'badge text-bg-secondary';
+    insignia.textContent = activo ? TEXTO_ESTADO.activo : TEXTO_ESTADO.inactivo;
+    celda.appendChild(insignia);
+    return celda;
+  }
+
   function crearFilaListado(registro) {
     const activo = Catalogos.esActivo(registro);
     const fila = document.createElement('tr');
 
     fila.appendChild(crearCeldaListado(String(registro.codigo)));
     fila.appendChild(crearCeldaListado(registro.nombre));
-    fila.appendChild(crearCeldaListado(activo ? TEXTO_ESTADO.activo : TEXTO_ESTADO.inactivo));
+    fila.appendChild(crearCeldaEstadoListado(activo));
 
     const celdaAcciones = document.createElement('td');
-    celdaAcciones.className = 'columna-acciones';
+    celdaAcciones.className = 'text-center text-nowrap';
 
     const botonModificar = document.createElement('button');
     botonModificar.type = 'button';
-    botonModificar.className = 'boton-secundario';
+    botonModificar.className = 'btn btn-secondary btn-sm';
     botonModificar.textContent = 'Modificar';
     botonModificar.setAttribute('aria-label', `Modificar ${registro.nombre}`);
 
@@ -155,7 +159,7 @@ const ListadoCatalogo = (function () {
 
     const botonEstado = document.createElement('button');
     botonEstado.type = 'button';
-    botonEstado.className = 'boton-secundario';
+    botonEstado.className = 'btn btn-secondary btn-sm ms-2';
     botonEstado.textContent = activo ? 'Desactivar' : 'Activar';
     botonEstado.setAttribute('aria-label', `${activo ? 'Desactivar' : 'Activar'} ${registro.nombre}`);
 
@@ -177,6 +181,8 @@ const ListadoCatalogo = (function () {
       const etiqueta = ETIQUETAS_FILTRO[filtro.campo];
 
       const elemento = document.createElement('li');
+      elemento.className = 'badge text-bg-primary d-flex align-items-center gap-2';
+
       const texto = document.createElement('span');
       texto.textContent = filtro.campo === 'estado'
         ? `${etiqueta}: ${filtro.valor}`
@@ -184,7 +190,7 @@ const ListadoCatalogo = (function () {
 
       const botonQuitar = document.createElement('button');
       botonQuitar.type = 'button';
-      botonQuitar.textContent = '×';
+      botonQuitar.className = 'btn-close btn-close-white';
       botonQuitar.setAttribute('aria-label', `Quitar filtro ${etiqueta}`);
       botonQuitar.addEventListener('click', () => quitarFiltroListado(filtro.campo));
 
@@ -334,7 +340,6 @@ const ListadoCatalogo = (function () {
     document.title = `${configuracion.tituloPlural} | Desarrollo Curricular y Docente`;
     tituloListado.textContent = configuracion.tituloPlural;
     enlaceAgregarListado.href = `formulario.html?catalogo=${encodeURIComponent(idCatalogo)}`;
-    Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
 
     registrarEventosListado();
     renderizarListado();
@@ -407,6 +412,7 @@ const FormularioCatalogo = (function () {
       return false;
     }
     Notificacion.limpiarErrorCampo(regla.campo);
+    Notificacion.marcarCampoValido(regla.campo);
     return true;
   }
 
@@ -488,7 +494,6 @@ const FormularioCatalogo = (function () {
   function mostrarVistaRegistroNoDisponible() {
     tituloCatalogo.textContent = 'Registro no disponible';
     formularioCatalogo.hidden = true;
-    Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
     Notificacion.mostrar('error', 'No se encontró el registro que desea modificar.');
   }
 
@@ -505,7 +510,6 @@ const FormularioCatalogo = (function () {
     tituloCatalogo.textContent = `${accion} ${configuracion.titulo}`;
     botonGuardarCatalogo.textContent = registroOriginal ? 'Guardar cambios' : 'Crear';
     botonCargarCsvCatalogo.hidden = Boolean(registroOriginal);
-    Catalogos.marcarCatalogoActivoEnMenu(idCatalogo);
 
     camposCatalogo.codigo.type = 'number';
     camposCatalogo.codigo.min = '1';

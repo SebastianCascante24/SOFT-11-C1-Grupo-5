@@ -66,11 +66,11 @@ const RevisionListado = (function () {
         fila.appendChild(crearCelda(curso.school));
 
         const celdaAcciones = document.createElement('td');
-        celdaAcciones.className = 'columna-acciones';
+        celdaAcciones.className = 'text-center text-nowrap';
 
         const botonRevisar = document.createElement('button');
         botonRevisar.type = 'button';
-        botonRevisar.className = 'boton-secundario';
+        botonRevisar.className = 'btn btn-secondary btn-sm';
         botonRevisar.textContent = 'Revisar';
         botonRevisar.setAttribute('aria-label', `Revisar ${curso.name || curso.code}`);
 
@@ -193,13 +193,33 @@ const RevisionCurso = (function () {
         if (elemento) elemento.textContent = valorMostrado(valor);
     }
 
+    function mostrarMensaje(tipo, texto) {
+        mensaje.className = `alert alert-${tipo}`;
+        mensaje.textContent = texto;
+    }
+
+    function mostrarEstado() {
+        const elemento = document.getElementById('estado');
+        if (!elemento) return;
+
+        let clase = 'text-bg-secondary';
+        if (curso.status === Revision.ESTADO_EN_REVISION) clase = 'text-bg-warning';
+        if (curso.status === Revision.ESTADO_APROBADO) clase = 'text-bg-success';
+        if (curso.status === Revision.ESTADO_DEVUELTO) clase = 'text-bg-danger';
+
+        const insignia = document.createElement('span');
+        insignia.className = `badge ${clase}`;
+        insignia.textContent = valorMostrado(curso.status);
+        elemento.replaceChildren(insignia);
+    }
+
     function mostrarCurso() {
         asignar('codigo', curso.code);
         asignar('nombre', curso.name);
         asignar('nombrePower', curso.powerName);
         asignar('escuela', curso.school);
         asignar('carrera', curso.career);
-        asignar('estado', curso.status);
+        mostrarEstado();
         asignar('fechaModificacion', curso.updatedAt);
 
         asignar('modalidad', curso.modality);
@@ -237,13 +257,13 @@ const RevisionCurso = (function () {
         accionesRevision.hidden = true;
         enlaceCancelar.textContent = 'Volver';
 
+        let texto = 'Este curso no está pendiente de revisión.';
         if (curso.status === Revision.ESTADO_APROBADO) {
-            mensaje.textContent = 'Este curso ya fue aprobado.';
+            texto = 'Este curso ya fue aprobado.';
         } else if (curso.status === Revision.ESTADO_DEVUELTO) {
-            mensaje.textContent = 'Este curso fue devuelto y está a la espera de correcciones.';
-        } else {
-            mensaje.textContent = 'Este curso no está pendiente de revisión.';
+            texto = 'Este curso fue devuelto y está a la espera de correcciones.';
         }
+        mostrarMensaje('info', texto);
     }
 
     function guardarResultado(cambios, resultado) {
@@ -276,12 +296,20 @@ const RevisionCurso = (function () {
         Enrutador.irA(`${Revision.RUTA_LISTADO}?resultado=${resultado}`);
     }
 
-    function aprobar() {
+    async function aprobar() {
         Notificacion.limpiarErrorCampo(campoObservaciones);
+
+        const confirmado = await Modal.confirmar({
+            titulo: 'Aprobar curso',
+            mensaje: `¿Desea aprobar el curso "${curso.name || curso.code}"?`,
+            textoConfirmar: 'Aprobar'
+        });
+        if (!confirmado) return;
+
         guardarResultado({ status: Revision.ESTADO_APROBADO }, 'aprobado');
     }
 
-    function devolver() {
+    async function devolver() {
         if (Validadores.estaVacio(campoObservaciones.value)) {
             Notificacion.mostrarErrorCampo(
                 campoObservaciones,
@@ -291,6 +319,13 @@ const RevisionCurso = (function () {
             campoObservaciones.focus();
             return;
         }
+
+        const confirmado = await Modal.confirmar({
+            titulo: 'Devolver curso',
+            mensaje: `¿Desea devolver el curso "${curso.name || curso.code}" con las observaciones escritas?`,
+            textoConfirmar: 'Devolver'
+        });
+        if (!confirmado) return;
 
         guardarResultado({ status: Revision.ESTADO_DEVUELTO }, 'devuelto');
     }
@@ -312,7 +347,7 @@ const RevisionCurso = (function () {
         );
 
         if (!curso) {
-            mensaje.textContent = 'No se encontró el curso. Puede que no exista o que el enlace sea incorrecto.';
+            mostrarMensaje('danger', 'No se encontró el curso. Puede que no exista o que el enlace sea incorrecto.');
             contenido.hidden = true;
             return;
         }
@@ -341,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeof Enrutador !== 'undefined' &&
         typeof Validadores !== 'undefined' &&
         typeof Notificacion !== 'undefined' &&
+        typeof Modal !== 'undefined' &&
         typeof Autenticacion !== 'undefined'
     ) {
         RevisionListado.iniciar();

@@ -2,222 +2,165 @@
 <html lang="es">
 
 <head>
-    <link rel="icon" type="image/png" href="../../favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisión del curso | Desarrollo Curricular y Docente</title>
-
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/base/variables.css">
-    <link rel="stylesheet" href="../../css/base/reset.css">
-    <link rel="stylesheet" href="../../css/base/tipografia.css">
-    <link rel="stylesheet" href="../../css/layout/encabezado.css">
-    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-    <link rel="stylesheet" href="../../css/layout/grid.css">
-    <link rel="stylesheet" href="../../css/componentes/formularios.css">
-    <link rel="stylesheet" href="../../css/componentes/botones.css">
-    <link rel="stylesheet" href="../../css/componentes/tablas.css">
-    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-    <link rel="stylesheet" href="../../css/componentes/alertas.css">
-    <link rel="stylesheet" href="../cursos/cursos.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 
 <body>
-    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+    <main id="contenido">
+        <h1 id="revision-titulo">Revisión del curso</h1>
+        <div id="mensaje" role="status" aria-live="polite"></div>
 
-    <header class="encabezado">
-        <!-- contenedor para la imagen de la U, pendiente -->
-        <a class="logo" href="../../index.html" aria-label="Desarrollo Curricular y Docente, ir al inicio">
-            <div class="brand-copy">
-                <strong></strong>
-                <span></span>
-            </div>
-        </a>
+        <div id="revision-contenido">
+            <section class="card mb-3" aria-labelledby="identificacion-titulo">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="identificacion-titulo">Identificación del curso</h2>
 
-        <div class="encabezado-acciones" role="group" aria-label="Opciones de la cuenta">
-            <button type="button" class="boton-secundario" id="encabezado-notificaciones" title="Notificaciones"
-                aria-label="Notificaciones"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
-                    <path
-                        d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
-                </svg></button>
-            <select id="encabezado-idioma" aria-label="Idioma" title="Idioma">
-                <option value="es">Español</option>
-                <option value="en">English</option>
-            </select>
-            <!-- A de admin por ahora -->
-            <button type="button" class="avatar" id="encabezado-avatar" aria-label="Perfil" title="Perfil">A</button>
-            <button type="button" class="boton-secundario" id="encabezado-cerrar-sesion" aria-label="Cerrar sesión"
-                title="Cerrar sesión"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" aria-hidden="true" focusable="false" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m16 17 5-5-5-5" />
-                    <path d="M21 12H9" />
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                </svg></button>
-        </div>
-    </header>
-
-    <div class="contenedor-principal">
-
-        <nav class="menu-lateral" aria-label="Menú principal">
-            <ul>
-                <li><a href="../../index.html">Inicio</a></li>
-                <li><a href="../usuarios/listado.html">Usuarios</a></li>
-                <li><a href="../escuelas/listado.html">Escuelas</a></li>
-                <li><a href="../carreras/listado.html">Carreras</a></li>
-                <li><a href="../cursos/listado.html">Cursos</a></li>
-                <li><a href="pendientes.html" aria-current="page">Revisión de cursos</a></li>
-                <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
-                <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
-                <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
-                <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
-                <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
-            </ul>
-        </nav>
-
-        <main id="contenido">
-            <h1 id="revision-titulo">Revisión del curso</h1>
-            <div id="mensaje" role="status" aria-live="polite"></div>
-
-            <div id="revision-contenido">
-                <section class="tarjeta" aria-labelledby="identificacion-titulo">
-                    <h2 id="identificacion-titulo">Identificación del curso</h2>
-
-                    <dl class="detalle-grid">
-                        <div>
+                    <dl class="row g-3 mb-0">
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Código</dt>
-                            <dd id="codigo">—</dd>
+                            <dd class="mb-0" id="codigo">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Nombre del curso</dt>
-                            <dd id="nombre">—</dd>
+                            <dd class="mb-0" id="nombre">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Nombre en Power Accounts</dt>
-                            <dd id="nombrePower">—</dd>
+                            <dd class="mb-0" id="nombrePower">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Escuela</dt>
-                            <dd id="escuela">—</dd>
+                            <dd class="mb-0" id="escuela">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Carrera</dt>
-                            <dd id="carrera">—</dd>
+                            <dd class="mb-0" id="carrera">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Estado</dt>
-                            <dd id="estado">—</dd>
+                            <dd class="mb-0" id="estado">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Última modificación</dt>
-                            <dd id="fechaModificacion">—</dd>
+                            <dd class="mb-0" id="fechaModificacion">—</dd>
                         </div>
                     </dl>
-                </section>
+                </div>
+            </section>
 
-                <section class="tarjeta" aria-labelledby="academica-titulo">
-                    <h2 id="academica-titulo">Información académica</h2>
+            <section class="card mb-3" aria-labelledby="academica-titulo">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="academica-titulo">Información académica</h2>
 
-                    <dl class="detalle-grid">
-                        <div>
+                    <dl class="row g-3 mb-0">
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Modalidad</dt>
-                            <dd id="modalidad">—</dd>
+                            <dd class="mb-0" id="modalidad">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Créditos</dt>
-                            <dd id="creditos">—</dd>
+                            <dd class="mb-0" id="creditos">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Horas de clase</dt>
-                            <dd id="horasClase">—</dd>
+                            <dd class="mb-0" id="horasClase">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Horas extraclase</dt>
-                            <dd id="horasExtraclase">—</dd>
+                            <dd class="mb-0" id="horasExtraclase">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Total de horas</dt>
-                            <dd id="totalHoras">—</dd>
+                            <dd class="mb-0" id="totalHoras">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Requisitos indispensables</dt>
-                            <dd id="requisitosIndispensables">—</dd>
+                            <dd class="mb-0" id="requisitosIndispensables">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Requisitos deseables</dt>
-                            <dd id="requisitosDeseables">—</dd>
+                            <dd class="mb-0" id="requisitosDeseables">—</dd>
                         </div>
                     </dl>
-                </section>
+                </div>
+            </section>
 
-                <section class="tarjeta" aria-labelledby="comercial-titulo">
-                    <h2 id="comercial-titulo">Información comercial</h2>
+            <section class="card mb-3" aria-labelledby="comercial-titulo">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="comercial-titulo">Información comercial</h2>
 
-                    <dl class="detalle-grid">
-                        <div>
+                    <dl class="row g-3 mb-0">
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>¿Es E-commerce?</dt>
-                            <dd id="ecommerce">—</dd>
+                            <dd class="mb-0" id="ecommerce">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Fecha de apertura</dt>
-                            <dd id="fechaApertura">—</dd>
+                            <dd class="mb-0" id="fechaApertura">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Moneda</dt>
-                            <dd id="moneda">—</dd>
+                            <dd class="mb-0" id="moneda">—</dd>
                         </div>
-                        <div>
+                        <div class="col-12 col-md-6 col-lg-4">
                             <dt>Programa</dt>
-                            <dd id="programa">—</dd>
+                            <dd class="mb-0" id="programa">—</dd>
                         </div>
                     </dl>
-                </section>
+                </div>
+            </section>
 
-                <section class="tarjeta" aria-labelledby="descripcion-titulo">
-                    <h2 id="descripcion-titulo">Descripción del curso</h2>
+            <section class="card mb-3" aria-labelledby="descripcion-titulo">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="descripcion-titulo">Descripción del curso</h2>
 
-                    <h3>Descripción corta</h3>
+                    <h3 class="h6">Descripción corta</h3>
                     <p id="descripcionCorta">—</p>
 
-                    <h3>Descripción completa</h3>
-                    <p id="descripcionCompleta">—</p>
-                </section>
+                    <h3 class="h6">Descripción completa</h3>
+                    <p class="mb-0" id="descripcionCompleta">—</p>
+                </div>
+            </section>
 
-                <section class="tarjeta" id="revision-resultado" aria-labelledby="resultado-titulo">
-                    <h2 id="resultado-titulo">Resultado de la revisión</h2>
+            <section class="card mb-3" id="revision-resultado" aria-labelledby="resultado-titulo">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="resultado-titulo">Resultado de la revisión</h2>
 
                     <div class="campo">
-                        <label for="observaciones">Observaciones</label>
-                        <p id="observaciones-ayuda">Obligatorias para devolver el curso. Máximo 500 caracteres.</p>
-                        <textarea id="observaciones" name="observaciones" rows="5" maxlength="500"
+                        <label class="form-label" for="observaciones">Observaciones</label>
+                        <div class="form-text mt-0 mb-2" id="observaciones-ayuda">Obligatorias para devolver el curso.
+                            Máximo 500 caracteres.</div>
+                        <textarea class="form-control" id="observaciones" name="observaciones" rows="5" maxlength="500"
                             aria-describedby="observaciones-ayuda"></textarea>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <div class="barra-acciones">
-                    <a href="pendientes.html" id="cancelar" class="boton-secundario">
-                        Cancelar
-                    </a>
-                    <div class="action-buttons" id="revision-acciones">
-                        <button type="button" id="devolver" class="boton-secundario">
-                            Devolver
-                        </button>
-                        <button type="button" id="aprobar" class="boton-principal">
-                            Aprobar
-                        </button>
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <a href="pendientes.html" id="cancelar" class="btn btn-secondary">Cancelar</a>
+                <div id="revision-acciones">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" id="devolver" class="btn btn-secondary">Devolver</button>
+                        <button type="button" id="aprobar" class="btn btn-primary">Aprobar</button>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
     <script src="../../js/nucleo/almacenamiento.js"></script>
     <script src="../../js/nucleo/enrutador.js"></script>
     <script src="../../js/nucleo/autenticacion.js"></script>
     <script src="../../js/utilidades/validadores.js"></script>
     <script src="../../js/componentes/notificacion.js"></script>
+    <script src="../../js/componentes/modal.js"></script>
     <script src="revision.js"></script>
 </body>
 

@@ -1,137 +1,212 @@
-<!DOCTYPE html><html lang="es"><head><link rel="icon" type="image/png" href="../../favicon.png"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Registrar carrera | CENFOTEC</title><link rel="stylesheet" href="../../css/base/variables.css">
-<link rel="stylesheet" href="../../css/base/reset.css">
-<link rel="stylesheet" href="../../css/base/tipografia.css">
-<link rel="stylesheet" href="../../css/layout/encabezado.css">
-<link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-<link rel="stylesheet" href="../../css/layout/grid.css">
-<link rel="stylesheet" href="../../css/componentes/formularios.css">
-<link rel="stylesheet" href="../../css/componentes/botones.css">
-<link rel="stylesheet" href="../../css/componentes/tablas.css">
-<link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-<link rel="stylesheet" href="../../css/componentes/alertas.css"><style>
-main .tarjeta{padding:24px;margin-top:18px} .campo{margin:12px 0} .campo label{display:block;margin-bottom:6px;font-weight:600}
-.campo input,.campo select{width:100%;max-width:580px;padding:10px;border:1px solid #c9d5e5;border-radius:3px;background:white}
-.acciones-hu{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
-.tabla-contenedor{overflow-x:auto} table{width:100%;border-collapse:collapse}th,td{padding:11px;text-align:left;border-bottom:1px solid #dce3eb}
-.avatares{display:flex;gap:10px;flex-wrap:wrap}.avatar-opcion{border:2px solid #dce3eb;border-radius:5px;background:#fff;padding:12px;cursor:pointer;font-size:25px}.avatar-opcion[aria-pressed="true"]{border-color:#0867E8;background:#e3ecff}
-.mensaje-hu{margin-top:14px;min-height:24px} .foto-perfil{font-size:52px}
-</style></head><body><a class="salto-contenido" href="#contenido">Saltar al contenido</a><header class="encabezado">
-    <a class="logo"
-       href="../../index.html"
-       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
 
-    <div class="encabezado-acciones"
-         role="group"
-         aria-label="Opciones de la cuenta">
+<!DOCTYPE html>
+<html lang="es">
 
-      <button type="button"
-              class="boton-secundario"
-              id="encabezado-notificaciones"
-              title="Notificaciones"
-              aria-label="Notificaciones">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
-          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
-        </svg>
-      </button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <select id="encabezado-idioma"
-              aria-label="Idioma"
-              title="Idioma">
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
+    <title>Registrar carrera | Desarrollo Curricular y Docente</title>
 
-      <button type="button"
-              class="avatar"
-              id="encabezado-avatar"
-              aria-label="Perfil"
-              title="Perfil">A</button>
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
 
-      <button type="button"
-              class="boton-secundario"
-              id="encabezado-cerrar-sesion"
-              aria-label="Cerrar sesión"
-              title="Cerrar sesión">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="m16 17 5-5-5-5"/>
-          <path d="M21 12H9"/>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        </svg>
-      </button>
-    </div>
-  </header><div class="contenedor-principal"><nav class="menu-lateral" aria-label="Menú principal">
-  <ul>
-    <li><a href="../../index.html">Inicio</a></li>
-    <li><a href="../usuarios/listado.html">Usuarios</a></li>
-    <li><a href="../escuelas/listado.html">Escuelas</a></li>
-    <li><a href="listado.html" aria-current="page">Carreras</a></li>
-    <li><a href="../cursos/listado.html">Cursos</a></li>
-    <li><a href="../revision/pendientes.html">Revisión de cursos</a></li>
-    <li>
-      <a href="../catalogos/listado.html?catalogo=areas-sfia">
-        Áreas SFIA
-      </a>
-    </li>
-    <li>
-      <a href="../catalogos/listado.html?catalogo=tematicas">
-        Temática
-      </a>
-    </li>
-    <li>
-      <a href="../catalogos/listado.html?catalogo=metodologias">
-        Metodologías de aprendizaje
-      </a>
-    </li>
-    <li>
-      <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
-        Casas certificadoras
-      </a>
-    </li>
-    <li>
-      <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
-        Niveles de complejidad
-      </a>
-    </li>
-  </ul>
-</nav><main id="contenido"><h1 id="tituloCarrera">Registrar carrera</h1><p>Registrar carrera y asociar director a una carrera.</p><section class="tarjeta"><form id="form-carrera" novalidate><div class="campo"><label for="codigo">Código de carrera *</label><input id="codigo" maxlength="20" required></div><div class="campo"><label for="nombre">Nombre de la carrera *</label><input id="nombre" maxlength="100" required></div><div class="campo"><label for="escuela">Escuela *</label><select id="escuela" required><option value="">Seleccione una escuela</option></select></div><div class="campo"><label for="director">Director de carrera *</label><select id="director" required><option value="">Seleccione un usuario con rol Dirección</option></select></div><div class="acciones-hu"><button class="boton" type="submit" id="botonGuardarCarrera">
-  Guardar carrera
-</button><button
-  class="boton-secundario"
-  type="reset"
-  id="botonRestablecerCarrera"
-  hidden>
-  Restablecer
-</button><a class="boton-secundario" href="listado.html" id="botonSalirCarrera">
-  Ver carreras
-</a>
-</div>
+<body>
 
-<p id="mensaje-carrera" class="mensaje-hu" role="status"></p>
+    <main id="contenido">
 
-</form>
-</section>
-</main>
-</div>
+        <h1 id="tituloCarrera">
+            Registrar carrera
+        </h1>
 
-<script src="../../js/nucleo/autenticacion.js"></script>
-<script src="carreras.js"></script>
+        <p id="descripcionCarrera" class="text-secondary mb-4">
+            Complete los datos para registrar una nueva carrera
+            en el Sistema de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Formulario de registro y modificación -->
+        <form id="form-carrera"
+              class="card mb-4"
+              novalidate>
+
+            <div class="card-body">
+
+                <fieldset>
+
+                    <legend class="h5 mb-3">
+                        Información de la carrera
+                    </legend>
+
+                    <p class="text-secondary mb-4">
+                        Los campos marcados con
+                        <span class="text-danger">*</span>
+                        son obligatorios.
+                    </p>
+
+                    <div class="row g-3">
+
+                        <!-- Código de carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="codigo"
+                                   class="form-label">
+                                Código de carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="codigo"
+                                   name="codigo"
+                                   maxlength="20"
+                                   placeholder="Ingrese el código de la carrera"
+                                   aria-describedby="errorCodigoCarrera"
+                                   required>
+
+                            <div id="errorCodigoCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Nombre de la carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="nombre"
+                                   class="form-label">
+                                Nombre de la carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombre"
+                                   name="nombre"
+                                   maxlength="100"
+                                   placeholder="Ingrese el nombre de la carrera"
+                                   aria-describedby="errorNombreCarrera"
+                                   required>
+
+                            <div id="errorNombreCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Escuela asociada -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="escuela"
+                                   class="form-label">
+                                Escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="escuela"
+                                    name="escuela"
+                                    class="form-select"
+                                    aria-describedby="errorEscuelaCarrera"
+                                    required>
+
+                                <option value="">
+                                    Seleccione una escuela
+                                </option>
+
+                            </select>
+
+                            <div id="errorEscuelaCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Director de carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="director"
+                                   class="form-label">
+                                Director de carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="director"
+                                    name="director"
+                                    class="form-select"
+                                    aria-describedby="errorDirectorCarrera"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un director
+                                </option>
+
+                            </select>
+
+                            <div id="errorDirectorCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <!-- Mensajes del sistema -->
+                <div id="mensaje-carrera"
+                     class="mt-3"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+                <!-- Acciones del formulario -->
+                <div class="d-flex flex-wrap justify-content-end gap-2 mt-4">
+
+                    <a href="listado.html"
+                       class="btn btn-secondary"
+                       id="botonSalirCarrera">
+                        Cancelar
+                    </a>
+
+                    <button type="reset"
+                            class="btn btn-secondary"
+                            id="botonRestablecerCarrera"
+                            hidden>
+                        Restablecer
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary"
+                            id="botonGuardarCarrera">
+                        Guardar carrera
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica del módulo de carreras -->
+    <script src="carreras.js"></script>
 
 </body>
+
 </html>

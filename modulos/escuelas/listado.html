@@ -1,226 +1,129 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <link rel="icon" type="image/png" href="../../favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escuelas registradas | Gestor de Cursos CENFOTEC</title>
 
-  <link rel="stylesheet" href="../../css/base/variables.css">
-  <link rel="stylesheet" href="../../css/base/reset.css">
-  <link rel="stylesheet" href="../../css/base/tipografia.css">
-  <link rel="stylesheet" href="../../css/layout/encabezado.css">
-  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-  <link rel="stylesheet" href="../../css/layout/grid.css">
-  <link rel="stylesheet" href="../../css/componentes/formularios.css">
-  <link rel="stylesheet" href="../../css/componentes/botones.css">
-  <link rel="stylesheet" href="../../css/componentes/tablas.css">
-  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-  <link rel="stylesheet" href="../../css/componentes/alertas.css">
-  <link rel="stylesheet" href="escuelas.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escuelas registradas | Desarrollo Curricular y Docente</title>
+
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 
 <body>
-  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
 
-  <!-- ENCABEZADO INSTITUCIONAL -->
-  <header class="encabezado">
-    <a class="logo" href="../../index.html"
-       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
-
-    <div class="encabezado-acciones" role="group"
-         aria-label="Opciones de la cuenta">
-
-      <button type="button" class="boton-secundario"
-              id="encabezado-notificaciones"
-              title="Notificaciones" aria-label="Notificaciones">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
-          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
-        </svg>
-      </button>
-
-      <select id="encabezado-idioma" aria-label="Idioma" title="Idioma">
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
-
-      <button type="button" class="avatar"
-              id="encabezado-avatar"
-              aria-label="Perfil" title="Perfil">A</button>
-
-      <button type="button" class="boton-secundario"
-              id="encabezado-cerrar-sesion"
-              aria-label="Cerrar sesión" title="Cerrar sesión">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="m16 17 5-5-5-5"/>
-          <path d="M21 12H9"/>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <div class="contenedor-principal">
-
-    <!-- MENÚ LATERAL -->
-    <nav class="menu-lateral" aria-label="Menú principal">
-      <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../usuarios/listado.html">Usuarios</a></li>
-        <li><a href="listado.html" aria-current="page">Escuelas</a></li>
-        <li><a href="../carreras/listado.html">Carreras</a></li>
-        <li><a href="../cursos/listado.html">Cursos</a></li>
-        <li><a href="../revision/pendientes.html">Revisión de cursos</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
-      </ul>
-    </nav>
-
-    <!-- CONTENIDO PRINCIPAL -->
     <main id="contenido">
-      <h1>Escuelas registradas</h1>
 
-      <p>
-        Consulte las escuelas registradas en el Sistema
-        de Gestión Curricular y Docente.
-      </p>
+        <h1>Escuelas registradas</h1>
 
-      <div class="acciones">
-        <a href="formulario.html" class="boton">
-          Registrar nueva escuela
-        </a>
-      </div>
-
-      <section class="tarjeta" aria-label="Listado de escuelas">
-        <h2>Listado de escuelas registradas</h2>
-        <div class="campo">
-  <label for="buscarEscuela">Buscar escuela</label>
-  <input
-    type="search"
-    id="buscarEscuela"
-    placeholder="Buscar por código, nombre o director"
-    autocomplete="off"
-  >
-</div>
-
-<p id="mensajeBusquedaEscuela" role="status"></p>
-
-        <p id="totalEscuelas" role="status">
-          Total de escuelas registradas: 0
+        <p class="text-secondary mb-4">
+            Consulte las escuelas registradas en el Sistema
+            de Gestión Curricular y Docente.
         </p>
 
-        <div class="tabla-contenedor">
-          <table>
-            <thead>
-             <tr>
-               <th scope="col">Código</th>
-                <th scope="col">Nombre de escuela</th>
-               <th scope="col">Director</th>
-               <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tablaEscuelas"></tbody>
-          </table>
+        <!-- Acción de registro -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+
+            <a href="formulario.html"
+               class="btn btn-primary">
+                Registrar nueva escuela
+            </a>
+
         </div>
-      </section>
+
+        <!-- Listado de escuelas -->
+        <section class="card mb-4"
+                 aria-labelledby="tituloListadoEscuelas">
+
+            <div class="card-body">
+
+                <h2 id="tituloListadoEscuelas"
+                    class="h5 mb-4">
+                    Listado de escuelas registradas
+                </h2>
+
+                <!-- Buscador -->
+                <div class="mb-3">
+
+                    <label for="buscarEscuela"
+                           class="form-label">
+                        Buscar escuela
+                    </label>
+
+                    <input type="search"
+                           class="form-control"
+                           id="buscarEscuela"
+                           placeholder="Buscar por código, nombre o director"
+                           autocomplete="off">
+
+                </div>
+
+                <!-- Mensajes del sistema -->
+                <div id="mensajeBusquedaEscuela"
+                     class="alert alert-info"
+                     role="status"
+                     aria-live="polite"
+                     hidden>
+                </div>
+
+                <!-- Contador de escuelas -->
+                <p id="totalEscuelas"
+                   class="text-secondary mb-3"
+                   role="status"
+                   aria-live="polite">
+                    Total de escuelas registradas: 0
+                </p>
+
+                <!-- Tabla de escuelas -->
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-primary">
+
+                            <tr>
+                                <th scope="col">Código</th>
+
+                                <th scope="col">
+                                    Nombre de escuela
+                                </th>
+
+                                <th scope="col">Director</th>
+
+                                <th scope="col">Acciones</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tablaEscuelas">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </main>
-  </div>
-  
-  <script src="../../js/nucleo/autenticacion.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const tabla = document.getElementById("tablaEscuelas");
-      const total = document.getElementById("totalEscuelas");
 
-      let escuelas = [];
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
 
-      try {
-        const datos = JSON.parse(
-          localStorage.getItem("grupo5_escuelas") || "[]"
-        );
-        escuelas = Array.isArray(datos) ? datos : [];
-      } catch (error) {
-        console.error("Error al leer escuelas:", error);
-      }
+    <!-- Lógica del listado de escuelas -->
+    <script src="listado.js"></script>
 
-      total.textContent =
-        `Total de escuelas registradas: ${escuelas.length}`;
-
-      if (escuelas.length === 0) {
-        const fila = tabla.insertRow();
-        const celda = fila.insertCell();
-        celda.colSpan = 3;
-        celda.textContent = "No hay escuelas registradas.";
-        return;
-      }
-
-    
-escuelas.forEach(escuela => {
-  const fila = tabla.insertRow();
-
-  [escuela.codigo, escuela.nombre, escuela.director]
-    .forEach(valor => {
-      const celda = fila.insertCell();
-      celda.textContent = valor || "";
-    });
-
-  const celdaAcciones = fila.insertCell();
-
-  const botonModificar = document.createElement("button");
-  botonModificar.type = "button";
-  botonModificar.className = "boton-secundario";
-  botonModificar.textContent = "Modificar";
-
-  botonModificar.addEventListener("click", () => {
-    window.location.href =
-      "formulario.html?codigo=" + encodeURIComponent(escuela.codigo);
-  });
-
-  celdaAcciones.appendChild(botonModificar);
-});
-
-// Buscador de escuelas en tiempo real
-const buscador = document.getElementById("buscarEscuela");
-const mensajeBusqueda = document.getElementById("mensajeBusquedaEscuela");
-
-buscador.addEventListener("input", () => {
-  const texto = buscador.value.trim().toLocaleLowerCase("es");
-
-  let coincidencias = 0;
-
-  tabla.querySelectorAll("tr").forEach(fila => {
-    const columnas = Array.from(fila.cells)
-      .slice(0, 3)
-      .map(celda => celda.textContent.toLocaleLowerCase("es"));
-
-    const coincide = columnas.some(valor => valor.includes(texto));
-
-    fila.hidden = !coincide;
-
-    if (coincide) coincidencias++;
-  });
-
-  mensajeBusqueda.textContent =
-    coincidencias === 0
-      ? "No se encontraron escuelas con ese criterio."
-      : "";
-});
-});
-  </script>
 </body>
+
 </html>
-
-

@@ -1,231 +1,440 @@
-
 /*
  * Módulo: Gestión de usuarios
  * HU-01: Registrar usuario
  * HU-08: Consultar usuarios registrados
  * Proyecto Integrador - Grupo 5
  *
+ * Migración a Bootstrap.
  * Prototipo académico: no almacena contraseñas.
  */
 
 const Usuarios = {
-  clave: "grupo5_usuarios",
+    clave: "grupo5_usuarios",
 
-  obtenerTodos() {
-    const datos = Almacenamiento.obtener(this.clave, []);
-    return Array.isArray(datos) ? datos : [];
-  },
+    obtenerTodos() {
+        const datos = Almacenamiento.obtener(this.clave, []);
+        return Array.isArray(datos) ? datos : [];
+    },
 
-  validar(datos) {
-    const errores = {};
-    
-if (!datos.identificacion) {
-  errores["u-identificacion"] =
-    "Ingrese el número de identificación.";
-} else if (!/^[A-Za-z0-9-]{5,20}$/.test(datos.identificacion)) {
-  errores["u-identificacion"] =
-    "La identificación debe tener entre 5 y 20 caracteres, usando letras, números o guiones.";
-} else if (
-  this.obtenerTodos().some(
-    usuario => usuario.identificacion === datos.identificacion
-  )
-) {
-  errores["u-identificacion"] =
-    "Ya existe un usuario con esta identificación.";
-}
+    // Obtener la fecha máxima permitida: 18 años atrás.
+    obtenerFechaMaximaNacimiento() {
+        const hoy = new Date();
+        const anio = hoy.getFullYear() - 18;
+        const mes = hoy.getMonth();
 
-if (!datos.telefono) {
-  errores["u-telefono"] =
-    "Ingrese el número telefónico.";
-} else {
-  const telefonoLimpio = datos.telefono.replace(/[\s()-]/g, "");
+        const ultimoDia = new Date(anio, mes + 1, 0).getDate();
+        const dia = Math.min(hoy.getDate(), ultimoDia);
 
-  if (!/^\+?\d{8,15}$/.test(telefonoLimpio)) {
-    errores["u-telefono"] =
-      "Ingrese un teléfono válido de 8 a 15 dígitos.";
-  }
-}
+        return `${anio}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+    },
 
+    // Comprobar que la fecha exista realmente.
+    esFechaValida(valor) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+            return false;
+        }
 
-   
-if (Validadores.estaVacio(datos.nombre)) {
-  errores["u-nombre"] = "Ingrese el nombre completo.";
-} else if (Validadores.superaLongitudMaxima(datos.nombre, 80)) {
-  errores["u-nombre"] = "Máximo 80 caracteres.";
-} else if (datos.nombre.trim().split(/\s+/).length < 2) {
-  errores["u-nombre"] =
-    "Debe ingresar al menos un nombre y un apellido.";
-} else if (!/^[\p{L}]+(?:[ '-][\p{L}]+)*$/u.test(datos.nombre)) {
-  errores["u-nombre"] =
-    "El nombre solo puede contener letras, espacios, apóstrofes y guiones.";
-}
+        const fecha = new Date(valor + "T00:00:00");
 
+        if (Number.isNaN(fecha.getTime())) {
+            return false;
+        }
 
-    if (Validadores.estaVacio(datos.correo)) {
-      errores["u-correo"] = "Ingrese el correo.";
-    } else if (
-      datos.correo.length > 80 ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.correo)
-    ) {
-      errores["u-correo"] = "Ingrese un correo válido.";
-    } else if (
-      this.obtenerTodos().some(
-        usuario => usuario.correo === datos.correo
-      )
-    ) {
-      errores["u-correo"] = "Este correo ya está registrado.";
-    }
-    
-if (!datos.correoPersonal) {
-  errores["u-correo-personal"] =
-    "Ingrese el correo personal.";
-} else if (
-  datos.correoPersonal.length > 80 ||
-  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.correoPersonal)
-) {
-  errores["u-correo-personal"] =
-    "Ingrese un correo personal válido.";
-} 
-else if (datos.correoPersonal === datos.correo) {
-  errores["u-correo-personal"] =
-    "El correo personal debe ser diferente del institucional.";
-} else if (
-  this.obtenerTodos().some(
-    usuario =>
-      (usuario.correoPersonal || "").trim().toLowerCase() ===
-      datos.correoPersonal
-  )
-) {
-  errores["u-correo-personal"] =
-    "Este correo personal ya está registrado.";
-}
+        const [anio, mes, dia] = valor.split("-").map(Number);
 
+        return anio > 0 &&
+            fecha.getFullYear() === anio &&
+            fecha.getMonth() + 1 === mes &&
+            fecha.getDate() === dia &&
+            fecha <= new Date();
+    },
 
-    const fecha = new Date(datos.nacimiento + "T00:00:00");
-    if (
-      !datos.nacimiento ||
-      Number.isNaN(fecha.getTime()) ||
-      fecha.toISOString().slice(0, 10) !== datos.nacimiento ||
-      fecha > new Date()
-    ) {
-      errores["u-nacimiento"] = "Ingrese una fecha válida.";
-    }
+    // Validación de mayoría de edad.
+    esMayorDeEdad(nacimiento) {
+        return this.esFechaValida(nacimiento) &&
+            nacimiento <= this.obtenerFechaMaximaNacimiento();
+    },
 
-    if (!["f", "m", "o", "n"].includes(datos.genero)) {
-      errores["u-genero"] = "Seleccione una opción.";
-    }
+    validar(datos) {
+        const errores = {};
+        const usuarios = this.obtenerTodos();
+        const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (
-      !["admin", "rectoria", "vice", "dc", "dir"]
-        .includes(datos.rol)
-    ) {
-      errores["u-rol"] = "Seleccione un rol válido.";
-    }
+        // Validación de identificación.
+        if (!datos.identificacion) {
+            errores["u-identificacion"] =
+                "Ingrese el número de identificación.";
 
-    if (
-      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,15}$/
-        .test(datos.password)
-    ) {
-      errores["u-password"] =
-        "Use de 8 a 15 caracteres, mayúscula, minúscula, número y símbolo.";
-    }
+        } else if (!/^[A-Za-z0-9-]{5,20}$/.test(datos.identificacion)) {
+            errores["u-identificacion"] =
+                "La identificación debe tener entre 5 y 20 caracteres, usando letras, números o guiones.";
 
-    return errores;
-  },
+        } else if (
+            usuarios.some(usuario =>
+                usuario.identificacion === datos.identificacion
+            )
+        ) {
+            errores["u-identificacion"] =
+                "Ya existe un usuario con esta identificación.";
+        }
 
-  registrar(datos) {
-    const usuarios = this.obtenerTodos();
+        // Validación del nombre.
+        if (Validadores.estaVacio(datos.nombre)) {
+            errores["u-nombre"] =
+                "Ingrese el nombre completo.";
 
-    // Nunca guardar contraseñas en localStorage.
-    
-const nuevo = {
-  id: crypto.randomUUID(),
-  identificacion: datos.identificacion,
-  nombre: datos.nombre,
-  telefono: datos.telefono,
-  correo: datos.correo,
-  correoPersonal: datos.correoPersonal,
-  nacimiento: datos.nacimiento,
-  genero: datos.genero,
-  rol: datos.rol,
-  fechaRegistro: new Date().toISOString()
-};
+        } else if (
+            Validadores.superaLongitudMaxima(datos.nombre, 80)
+        ) {
+            errores["u-nombre"] =
+                "Máximo 80 caracteres.";
 
-    usuarios.push(nuevo);
+        } else if (datos.nombre.trim().split(/\s+/).length < 2) {
+            errores["u-nombre"] =
+                "Debe ingresar al menos un nombre y un apellido.";
 
-    return Almacenamiento.guardar(this.clave, usuarios);
-  },
+        } else if (
+            !/^[\p{L}]+(?:[ '-][\p{L}]+)*$/u.test(datos.nombre)
+        ) {
+            errores["u-nombre"] =
+                "El nombre solo puede contener letras, espacios, apóstrofes y guiones.";
+        }
 
-  iniciarFormulario() {
-    const formulario = document.getElementById("form-usuario");
-    if (!formulario) return;
+        // Validación del teléfono.
+        if (!datos.telefono) {
+            errores["u-telefono"] =
+                "Ingrese el número telefónico.";
 
-    formulario.addEventListener("submit", evento => {
-      evento.preventDefault();
+        } else {
+            const telefonoLimpio =
+                datos.telefono.replace(/[\s()-]/g, "");
 
-      
-const datos = {
-  identificacion: document.getElementById("u-identificacion").value.trim(),
-  nombre: document.getElementById("u-nombre").value.trim(),
-  telefono: document.getElementById("u-telefono").value.trim(),
-  correo: document.getElementById("u-correo").value.trim().toLowerCase(),
-  correoPersonal: document.getElementById("u-correo-personal").value.trim().toLowerCase(),
-  nacimiento: document.getElementById("u-nacimiento").value,
-  genero: document.getElementById("u-genero").value,
-  rol: document.getElementById("u-rol").value,
-  password: document.getElementById("u-password").value
-};
+            if (!/^\+?\d{8,15}$/.test(telefonoLimpio)) {
+                errores["u-telefono"] =
+                    "Ingrese un teléfono válido de 8 a 15 dígitos.";
+            }
+        }
 
-      const errores = this.validar(datos);
-      const resumen = document.getElementById("resumen-errores");
+        // Validación del correo institucional.
+        if (Validadores.estaVacio(datos.correo)) {
+            errores["u-correo"] =
+                "Ingrese el correo institucional.";
 
-      formulario.querySelectorAll(".mensaje-error").forEach(elemento => {
-        elemento.textContent = "";
-      });
+        } else if (
+            datos.correo.length > 80 ||
+            !formatoCorreo.test(datos.correo)
+        ) {
+            errores["u-correo"] =
+                "Ingrese un correo válido.";
 
-      formulario.querySelectorAll("[aria-invalid]").forEach(elemento => {
-        elemento.removeAttribute("aria-invalid");
-      });
+        } else if (
+            usuarios.some(usuario =>
+                (usuario.correo || "").trim().toLowerCase() ===
+                datos.correo
+            )
+        ) {
+            errores["u-correo"] =
+                "Este correo ya está registrado.";
+        }
 
-      resumen.hidden = true;
-      resumen.textContent = "";
+        // Validación del correo personal.
+        if (!datos.correoPersonal) {
+            errores["u-correo-personal"] =
+                "Ingrese el correo personal.";
 
-      if (Object.keys(errores).length > 0) {
+        } else if (
+            datos.correoPersonal.length > 80 ||
+            !formatoCorreo.test(datos.correoPersonal)
+        ) {
+            errores["u-correo-personal"] =
+                "Ingrese un correo personal válido.";
+
+        } else if (datos.correoPersonal === datos.correo) {
+            errores["u-correo-personal"] =
+                "El correo personal debe ser diferente del institucional.";
+
+        } else if (
+            usuarios.some(usuario =>
+                (usuario.correoPersonal || "").trim().toLowerCase() ===
+                datos.correoPersonal
+            )
+        ) {
+            errores["u-correo-personal"] =
+                "Este correo personal ya está registrado.";
+        }
+
+        // Validación de la fecha de nacimiento.
+        if (!datos.nacimiento) {
+            errores["u-nacimiento"] =
+                "Ingrese la fecha de nacimiento.";
+
+        } else if (!this.esFechaValida(datos.nacimiento)) {
+            errores["u-nacimiento"] =
+                "Ingrese una fecha de nacimiento válida.";
+
+        } else if (!this.esMayorDeEdad(datos.nacimiento)) {
+            errores["u-nacimiento"] =
+                "El usuario debe tener al menos 18 años.";
+        }
+
+        // Validación del género.
+        if (!["f", "m", "o", "n"].includes(datos.genero)) {
+            errores["u-genero"] =
+                "Seleccione una opción.";
+        }
+
+        // Validación del rol.
+        if (
+            !["admin", "rectoria", "vice", "dc", "dir"]
+                .includes(datos.rol)
+        ) {
+            errores["u-rol"] =
+                "Seleccione un rol válido.";
+        }
+
+        // Validación de la contraseña.
+        if (
+            !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,15}$/
+                .test(datos.password)
+        ) {
+            errores["u-password"] =
+                "Use de 8 a 15 caracteres, mayúscula, minúscula, número y símbolo.";
+        }
+
+        return errores;
+    },
+
+    registrar(datos) {
+        const usuarios = this.obtenerTodos();
+
+        // Nunca almacenar contraseñas en localStorage.
+        const nuevo = {
+            id: crypto.randomUUID(),
+            identificacion: datos.identificacion,
+            nombre: datos.nombre,
+            telefono: datos.telefono,
+            correo: datos.correo,
+            correoPersonal: datos.correoPersonal,
+            nacimiento: datos.nacimiento,
+            genero: datos.genero,
+            rol: datos.rol,
+            fechaRegistro: new Date().toISOString()
+        };
+
+        usuarios.push(nuevo);
+
+        return Almacenamiento.guardar(this.clave, usuarios);
+    },
+
+    limpiarErrores(formulario) {
+        formulario.querySelectorAll(".mensaje-error")
+            .forEach(elemento => {
+                elemento.textContent = "";
+            });
+
+        formulario.querySelectorAll(".is-invalid, .is-valid")
+            .forEach(elemento => {
+                elemento.classList.remove("is-invalid", "is-valid");
+            });
+
+        formulario.querySelectorAll("[aria-invalid]")
+            .forEach(elemento => {
+                elemento.removeAttribute("aria-invalid");
+            });
+
+        const resumen = document.getElementById("resumen-errores");
+
+        if (resumen) {
+            resumen.hidden = true;
+            resumen.textContent = "";
+        }
+    },
+
+    mostrarMensaje(mensaje, tipo = "danger") {
+        const resumen = document.getElementById("resumen-errores");
+
+        if (!resumen) return;
+
+        resumen.classList.remove(
+            "alert-danger",
+            "alert-success",
+            "alert-warning",
+            "alert-info"
+        );
+
+        resumen.classList.add("alert", `alert-${tipo}`);
+
+        resumen.setAttribute(
+            "role",
+            tipo === "success" ? "status" : "alert"
+        );
+
+        resumen.textContent = mensaje;
+        resumen.hidden = false;
+    },
+
+    mostrarErrores(errores) {
         Object.entries(errores).forEach(([campo, mensaje]) => {
-          document.getElementById("error-" + campo).textContent = mensaje;
-          document.getElementById(campo).setAttribute("aria-invalid", "true");
+            const entrada = document.getElementById(campo);
+            const error = document.getElementById("error-" + campo);
+
+            if (entrada) {
+                entrada.classList.add("is-invalid");
+                entrada.setAttribute("aria-invalid", "true");
+            }
+
+            if (error) {
+                error.textContent = mensaje;
+            }
         });
 
-        resumen.textContent = "Revise los campos señalados.";
-        resumen.hidden = false;
-        document.getElementById(Object.keys(errores)[0]).focus();
-        return;
-      }
+        this.mostrarMensaje(
+            "Revise los campos señalados antes de continuar.",
+            "danger"
+        );
 
-const registroExitoso = this.registrar(datos);
+        const primerCampo =
+            document.getElementById(Object.keys(errores)[0]);
 
-if (registroExitoso) {
+        if (primerCampo) {
+            primerCampo.focus();
+        }
+    },
 
-        formulario.reset();
-        resumen.setAttribute("role", "status");
-        resumen.textContent =
-          "Registro de demostración guardado correctamente.";
-        resumen.hidden = false;
-      } else {
-        resumen.textContent = "No se pudo guardar el registro.";
-        resumen.hidden = false;
-      }
-    });
-  }
+    iniciarFormulario() {
+        const formulario = document.getElementById("form-usuario");
+
+        if (!formulario) return;
+
+        // Desactivar mensajes nativos del navegador.
+        formulario.noValidate = true;
+
+        // Limitar el calendario a personas mayores de edad.
+        const campoNacimiento =
+            document.getElementById("u-nacimiento");
+
+        if (campoNacimiento) {
+            campoNacimiento.max =
+                this.obtenerFechaMaximaNacimiento();
+        }
+
+        // Limpiar el error cuando se modifica un campo.
+        const limpiarCampo = evento => {
+            const campo = evento.target;
+
+            if (!campo.id) return;
+
+            campo.classList.remove("is-invalid");
+            campo.removeAttribute("aria-invalid");
+
+            const error =
+                document.getElementById("error-" + campo.id);
+
+            if (error) {
+                error.textContent = "";
+            }
+        };
+
+        formulario.addEventListener("input", limpiarCampo);
+        formulario.addEventListener("change", limpiarCampo);
+
+        formulario.addEventListener("submit", evento => {
+            evento.preventDefault();
+
+            this.limpiarErrores(formulario);
+
+            const obtenerValor = id =>
+                document.getElementById(id)?.value || "";
+
+            const datos = {
+                identificacion:
+                    obtenerValor("u-identificacion").trim(),
+
+                nombre:
+                    obtenerValor("u-nombre").trim(),
+
+                telefono:
+                    obtenerValor("u-telefono").trim(),
+
+                correo:
+                    obtenerValor("u-correo").trim().toLowerCase(),
+
+                correoPersonal:
+                    obtenerValor("u-correo-personal").trim().toLowerCase(),
+
+                nacimiento:
+                    obtenerValor("u-nacimiento"),
+
+                genero:
+                    obtenerValor("u-genero"),
+
+                rol:
+                    obtenerValor("u-rol"),
+
+                password:
+                    obtenerValor("u-password")
+            };
+
+            const errores = this.validar(datos);
+
+            if (Object.keys(errores).length > 0) {
+                this.mostrarErrores(errores);
+                return;
+            }
+
+            try {
+                const registroExitoso = this.registrar(datos);
+
+                if (registroExitoso) {
+                    formulario.reset();
+
+                    this.limpiarErrores(formulario);
+
+                    this.mostrarMensaje(
+                        "El usuario se registró correctamente. Redirigiendo al listado...",
+                        "success"
+                    );
+
+                    // Evitar registros duplicados durante la redirección.
+                    formulario
+                        .querySelectorAll('button[type="submit"], input[type="submit"]')
+                        .forEach(boton => {
+                            boton.disabled = true;
+                        });
+
+                    // Redirigir al listado después del registro.
+                    setTimeout(() => {
+                        window.location.href = "listado.html";
+                    }, 1500);
+
+                } else {
+                    this.mostrarMensaje(
+                        "No se pudo guardar el registro. Intente nuevamente.",
+                        "danger"
+                    );
+                }
+
+            } catch (error) {
+                console.error("Error al registrar usuario:", error);
+
+                this.mostrarMensaje(
+                    "Ocurrió un error al registrar el usuario.",
+                    "danger"
+                );
+            }
+        });
+    }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (
-    typeof Almacenamiento !== "undefined" &&
-    typeof Validadores !== "undefined"
-  ) {
-    Usuarios.iniciarFormulario();
-  } else {
-    console.error("Faltan dependencias del módulo de usuarios.");
-  }
+    if (
+        typeof Almacenamiento !== "undefined" &&
+        typeof Validadores !== "undefined"
+    ) {
+        Usuarios.iniciarFormulario();
+    } else {
+        console.error(
+            "Faltan dependencias del módulo de usuarios."
+        );
+    }
 });

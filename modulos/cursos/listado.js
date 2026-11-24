@@ -1,4 +1,3 @@
-
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -118,6 +117,7 @@ const cursos_normalizados = cursos.map(curso => ({
       fila.appendChild(celdaEstado);
 
       const celdaAcciones = document.createElement("td");
+      celdaAcciones.className = "text-center";
       const enlace = document.createElement("a");
 
       enlace.href =
@@ -125,7 +125,7 @@ const cursos_normalizados = cursos.map(curso => ({
         encodeURIComponent(curso.id ?? curso.code ?? curso.codigo ?? "");
 
       enlace.textContent = "Ver detalle";
-      enlace.className = "boton-secundario";
+      enlace.className = "btn btn-secondary btn-sm";
 
       celdaAcciones.appendChild(enlace);
       fila.appendChild(celdaAcciones);

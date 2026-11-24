@@ -1,4 +1,3 @@
-
 /*
  * Módulo: Gestión de usuarios
  * HU-01: Registrar usuario
@@ -17,18 +16,59 @@ const Usuarios = {
         return Array.isArray(datos) ? datos : [];
     },
 
+    // Obtener la fecha máxima permitida: 18 años atrás.
+    obtenerFechaMaximaNacimiento() {
+        const hoy = new Date();
+        const anio = hoy.getFullYear() - 18;
+        const mes = hoy.getMonth();
+
+        const ultimoDia = new Date(anio, mes + 1, 0).getDate();
+        const dia = Math.min(hoy.getDate(), ultimoDia);
+
+        return `${anio}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+    },
+
+    // Comprobar que la fecha exista realmente.
+    esFechaValida(valor) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+            return false;
+        }
+
+        const fecha = new Date(valor + "T00:00:00");
+
+        if (Number.isNaN(fecha.getTime())) {
+            return false;
+        }
+
+        const [anio, mes, dia] = valor.split("-").map(Number);
+
+        return anio > 0 &&
+            fecha.getFullYear() === anio &&
+            fecha.getMonth() + 1 === mes &&
+            fecha.getDate() === dia &&
+            fecha <= new Date();
+    },
+
+    // Validación de mayoría de edad.
+    esMayorDeEdad(nacimiento) {
+        return this.esFechaValida(nacimiento) &&
+            nacimiento <= this.obtenerFechaMaximaNacimiento();
+    },
+
     validar(datos) {
         const errores = {};
         const usuarios = this.obtenerTodos();
         const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // Validación de identificación
+        // Validación de identificación.
         if (!datos.identificacion) {
             errores["u-identificacion"] =
                 "Ingrese el número de identificación.";
+
         } else if (!/^[A-Za-z0-9-]{5,20}$/.test(datos.identificacion)) {
             errores["u-identificacion"] =
                 "La identificación debe tener entre 5 y 20 caracteres, usando letras, números o guiones.";
+
         } else if (
             usuarios.some(usuario =>
                 usuario.identificacion === datos.identificacion
@@ -38,18 +78,21 @@ const Usuarios = {
                 "Ya existe un usuario con esta identificación.";
         }
 
-        // Validación del nombre
+        // Validación del nombre.
         if (Validadores.estaVacio(datos.nombre)) {
             errores["u-nombre"] =
                 "Ingrese el nombre completo.";
+
         } else if (
             Validadores.superaLongitudMaxima(datos.nombre, 80)
         ) {
             errores["u-nombre"] =
                 "Máximo 80 caracteres.";
+
         } else if (datos.nombre.trim().split(/\s+/).length < 2) {
             errores["u-nombre"] =
                 "Debe ingresar al menos un nombre y un apellido.";
+
         } else if (
             !/^[\p{L}]+(?:[ '-][\p{L}]+)*$/u.test(datos.nombre)
         ) {
@@ -57,10 +100,11 @@ const Usuarios = {
                 "El nombre solo puede contener letras, espacios, apóstrofes y guiones.";
         }
 
-        // Validación del teléfono
+        // Validación del teléfono.
         if (!datos.telefono) {
             errores["u-telefono"] =
                 "Ingrese el número telefónico.";
+
         } else {
             const telefonoLimpio =
                 datos.telefono.replace(/[\s()-]/g, "");
@@ -71,16 +115,18 @@ const Usuarios = {
             }
         }
 
-        // Validación del correo institucional
+        // Validación del correo institucional.
         if (Validadores.estaVacio(datos.correo)) {
             errores["u-correo"] =
                 "Ingrese el correo institucional.";
+
         } else if (
             datos.correo.length > 80 ||
             !formatoCorreo.test(datos.correo)
         ) {
             errores["u-correo"] =
                 "Ingrese un correo válido.";
+
         } else if (
             usuarios.some(usuario =>
                 (usuario.correo || "").trim().toLowerCase() ===
@@ -91,19 +137,22 @@ const Usuarios = {
                 "Este correo ya está registrado.";
         }
 
-        // Validación del correo personal
+        // Validación del correo personal.
         if (!datos.correoPersonal) {
             errores["u-correo-personal"] =
                 "Ingrese el correo personal.";
+
         } else if (
             datos.correoPersonal.length > 80 ||
             !formatoCorreo.test(datos.correoPersonal)
         ) {
             errores["u-correo-personal"] =
                 "Ingrese un correo personal válido.";
+
         } else if (datos.correoPersonal === datos.correo) {
             errores["u-correo-personal"] =
                 "El correo personal debe ser diferente del institucional.";
+
         } else if (
             usuarios.some(usuario =>
                 (usuario.correoPersonal || "").trim().toLowerCase() ===
@@ -114,26 +163,27 @@ const Usuarios = {
                 "Este correo personal ya está registrado.";
         }
 
-        // Validación de la fecha de nacimiento
-        const fecha = new Date(datos.nacimiento + "T00:00:00");
-
-        if (
-            !datos.nacimiento ||
-            Number.isNaN(fecha.getTime()) ||
-            fecha.toISOString().slice(0, 10) !== datos.nacimiento ||
-            fecha > new Date()
-        ) {
+        // Validación de la fecha de nacimiento.
+        if (!datos.nacimiento) {
             errores["u-nacimiento"] =
-                "Ingrese una fecha válida.";
+                "Ingrese la fecha de nacimiento.";
+
+        } else if (!this.esFechaValida(datos.nacimiento)) {
+            errores["u-nacimiento"] =
+                "Ingrese una fecha de nacimiento válida.";
+
+        } else if (!this.esMayorDeEdad(datos.nacimiento)) {
+            errores["u-nacimiento"] =
+                "El usuario debe tener al menos 18 años.";
         }
 
-        // Validación del género
+        // Validación del género.
         if (!["f", "m", "o", "n"].includes(datos.genero)) {
             errores["u-genero"] =
                 "Seleccione una opción.";
         }
 
-        // Validación del rol
+        // Validación del rol.
         if (
             !["admin", "rectoria", "vice", "dc", "dir"]
                 .includes(datos.rol)
@@ -142,7 +192,7 @@ const Usuarios = {
                 "Seleccione un rol válido.";
         }
 
-        // Validación de la contraseña
+        // Validación de la contraseña.
         if (
             !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,15}$/
                 .test(datos.password)
@@ -259,6 +309,15 @@ const Usuarios = {
         // Desactivar mensajes nativos del navegador.
         formulario.noValidate = true;
 
+        // Limitar el calendario a personas mayores de edad.
+        const campoNacimiento =
+            document.getElementById("u-nacimiento");
+
+        if (campoNacimiento) {
+            campoNacimiento.max =
+                this.obtenerFechaMaximaNacimiento();
+        }
+
         // Limpiar el error cuando se modifica un campo.
         const limpiarCampo = evento => {
             const campo = evento.target;
@@ -332,15 +391,21 @@ const Usuarios = {
                     this.limpiarErrores(formulario);
 
                     this.mostrarMensaje(
-                        "El usuario se registró correctamente.",
+                        "El usuario se registró correctamente. Redirigiendo al listado...",
                         "success"
                     );
 
-                    document.getElementById("resumen-errores")
-                        ?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center"
+                    // Evitar registros duplicados durante la redirección.
+                    formulario
+                        .querySelectorAll('button[type="submit"], input[type="submit"]')
+                        .forEach(boton => {
+                            boton.disabled = true;
                         });
+
+                    // Redirigir al listado después del registro.
+                    setTimeout(() => {
+                        window.location.href = "listado.html";
+                    }, 1500);
 
                 } else {
                     this.mostrarMensaje(

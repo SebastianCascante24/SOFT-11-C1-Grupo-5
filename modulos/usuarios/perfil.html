@@ -18,10 +18,12 @@
 
     <main id="contenido">
 
-        <h1>Consultar perfil de usuario</h1>
+        <h1 id="titulo-pagina-perfil">
+            Consultar perfil de usuario
+        </h1>
 
-        <p class="text-secondary mb-4">
-            Información del usuario que inició sesión y configuración del avatar.
+        <p id="descripcion-perfil" class="text-secondary mb-4">
+            Consulte la información del perfil de usuario.
         </p>
 
         <!-- Información del perfil -->
@@ -30,7 +32,7 @@
             <div class="card-body">
 
                 <h2 id="titulo-perfil" class="h5 mb-4">
-                    Información de mi perfil
+                    Información del perfil
                 </h2>
 
                 <div id="perfil-datos" role="status"></div>
@@ -39,18 +41,20 @@
 
                     <button type="button"
                             class="btn btn-primary"
-                            id="boton-editar-perfil">
+                            id="boton-editar-perfil"
+                            hidden>
                         Editar mi perfil
                     </button>
 
                     <a class="btn btn-secondary"
-                       href="listado.html">
+                       href="listado.html"
+                       id="volver-usuarios">
                         Volver a usuarios
                     </a>
 
                 </div>
 
-                <!-- Formulario de edición -->
+                <!-- Formulario de edición personal -->
                 <form id="form-editar-perfil"
                       class="mt-4"
                       novalidate
@@ -68,7 +72,6 @@
                         son obligatorios.
                     </p>
 
-                    <!-- Mensajes del sistema -->
                     <div id="mensaje-editar-perfil"
                          class="alert alert-danger"
                          role="status"
@@ -224,8 +227,11 @@
 
         </section>
 
-        <!-- Personalización del avatar -->
-        <section class="card" aria-labelledby="titulo-avatar">
+        <!-- Personalización exclusiva del perfil propio -->
+        <section id="seccion-avatar"
+                 class="card"
+                 aria-labelledby="titulo-avatar"
+                 hidden>
 
             <div class="card-body">
 

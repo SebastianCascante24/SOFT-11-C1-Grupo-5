@@ -1,330 +1,323 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <link rel="icon" type="image/png" href="../../favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Usuarios registrados | Gestor de Cursos CENFOTEC</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Estilos institucionales -->
-  <link rel="stylesheet" href="../../css/base/variables.css">
-  <link rel="stylesheet" href="../../css/base/reset.css">
-  <link rel="stylesheet" href="../../css/base/tipografia.css">
-  <link rel="stylesheet" href="../../css/layout/encabezado.css">
-  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-  <link rel="stylesheet" href="../../css/layout/grid.css">
-  <link rel="stylesheet" href="../../css/componentes/formularios.css">
-  <link rel="stylesheet" href="../../css/componentes/botones.css">
-  <link rel="stylesheet" href="../../css/componentes/tablas.css">
-  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-  <link rel="stylesheet" href="../../css/componentes/alertas.css">
+    <title>Usuarios registrados | Desarrollo Curricular y Docente</title>
 
-  <!-- Estilos propios del listado -->
-  <link rel="stylesheet" href="listado-usuarios.css">
+    <!-- Estilos institucionales y Bootstrap -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 
 <body>
-    <a class="salto-contenido" href="#contenido">
-        Saltar al contenido
-    </a>
 
-  <!-- ENCABEZADO INSTITUCIONAL -->
-  <header class="encabezado">
-    <a class="logo"
-       href="../../index.html"
-       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
-
-    <div class="encabezado-acciones"
-         role="group"
-         aria-label="Opciones de la cuenta">
-
-      <button type="button"
-              class="boton-secundario"
-              id="encabezado-notificaciones"
-              title="Notificaciones"
-              aria-label="Notificaciones">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
-          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
-        </svg>
-      </button>
-
-      <select id="encabezado-idioma"
-              aria-label="Idioma"
-              title="Idioma">
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
-
-      <button type="button"
-              class="avatar"
-              id="encabezado-avatar"
-              aria-label="Perfil"
-              title="Perfil">A</button>
-
-      <button type="button"
-              class="boton-secundario"
-              id="encabezado-cerrar-sesion"
-              aria-label="Cerrar sesión"
-              title="Cerrar sesión">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="m16 17 5-5-5-5"/>
-          <path d="M21 12H9"/>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- DISTRIBUCIÓN PRINCIPAL -->
-  <div class="contenedor-principal">
-
-    <!-- MENÚ LATERAL -->
-    <nav class="menu-lateral" aria-label="Menú principal">
-      <ul>
-        <li>
-          <a href="../../index.html">Inicio</a>
-        </li>
-        <li>
-          <a href="listado.html" aria-current="page">Usuarios</a>
-        </li>
-        <li>
-          <a href="../escuelas/listado.html">Escuelas</a>
-        </li>
-        <li>
-          <a href="../carreras/listado.html">Carreras</a>
-        </li>
-        <li>
-          <a href="../cursos/listado.html">Cursos</a>
-        </li>
-        <li><a href="../revision/pendientes.html">Revisión de cursos</a></li>
-        <li>
-          <a href="../catalogos/listado.html?catalogo=areas-sfia">
-            Áreas SFIA
-          </a>
-        </li>
-        <li>
-          <a href="../catalogos/listado.html?catalogo=tematicas">
-            Temática
-          </a>
-        </li>
-        <li>
-          <a href="../catalogos/listado.html?catalogo=metodologias">
-            Metodologías de aprendizaje
-          </a>
-        </li>
-        <li>
-          <a href="../catalogos/listado.html?catalogo=casas-certificadoras">
-            Casas certificadoras
-          </a>
-        </li>
-        <li>
-          <a href="../catalogos/listado.html?catalogo=niveles-complejidad">
-            Niveles de complejidad
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- CONTENIDO -->
     <main id="contenido">
 
-      <h1>Usuarios registrados</h1>
+        <h1>Usuarios registrados</h1>
 
-      <p>
-        Consulte los usuarios registrados en el Sistema
-        de Gestión Curricular y Docente.
-      </p>
-
-      <div class="acciones acciones-usuarios">
-        <a class="boton" href="usuario-registro.html">
-          Registrar nuevo usuario
-        </a>
-      </div>
-
-      <!-- TARJETA INSTITUCIONAL -->
-      <section class="tarjeta listado-usuarios"
-               aria-labelledby="titulo-listado">
-
-        <h2 id="titulo-listado">Listado de usuarios</h2>
-
-        <div class="campo">
-  <label for="buscar-usuario">Buscar usuario</label>
-  <input
-    type="search"
-    id="buscar-usuario"
-    placeholder="Buscar por nombre o correo institucional"
-    autocomplete="off"
-  >
-  </div> 
-
-        <p id="mensaje"
-           class="mensaje-listado"
-           role="status"
-           aria-live="polite">
-          Cargando usuarios...
+        <p class="text-muted mb-4">
+            Consulte los usuarios registrados en el Sistema
+            de Gestión Curricular y Docente.
         </p>
 
-        <div class="tabla-contenedor">
-          <table>
-            <caption class="solo-lectores">
-              Listado de usuarios registrados
-            </caption>
+        <!-- Acciones principales -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
 
-            <thead>
-              <tr>
-                <th scope="col">Nombre completo</th>
-                <th scope="col">Correo institucional</th>
-                <th scope="col">Género</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Fecha de registro</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
+            <a href="usuario-registro.html"
+               class="btn btn-primary">
+                Registrar nuevo usuario
+            </a>
 
-            <tbody id="tabla-usuarios"></tbody>
-          </table>
         </div>
 
-      </section>
-    </main>
-  </div>
+        <!-- Listado de usuarios -->
+        <section class="card" aria-labelledby="titulo-listado">
 
-  <script src="../../js/nucleo/autenticacion.js"></script>
-  <!-- CARGA DE USUARIOS -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const tabla = document.getElementById("tabla-usuarios");
-      const mensaje = document.getElementById("mensaje");
+            <div class="card-body">
+
+                <h2 id="titulo-listado" class="h5 mb-3">
+                    Listado de usuarios
+                </h2>
+
+                <!-- Buscador -->
+                <div class="mb-3">
+
+                    <label for="buscar-usuario" class="form-label">
+                        Buscar usuario
+                    </label>
+
+                    <input
+                        type="search"
+                        class="form-control"
+                        id="buscar-usuario"
+                        placeholder="Buscar por nombre o correo institucional"
+                        autocomplete="off">
+
+                </div>
+
+                <!-- Mensajes del listado -->
+                <p id="mensaje"
+                   class="text-muted small mb-3"
+                   role="status"
+                   aria-live="polite">
+
+                    Cargando usuarios...
+
+                </p>
+
+                <!-- Tabla adaptable -->
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <caption class="visually-hidden">
+                            Listado de usuarios registrados
+                        </caption>
+
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Correo institucional</th>
+                                <th scope="col">Género</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Fecha de registro</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabla-usuarios"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="usuarios.js"></script>
+
+    <!-- Lógica del listado -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const tabla = document.getElementById("tabla-usuarios");
+            const mensaje = document.getElementById("mensaje");
+            const buscador = document.getElementById("buscar-usuario");
 
             let usuarios = [];
 
+            // Obtener usuarios almacenados
             try {
+
                 const datos = JSON.parse(
                     localStorage.getItem("grupo5_usuarios") || "[]"
                 );
 
-        usuarios = Array.isArray(datos) ? datos : [];
-      } catch (error) {
-        mensaje.textContent =
-          "No fue posible leer los usuarios almacenados.";
-        mensaje.classList.add("mensaje-listado-error");
-        return;
-      }
+                usuarios = Array.isArray(datos) ? datos : [];
 
-      if (usuarios.length === 0) {
-        mensaje.textContent =
-          "No existen usuarios registrados.";
-        mensaje.classList.add("mensaje-listado-vacio");
-        return;
-      }
+            } catch (error) {
+
+                console.error("Error al consultar usuarios:", error);
+
+                mensaje.className = "alert alert-danger";
+
+                mensaje.textContent =
+                    "No fue posible leer los usuarios almacenados.";
+
+                mensaje.setAttribute("role", "alert");
+
+                return;
+            }
+
+            // Mostrar mensaje cuando no existen usuarios
+            if (usuarios.length === 0) {
+
+                mensaje.className = "alert alert-info";
+
+                mensaje.textContent =
+                    "No existen usuarios registrados.";
+
+                return;
+            }
 
             mensaje.textContent =
                 `Total de usuarios registrados: ${usuarios.length}`;
 
-      const generos = {
-        f: "Femenino",
-        m: "Masculino",
-        o: "Otro",
-        n: "Prefiero no indicarlo"
-      };
+            // Etiquetas de género
+            const generos = {
+                f: "Femenino",
+                m: "Masculino",
+                o: "Otro",
+                n: "Prefiero no indicarlo"
+            };
 
-      const roles = {
-        admin: "Administrador",
-        rectoria: "Rectoría",
-        vice: "Vicerrectoría",
-        dc: "Desarrollo Curricular",
-        dir: "Dirección de Escuela / Carrera"
-      };
+            // Etiquetas de roles
+            const roles = {
+                admin: "Administrador",
+                rectoria: "Rectoría",
+                vice: "Vicerrectoría",
+                dc: "Desarrollo Curricular",
+                dir: "Dirección de Escuela / Carrera"
+            };
 
-      usuarios.forEach(usuario => {
-        const fila = document.createElement("tr");
+            // Construcción de la tabla
+            usuarios.forEach(usuario => {
 
-        let fecha = "No disponible";
+                const fila = document.createElement("tr");
 
-        if (usuario.fechaRegistro) {
-          const fechaConvertida = new Date(usuario.fechaRegistro);
+                let fecha = "No disponible";
 
-          if (!Number.isNaN(fechaConvertida.getTime())) {
-            fecha = fechaConvertida.toLocaleDateString("es-CR");
-          }
-        }
+                if (usuario.fechaRegistro) {
 
-        const valores = [
-          usuario.nombre || "No disponible",
-          usuario.correo || "No disponible",
-          generos[usuario.genero] || usuario.genero || "No disponible",
-          roles[usuario.rol] || usuario.rol || "No disponible",
-          fecha
-        ];
+                    const fechaConvertida =
+                        new Date(usuario.fechaRegistro);
+
+                    if (!Number.isNaN(fechaConvertida.getTime())) {
+
+                        fecha =
+                            fechaConvertida.toLocaleDateString("es-CR");
+                    }
+                }
+
+                const valores = [
+
+                    usuario.nombre || "No disponible",
+
+                    usuario.correo || "No disponible",
+
+                    generos[usuario.genero] ||
+                        usuario.genero ||
+                        "No disponible",
+
+                    roles[usuario.rol] ||
+                        usuario.rol ||
+                        "No disponible",
+
+                    fecha
+                ];
 
                 valores.forEach(valor => {
+
                     const celda = document.createElement("td");
+
                     celda.textContent = valor;
+
                     fila.appendChild(celda);
+
                 });
 
-        const celdaAcciones = document.createElement("td");
+                // Acciones del usuario
+                const celdaAcciones = document.createElement("td");
 
-        const enlaceEditar = document.createElement("a");
-        enlaceEditar.href = "editar.html?id=" +
-         encodeURIComponent(usuario.id);
+                const acciones = document.createElement("div");
 
-          enlaceEditar.textContent = "Editar";
-             enlaceEditar.className = "boton-secundario";
+                acciones.className = "d-flex flex-wrap gap-2";
 
-              celdaAcciones.appendChild(enlaceEditar);
-        const enlacePerfil = document.createElement("a");
-        enlacePerfil.href = "perfil.html";
-        enlacePerfil.textContent = "Mi perfil";
-        enlacePerfil.className = "boton-secundario";
-        celdaAcciones.appendChild(document.createTextNode(" "));
-        celdaAcciones.appendChild(enlacePerfil);
-               fila.appendChild(celdaAcciones);
- 
+                // Botón editar
+                const enlaceEditar = document.createElement("a");
+
+                enlaceEditar.href =
+                    "editar.html?id=" +
+                    encodeURIComponent(usuario.id);
+
+                enlaceEditar.textContent = "Editar";
+
+                enlaceEditar.className =
+                    "btn btn-outline-primary btn-sm";
+
+                acciones.appendChild(enlaceEditar);
+
+                // Botón perfil
+                const enlacePerfil = document.createElement("a");
+
+                enlacePerfil.href = "perfil.html";
+
+                enlacePerfil.textContent = "Mi perfil";
+
+                enlacePerfil.className =
+                    "btn btn-outline-secondary btn-sm";
+
+                acciones.appendChild(enlacePerfil);
+
+                celdaAcciones.appendChild(acciones);
+
+                fila.appendChild(celdaAcciones);
+
                 tabla.appendChild(fila);
+
             });
-            const buscador = document.getElementById("buscar-usuario");
 
-buscador.addEventListener("input", () => {
-  const texto = buscador.value.trim().toLowerCase();
-  let encontrados = 0;
+            // Búsqueda por nombre o correo institucional
+            buscador.addEventListener("input", () => {
 
-  tabla.querySelectorAll("tr").forEach(fila => {
-    const nombre = fila.cells[0].textContent.toLowerCase();
-    const correo = fila.cells[1].textContent.toLowerCase();
+                const texto =
+                    buscador.value.trim().toLowerCase();
 
-    const coincide = nombre.includes(texto) || correo.includes(texto);
+                let encontrados = 0;
 
-    fila.hidden = !coincide;
-    fila.style.display = coincide ? "" : "none";
+                tabla.querySelectorAll("tr").forEach(fila => {
 
-    if (coincide) encontrados++;
-  });
+                    const nombre =
+                        fila.cells[0].textContent.toLowerCase();
 
-  mensaje.textContent = texto
-    ? `Usuarios encontrados: ${encontrados}`
-    : `Total de usuarios registrados: ${usuarios.length}`;
-});
+                    const correo =
+                        fila.cells[1].textContent.toLowerCase();
+
+                    const coincide =
+                        nombre.includes(texto) ||
+                        correo.includes(texto);
+
+                    fila.hidden = !coincide;
+
+                    fila.style.display =
+                        coincide ? "" : "none";
+
+                    if (coincide) encontrados++;
+
+                });
+
+                if (encontrados === 0) {
+
+                    mensaje.className = "alert alert-info";
+
+                    mensaje.textContent =
+                        "No se encontraron usuarios que coincidan con la búsqueda.";
+
+                } else {
+
+                    mensaje.className = "text-muted small mb-3";
+
+                    mensaje.textContent = texto
+
+                        ? `Usuarios encontrados: ${encontrados}`
+
+                        : `Total de usuarios registrados: ${usuarios.length}`;
+
+                }
+
+            });
+
         });
+
     </script>
+
 </body>
 
 </html>

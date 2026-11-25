@@ -142,33 +142,44 @@ schoolSelect.addEventListener("change", () => {
 // Ejecutar la carga inicial
 loadSchools();
   function showMessage(text, type = "info") {
+    const clase = { error: "alert-danger", success: "alert-success", info: "alert-info" }[type] || "alert-info";
     message.textContent = text;
-    message.className = `notice ${type}`;
+    message.className = `alert ${clase}`;
+    message.hidden = false;
     message.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function clearMessage() {
     message.textContent = "";
-    message.className = "notice hidden";
+    message.className = "alert";
+    message.hidden = true;
   }
 
   function setError(id, text) {
     const element = get(id);
     const field = element.closest(".field");
     if (!field) return;
-    field.classList.toggle("invalid", Boolean(text));
+    element.classList.toggle("is-invalid", Boolean(text));
     const error = field.querySelector(".error-text");
-    if (error) error.textContent = text || "";
+    if (error) {
+      error.textContent = text || "";
+      error.classList.toggle("d-block", Boolean(text));
+    }
     element.setAttribute("aria-invalid", text ? "true" : "false");
   }
 
   function clearErrors() {
     form.querySelectorAll(".field").forEach(field => {
-      field.classList.remove("invalid");
       const error = field.querySelector(".error-text");
-      if (error) error.textContent = "";
+      if (error) {
+        error.textContent = "";
+        error.classList.remove("d-block");
+      }
       const control = field.querySelector("input, select, textarea");
-      if (control) control.setAttribute("aria-invalid", "false");
+      if (control) {
+        control.classList.remove("is-invalid");
+        control.setAttribute("aria-invalid", "false");
+      }
     });
   }
 
@@ -282,7 +293,7 @@ if (mode === "draft") {
       showMessage(mode === "draft"
         ? "Revise los datos señalados. Para guardar un borrador debe ingresar escuela, código y nombre válidos."
         : "Hay datos que necesitan revisión. Complete los campos indicados antes de enviar el curso.", "error");
-      const first = form.querySelector(".field.invalid input, .field.invalid select, .field.invalid textarea");
+      const first = form.querySelector(".is-invalid");
       if (first) first.focus({ preventScroll: false });
     }
     return valid;
@@ -411,6 +422,7 @@ function updateProgress() {
 
     // Actualizar barra y texto
     get("completionBar").style.width = `${percent}%`;
+    get("completionBar").parentElement.setAttribute("aria-valuenow", percent);
     get("completionText").textContent =
         `${percent}% completado (${completed}/${fields.length} campos)`;
 }
@@ -514,4 +526,3 @@ function cargarCursoParaEditar() {
   updateProgress();
   cargarCursoParaEditar();
 })();
-  

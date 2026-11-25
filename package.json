@@ -1,0 +1,16 @@
+{
+  "name": "soft-11-c1-grupo-5",
+  "version": "1.0.0",
+  "description": "Proyecto Integrador 1 · Sistema de gestión para el Departamento de Desarrollo Curricular y Docente de la Universidad CENFOTEC.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

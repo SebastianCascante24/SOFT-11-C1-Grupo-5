@@ -1,171 +1,181 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <link rel="icon" type="image/png" href="../../favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registrar escuela | Gestor de Cursos CENFOTEC</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../../css/base/variables.css">
-  <link rel="stylesheet" href="../../css/base/reset.css">
-  <link rel="stylesheet" href="../../css/base/tipografia.css">
-  <link rel="stylesheet" href="../../css/layout/encabezado.css">
-  <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-  <link rel="stylesheet" href="../../css/layout/grid.css">
-  <link rel="stylesheet" href="../../css/componentes/formularios.css">
-  <link rel="stylesheet" href="../../css/componentes/botones.css">
-  <link rel="stylesheet" href="../../css/componentes/tablas.css">
-  <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-  <link rel="stylesheet" href="../../css/componentes/alertas.css">
-  <link rel="stylesheet" href="escuelas.css">
+    <title>Registrar escuela | Desarrollo Curricular y Docente</title>
 
-  <script src="escuelas.js" defer></script>
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 
 <body>
-  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
 
-  <!-- ENCABEZADO INSTITUCIONAL -->
-  <header class="encabezado">
-    <a class="logo" href="../../index.html"
-       aria-label="Desarrollo Curricular y Docente, ir al inicio"></a>
-
-    <div class="encabezado-acciones" role="group"
-         aria-label="Opciones de la cuenta">
-
-      <button type="button" class="boton-secundario"
-              id="encabezado-notificaciones"
-              title="Notificaciones" aria-label="Notificaciones">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
-          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
-        </svg>
-      </button>
-
-      <select id="encabezado-idioma" aria-label="Idioma" title="Idioma">
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
-
-      <button type="button" class="avatar"
-              id="encabezado-avatar"
-              aria-label="Perfil" title="Perfil">A</button>
-
-      <button type="button" class="boton-secundario"
-              id="encabezado-cerrar-sesion"
-              aria-label="Cerrar sesión" title="Cerrar sesión">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
-          <path d="m16 17 5-5-5-5"/>
-          <path d="M21 12H9"/>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- DISTRIBUCIÓN PRINCIPAL -->
-  <div class="contenedor-principal">
-
-    <!-- MENÚ LATERAL -->
-    <nav class="menu-lateral" aria-label="Menú principal">
-      <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../usuarios/listado.html">Usuarios</a></li>
-        <li><a href="listado.html" aria-current="page">Escuelas</a></li>
-        <li><a href="../carreras/listado.html">Carreras</a></li>
-        <li><a href="../cursos/listado.html">Cursos</a></li>
-        <li><a href="../revision/pendientes.html">Revisión de cursos</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=areas-sfia">Áreas SFIA</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=tematicas">Temática</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=metodologias">Metodologías de aprendizaje</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=casas-certificadoras">Casas certificadoras</a></li>
-        <li><a href="../catalogos/listado.html?catalogo=niveles-complejidad">Niveles de complejidad</a></li>
-      </ul>
-    </nav>
-
-    <!-- CONTENIDO DEL FORMULARIO -->
     <main id="contenido">
 
-      <h1 id="tituloFormularioEscuela">Registrar escuela</h1>
-      <p>
-        Complete los datos para registrar una nueva escuela
-        en el Sistema de Gestión Curricular y Docente.
-        Los campos marcados con * son obligatorios.
-      </p>
-
-     <form id="formularioEscuela" class="tarjeta" novalidate>
-        <fieldset>
-          <legend>Información de la escuela</legend>
-
-          <div class="campo">
-            <label for="codigoEscuela">Código de escuela *</label>
-            <input type="text"
-                   id="codigoEscuela"
-                   name="codigoEscuela"
-                   maxlength="20"
-                   aria-describedby="errorCodigo"
-                   required>
-            <p id="errorCodigo" class="mensaje-error"
-               aria-live="polite"></p>
-          </div>
-  <div class="campo">
-  <label for="nombreEscuela">Nombre de la escuela *</label>
-  <input
-    type="text"
-    id="nombreEscuela"
-    name="nombreEscuela"
-    maxlength="100"
-    aria-describedby="errorNombre"
-    required
-  >
-  <p
-    id="errorNombre"
-    class="mensaje-error"
-    aria-live="polite"></p>
-</div>
-          <div class="campo">
-  <label for="directorEscuela">Director de escuela *</label>
-
-  <select
-    id="directorEscuela"
-    name="directorEscuela"
-    aria-describedby="errorDirector"
-    required>
-    <option value="">Seleccione un director</option>
-  </select>
-
-  <p id="errorDirector"
-     class="mensaje-error"
-     aria-live="polite"></p>
-</div>
-        </fieldset>
-
-        <p id="mensajeRegistro" role="status"
-           aria-live="polite"></p>
-
-        <div class="acciones">
-           <button type="submit" class="boton" id="botonGuardarEscuela">
+        <h1 id="tituloFormularioEscuela">
             Registrar escuela
-          </button>
-          <button type="reset" class="boton boton-secundario">
-            Restablecer
-          </button>
-          <a href="listado.html" class="boton boton-secundario">
-            Cancelar
-          </a>
-        </div>
-      </form>
+        </h1>
+
+        <p class="text-secondary mb-4">
+            Complete los datos para registrar una nueva escuela
+            en el Sistema de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Formulario de registro y edición -->
+        <form id="formularioEscuela"
+              class="card mb-4"
+              novalidate>
+
+            <div class="card-body">
+
+                <fieldset>
+
+                    <legend class="h5 mb-3">
+                        Información de la escuela
+                    </legend>
+
+                    <p class="text-secondary mb-4">
+                        Los campos marcados con
+                        <span class="text-danger">*</span>
+                        son obligatorios.
+                    </p>
+
+                    <div class="row g-3">
+
+                        <!-- Código de escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="codigoEscuela"
+                                   class="form-label">
+                                Código de escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="codigoEscuela"
+                                   name="codigoEscuela"
+                                   maxlength="20"
+                                   placeholder="Ingrese el código de la escuela"
+                                   aria-describedby="errorCodigo"
+                                   required>
+
+                            <div id="errorCodigo"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Nombre de la escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="nombreEscuela"
+                                   class="form-label">
+                                Nombre de la escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombreEscuela"
+                                   name="nombreEscuela"
+                                   maxlength="100"
+                                   placeholder="Ingrese el nombre de la escuela"
+                                   aria-describedby="errorNombre"
+                                   required>
+
+                            <div id="errorNombre"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Director de escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="directorEscuela"
+                                   class="form-label">
+                                Director de escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="directorEscuela"
+                                    name="directorEscuela"
+                                    class="form-select"
+                                    aria-describedby="errorDirector"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un director
+                                </option>
+
+                            </select>
+
+                            <div id="errorDirector"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <!-- Mensajes del sistema -->
+                <div id="mensajeRegistro"
+                     class="mt-3"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+                <!-- Acciones del formulario -->
+                <div class="d-flex flex-wrap justify-content-end gap-2 mt-4">
+
+                    <a href="listado.html"
+                       class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="reset"
+                            class="btn btn-secondary">
+                        Restablecer
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary"
+                            id="botonGuardarEscuela">
+                        Registrar escuela
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
     </main>
-  </div>
-  <script src="../../js/nucleo/autenticacion.js"></script>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica del módulo de escuelas -->
+    <script src="escuelas.js"></script>
+
 </body>
+
 </html>

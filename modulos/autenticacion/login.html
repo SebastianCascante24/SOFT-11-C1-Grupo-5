@@ -2,57 +2,59 @@
 <html lang="es">
 
 <head>
-    <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="icon" type="image/png" href="../../recursos/imagenes/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Desarrollo Curricular y Docente</title>
+    <title>Iniciar sesión | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/base/variables.css">
-    <link rel="stylesheet" href="../../css/base/reset.css">
-    <link rel="stylesheet" href="../../css/base/tipografia.css">
-    <link rel="stylesheet" href="../../css/layout/encabezado.css">
-    <link rel="stylesheet" href="../../css/layout/menu-lateral.css">
-    <link rel="stylesheet" href="../../css/layout/grid.css">
-    <link rel="stylesheet" href="../../css/componentes/formularios.css">
-    <link rel="stylesheet" href="../../css/componentes/botones.css">
-    <link rel="stylesheet" href="../../css/componentes/tablas.css">
-    <link rel="stylesheet" href="../../css/componentes/tarjetas.css">
-    <link rel="stylesheet" href="../../css/componentes/alertas.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 </head>
 
-<body>
-    <main id="contenido" class="login">
-        <section class="tarjeta login-tarjeta" aria-labelledby="login-titulo">
-            <h1 id="login-titulo">Iniciar sesión</h1>
-            <p class="login-subtitulo">Ingrese sus credenciales para continuar</p>
+<body class="d-flex flex-column min-vh-100">
+    <main id="contenido" class="flex-grow-1 d-flex align-items-center justify-content-center p-3">
+        <section class="card login-tarjeta w-100" aria-labelledby="login-titulo">
+            <div class="card-body p-4">
+                <h1 class="h3 text-center mb-2" id="login-titulo">Iniciar sesión</h1>
+                <p class="text-center text-secondary small mb-4">Ingrese sus credenciales para continuar</p>
 
-            <form id="login-formulario" novalidate>
-                <div id="login-error-general" class="alerta alerta-error" role="alert" hidden></div>
+                <form id="login-formulario" novalidate>
+                    <div id="login-error-general" class="alert alert-danger mb-4" role="alert" hidden></div>
 
-                <div class="campo">
-                    <label for="login-usuario">Usuario <span class="obligatorio" aria-hidden="true">*</span></label>
-                    <input type="text" id="login-usuario" name="usuario" autocomplete="username" required>
-                </div>
+                    <div class="campo mb-3">
+                        <label class="form-label" for="login-usuario">Usuario <span class="text-danger"
+                                aria-hidden="true">*</span></label>
+                        <input type="text" class="form-control" id="login-usuario" name="usuario"
+                            autocomplete="username" required>
+                    </div>
 
-                <div class="campo">
-                    <label for="login-contrasena">Contraseña <span class="obligatorio"
-                            aria-hidden="true">*</span></label>
-                    <input type="password" id="login-contrasena" name="contrasena" autocomplete="current-password"
-                        required>
-                </div>
+                    <div class="campo mb-3">
+                        <label class="form-label" for="login-contrasena">Contraseña <span class="text-danger"
+                                aria-hidden="true">*</span></label>
+                        <input type="password" class="form-control" id="login-contrasena" name="contrasena"
+                            autocomplete="current-password" required>
+                    </div>
 
-                <button type="submit" id="login-boton-iniciar">Iniciar</button>
+                    <button type="submit" class="btn btn-primary w-100" id="login-boton-iniciar">Iniciar</button>
 
-                <div class="login-separador" role="separator"><span>o</span></div>
+                    <div class="d-flex align-items-center gap-3 my-3 text-secondary small">
+                        <hr class="flex-grow-1 m-0" aria-hidden="true">
+                        <span>o</span>
+                        <hr class="flex-grow-1 m-0" aria-hidden="true">
+                    </div>
 
-                <!-- sin funcionalidad -->
-                <button type="button" class="boton-secundario" id="login-boton-google">Iniciar con Google</button>
+                    <!-- sin funcionalidad -->
+                    <button type="button" class="btn btn-secondary w-100" id="login-boton-google">Iniciar con
+                        Google</button>
 
-                <a class="login-enlace" id="login-enlace-olvido" href="#">¿Olvidó su contraseña?</a>
-            </form>
+                    <a class="d-block text-center small mt-4" id="login-enlace-olvido" href="#">¿Olvidó su
+                        contraseña?</a>
+                </form>
+            </div>
         </section>
     </main>
-    <footer class="page-footer">
+
+    <footer class="text-center text-secondary small py-3">
         Universidad CENFOTEC · Sistema de Gestión Curricular y Docente
     </footer>
 

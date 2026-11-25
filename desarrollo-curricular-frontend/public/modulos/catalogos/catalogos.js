@@ -38,28 +38,25 @@ const Catalogos = {
     return Catalogos.CONFIGURACION[idCatalogo] || null;
   },
 
-  obtenerRegistros(idCatalogo) {
-    return Almacenamiento.obtener(`catalogo_${idCatalogo}`, []);
+  async obtenerRegistros(idCatalogo) {
+    return Api.obtener(`/${idCatalogo}`);
   },
 
-  buscarRegistro(idCatalogo, codigo) {
-    return Catalogos.obtenerRegistros(idCatalogo)
-      .find((registro) => String(registro.codigo) === String(codigo));
+  async buscarRegistro(idCatalogo, codigo) {
+    try {
+      return await Api.obtener(`/${idCatalogo}/${encodeURIComponent(codigo)}`);
+    } catch (error) {
+      if (error.estado === 404) return null;
+      throw error;
+    }
   },
 
-  agregarRegistro(idCatalogo, registro) {
-    const registros = Catalogos.obtenerRegistros(idCatalogo);
-    registros.push(registro);
-    return Almacenamiento.guardar(`catalogo_${idCatalogo}`, registros);
+  async agregarRegistro(idCatalogo, registro) {
+    return Api.crear(`/${idCatalogo}`, registro);
   },
 
-  actualizarRegistro(idCatalogo, codigo, cambios) {
-    const registros = Catalogos.obtenerRegistros(idCatalogo);
-    const indice = registros.findIndex((registro) => String(registro.codigo) === String(codigo));
-    if (indice === -1) return false;
-
-    registros[indice] = { ...registros[indice], ...cambios, codigo: registros[indice].codigo };
-    return Almacenamiento.guardar(`catalogo_${idCatalogo}`, registros);
+  async actualizarRegistro(idCatalogo, codigo, cambios) {
+    return Api.actualizar(`/${idCatalogo}/${encodeURIComponent(codigo)}`, cambios);
   },
 
   normalizarCodigo(idCatalogo, valor) {
@@ -84,6 +81,7 @@ const ListadoCatalogo = (function () {
   let idCatalogo = null;
   let configuracion = null;
   let paginaActual = 1;
+  let todosLosRegistros = [];
   const filtros = { codigo: '', nombre: '', estado: 'todos' };
 
   let contenidoListado = null;
@@ -211,7 +209,7 @@ const ListadoCatalogo = (function () {
   }
 
   function renderizarListado() {
-    const registros = Catalogos.obtenerRegistros(idCatalogo)
+    const registros = todosLosRegistros
       .filter(coincideConFiltrosListado)
       .sort(compararPorCodigoListado);
 
@@ -233,6 +231,16 @@ const ListadoCatalogo = (function () {
     indicadorPaginaListado.textContent = `Página ${paginaActual} de ${totalPaginas}`;
     botonAnteriorListado.disabled = paginaActual <= 1;
     botonSiguienteListado.disabled = paginaActual >= totalPaginas;
+  }
+
+  // Pide los registros a la API una sola vez; los filtros trabajan sobre esta copia
+  async function cargarRegistrosListado() {
+    try {
+      todosLosRegistros = await Catalogos.obtenerRegistros(idCatalogo);
+    } catch (error) {
+      todosLosRegistros = [];
+      Notificacion.mostrar('error', error.message);
+    }
   }
 
   function quitarFiltroListado(campo) {
@@ -307,7 +315,7 @@ const ListadoCatalogo = (function () {
 
   // inicio
 
-  function iniciar() {
+  async function iniciar() {
     contenidoListado = document.getElementById('listado-catalogo-contenido');
     if (!contenidoListado) return; // La página actual no es listado.html
 
@@ -342,6 +350,7 @@ const ListadoCatalogo = (function () {
     enlaceAgregarListado.href = `formulario.html?catalogo=${encodeURIComponent(idCatalogo)}`;
 
     registrarEventosListado();
+    await cargarRegistrosListado();
     renderizarListado();
     mostrarAvisoResultadoListado();
   }
@@ -372,15 +381,12 @@ const FormularioCatalogo = (function () {
 
   const reglasCatalogo = [];
 
+  // El codigo duplicado ya no se revisa aqui: lo decide la API (responde 409)
   function validarCodigoCatalogo() {
     const valor = camposCatalogo.codigo.value.trim();
 
     if (Validadores.estaVacio(valor)) return 'Ingrese el código.';
     if (!Validadores.esEnteroPositivo(valor)) return 'Ingrese un código entero positivo.';
-
-    if (Catalogos.buscarRegistro(idCatalogo, Catalogos.normalizarCodigo(idCatalogo, valor))) {
-      return configuracion.codigo.mensajeDuplicado;
-    }
     return '';
   }
 
@@ -425,7 +431,7 @@ const FormularioCatalogo = (function () {
     Notificacion.limpiarErrorGeneral(errorGeneralCatalogo);
   }
 
-  function manejarEnvioCatalogo(evento) {
+  async function manejarEnvioCatalogo(evento) {
     evento.preventDefault();
     Notificacion.limpiarErrorGeneral(errorGeneralCatalogo);
 
@@ -441,7 +447,7 @@ const FormularioCatalogo = (function () {
     }
 
     if (registroOriginal) {
-      guardarModificacionCatalogo();
+      await guardarModificacionCatalogo();
       return;
     }
 
@@ -454,15 +460,30 @@ const FormularioCatalogo = (function () {
       registro.descripcion = camposCatalogo.descripcion.value.trim();
     }
 
-    if (!Catalogos.agregarRegistro(idCatalogo, registro)) {
-      Notificacion.mostrar('error', 'No se pudo guardar el registro. Intente de nuevo.');
+    botonGuardarCatalogo.disabled = true;
+    try {
+      await Catalogos.agregarRegistro(idCatalogo, registro);
+    } catch (error) {
+      botonGuardarCatalogo.disabled = false;
+
+      if (error.estado === 409) {
+        // Codigo duplicado
+        Notificacion.mostrarErrorCampo(camposCatalogo.codigo, error.message);
+        Notificacion.mostrarErrorGeneral(
+          errorGeneralCatalogo,
+          'Hay datos que necesitan revisión. Corrija los campos señalados.'
+        );
+        camposCatalogo.codigo.focus();
+      } else {
+        Notificacion.mostrar('error', error.message);
+      }
       return;
     }
 
     Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}&resultado=creado`);
   }
 
-  function guardarModificacionCatalogo() {
+  async function guardarModificacionCatalogo() {
     const cambios = { nombre: camposCatalogo.nombre.value.trim() };
     if (configuracion.descripcion.visible) {
       cambios.descripcion = camposCatalogo.descripcion.value.trim();
@@ -475,8 +496,12 @@ const FormularioCatalogo = (function () {
       return;
     }
 
-    if (!Catalogos.actualizarRegistro(idCatalogo, codigoModificar, cambios)) {
-      Notificacion.mostrar('error', 'No se pudo guardar la modificación. Intente de nuevo.');
+    botonGuardarCatalogo.disabled = true;
+    try {
+      await Catalogos.actualizarRegistro(idCatalogo, codigoModificar, cambios);
+    } catch (error) {
+      botonGuardarCatalogo.disabled = false;
+      Notificacion.mostrar('error', error.message);
       return;
     }
 
@@ -550,7 +575,7 @@ const FormularioCatalogo = (function () {
 
   // inicio
 
-  function iniciar() {
+  async function iniciar() {
     formularioCatalogo = document.getElementById('catalogo-formulario');
     if (!formularioCatalogo) return;
 
@@ -576,7 +601,14 @@ const FormularioCatalogo = (function () {
 
     codigoModificar = Enrutador.obtenerParametro('codigo');
     if (codigoModificar !== null) {
-      registroOriginal = Catalogos.buscarRegistro(idCatalogo, codigoModificar);
+      try {
+        registroOriginal = await Catalogos.buscarRegistro(idCatalogo, codigoModificar);
+      } catch (error) {
+        formularioCatalogo.hidden = true;
+        Notificacion.mostrar('error', error.message);
+        return;
+      }
+
       if (!registroOriginal) {
         mostrarVistaRegistroNoDisponible();
         return;

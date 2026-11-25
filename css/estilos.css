@@ -219,3 +219,6 @@ h1 {
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+/* Login: ancho maximo de la tarjeta */
+.login-tarjeta { max-width: 440px; }

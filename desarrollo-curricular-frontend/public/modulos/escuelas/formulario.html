@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar escuela | Desarrollo Curricular y Docente</title>
+
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+
+    <main id="contenido">
+
+        <h1 id="tituloFormularioEscuela">
+            Registrar escuela
+        </h1>
+
+        <p class="text-secondary mb-4">
+            Complete los datos para registrar una nueva escuela
+            en el Sistema de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Formulario de registro y edición -->
+        <form id="formularioEscuela"
+              class="card mb-4"
+              novalidate>
+
+            <div class="card-body">
+
+                <fieldset>
+
+                    <legend class="h5 mb-3">
+                        Información de la escuela
+                    </legend>
+
+                    <p class="text-secondary mb-4">
+                        Los campos marcados con
+                        <span class="text-danger">*</span>
+                        son obligatorios.
+                    </p>
+
+                    <div class="row g-3">
+
+                        <!-- Código de escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="codigoEscuela"
+                                   class="form-label">
+                                Código de escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="codigoEscuela"
+                                   name="codigoEscuela"
+                                   maxlength="20"
+                                   placeholder="Ingrese el código de la escuela"
+                                   aria-describedby="errorCodigo"
+                                   required>
+
+                            <div id="errorCodigo"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Nombre de la escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="nombreEscuela"
+                                   class="form-label">
+                                Nombre de la escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombreEscuela"
+                                   name="nombreEscuela"
+                                   maxlength="100"
+                                   placeholder="Ingrese el nombre de la escuela"
+                                   aria-describedby="errorNombre"
+                                   required>
+
+                            <div id="errorNombre"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Director de escuela -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="directorEscuela"
+                                   class="form-label">
+                                Director de escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="directorEscuela"
+                                    name="directorEscuela"
+                                    class="form-select"
+                                    aria-describedby="errorDirector"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un director
+                                </option>
+
+                            </select>
+
+                            <div id="errorDirector"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <!-- Mensajes del sistema -->
+                <div id="mensajeRegistro"
+                     class="mt-3"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+                <!-- Acciones del formulario -->
+                <div class="d-flex flex-wrap justify-content-end gap-2 mt-4">
+
+                    <a href="listado.html"
+                       class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="reset"
+                            class="btn btn-secondary">
+                        Restablecer
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary"
+                            id="botonGuardarEscuela">
+                        Registrar escuela
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica del módulo de escuelas -->
+    <script src="escuelas.js"></script>
+
+</body>
+
+</html>

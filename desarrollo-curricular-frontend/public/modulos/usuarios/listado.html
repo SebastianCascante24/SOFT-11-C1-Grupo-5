@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuarios registrados | Desarrollo Curricular y Docente</title>
+
+    <!-- Estilos institucionales y Bootstrap -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+
+    <main id="contenido">
+
+        <h1>Usuarios registrados</h1>
+
+        <p class="text-muted mb-4">
+            Consulte los usuarios registrados en el Sistema
+            de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Acciones principales -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+
+            <a href="usuario-registro.html"
+               class="btn btn-primary">
+                Registrar nuevo usuario
+            </a>
+
+        </div>
+
+        <!-- Listado de usuarios -->
+        <section class="card" aria-labelledby="titulo-listado">
+
+            <div class="card-body">
+
+                <h2 id="titulo-listado" class="h5 mb-3">
+                    Listado de usuarios
+                </h2>
+
+                <!-- Buscador -->
+                <div class="mb-3">
+
+                    <label for="buscar-usuario" class="form-label">
+                        Buscar usuario
+                    </label>
+
+                    <input
+                        type="search"
+                        class="form-control"
+                        id="buscar-usuario"
+                        placeholder="Buscar por nombre o correo institucional"
+                        autocomplete="off">
+
+                </div>
+
+                <!-- Mensajes del listado -->
+                <p id="mensaje"
+                   class="text-muted small mb-3"
+                   role="status"
+                   aria-live="polite">
+                    Cargando usuarios...
+                </p>
+
+                <!-- Tabla adaptable -->
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <caption class="visually-hidden">
+                            Listado de usuarios registrados
+                        </caption>
+
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Correo institucional</th>
+                                <th scope="col">Género</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Fecha de registro</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabla-usuarios"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="usuarios.js"></script>
+
+    <!-- Lógica independiente del listado -->
+    <script src="listado.js"></script>
+
+</body>
+
+</html>

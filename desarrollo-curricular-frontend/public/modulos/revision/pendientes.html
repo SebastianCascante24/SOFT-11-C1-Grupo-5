@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisión de cursos | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+    <main id="contenido">
+        <h1 id="revision-titulo">Cursos pendientes de revisión</h1>
+
+        <section id="revision-contenido" class="card" aria-labelledby="revision-titulo">
+            <div class="card-body">
+                <p id="revision-contador" class="mb-3" role="status"></p>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle" aria-labelledby="revision-titulo">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Escuela</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="revision-cuerpo"></tbody>
+                    </table>
+                </div>
+
+                <p id="revision-vacio" class="alert alert-info" role="status" hidden></p>
+
+                <nav class="d-flex justify-content-center align-items-center gap-3 mt-3"
+                    aria-label="Paginación del listado">
+                    <button type="button" class="btn btn-secondary" id="revision-anterior">Anterior</button>
+                    <span id="revision-pagina" aria-live="polite"></span>
+                    <button type="button" class="btn btn-secondary" id="revision-siguiente">Siguiente</button>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="../../js/componentes/modal.js"></script>
+    <script src="revision.js"></script>
+</body>
+
+</html>

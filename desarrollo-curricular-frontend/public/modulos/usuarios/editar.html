@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modificar usuario | Desarrollo Curricular y Docente</title>
+
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+
+    <main id="contenido">
+
+        <section class="card" aria-labelledby="titulo-edicion">
+
+            <div class="card-body">
+
+                <h1 id="titulo-edicion">
+                    Modificar usuario registrado
+                </h1>
+
+                <p class="mb-4">
+                    Actualice los datos permitidos del usuario.
+                    Los campos con
+                    <span class="text-danger">*</span>
+                    son obligatorios.
+                </p>
+
+                <form id="form-editar-usuario" novalidate>
+
+                    <!-- Mensajes del sistema -->
+                    <div id="mensaje-edicion"
+                         class="alert alert-danger"
+                         role="status"
+                         aria-live="polite"
+                         hidden>
+                    </div>
+
+                    <!-- Información personal -->
+                    <fieldset class="mb-4">
+
+                        <legend class="h5 mb-3">
+                            Información del usuario
+                        </legend>
+
+                        <div class="row g-3">
+
+                            <!-- Nombre completo -->
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-nombre"
+                                       class="form-label">
+                                    Nombre completo
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="editar-nombre"
+                                       maxlength="80"
+                                       autocomplete="name"
+                                       aria-describedby="error-editar-nombre"
+                                       required>
+
+                                <div id="error-editar-nombre"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <!-- Correo institucional -->
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-correo"
+                                       class="form-label">
+                                    Correo institucional
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="email"
+                                       class="form-control"
+                                       id="editar-correo"
+                                       maxlength="80"
+                                       autocomplete="email"
+                                       aria-describedby="error-editar-correo"
+                                       required>
+
+                                <div id="error-editar-correo"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <!-- Número telefónico -->
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-telefono"
+                                       class="form-label">
+                                    Número telefónico
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="tel"
+                                       class="form-control"
+                                       id="editar-telefono"
+                                       maxlength="20"
+                                       placeholder="Ejemplo: 8888-8888"
+                                       autocomplete="tel"
+                                       aria-describedby="error-editar-telefono"
+                                       required>
+
+                                <div id="error-editar-telefono"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <!-- Fecha de nacimiento -->
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-nacimiento"
+                                       class="form-label">
+                                    Fecha de nacimiento
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="date"
+                                       class="form-control"
+                                       id="editar-nacimiento"
+                                       autocomplete="bday"
+                                       aria-describedby="error-editar-nacimiento"
+                                       required>
+
+                                <div id="error-editar-nacimiento"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <!-- Género -->
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-genero"
+                                       class="form-label">
+                                    Género
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select id="editar-genero"
+                                        class="form-select"
+                                        aria-describedby="error-editar-genero"
+                                        required>
+
+                                    <option value="">
+                                        Seleccione una opción
+                                    </option>
+
+                                    <option value="f">Femenino</option>
+                                    <option value="m">Masculino</option>
+                                    <option value="o">Otro</option>
+                                    <option value="n">Prefiero no indicarlo</option>
+
+                                </select>
+
+                                <div id="error-editar-genero"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <hr class="my-4">
+
+                    <!-- Acceso al sistema -->
+                    <fieldset class="mb-4">
+
+                        <legend class="h5 mb-3">
+                            Acceso al sistema
+                        </legend>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="editar-rol"
+                                       class="form-label">
+                                    Rol
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select id="editar-rol"
+                                        class="form-select"
+                                        aria-describedby="error-editar-rol"
+                                        required>
+
+                                    <option value="">
+                                        Seleccione un rol
+                                    </option>
+
+                                    <option value="admin">Administrador</option>
+                                    <option value="rectoria">Rectoría</option>
+                                    <option value="vice">Vicerrectoría</option>
+                                    <option value="dc">Desarrollo Curricular</option>
+                                    <option value="dir">Dirección de Escuela / Carrera</option>
+
+                                </select>
+
+                                <div id="error-editar-rol"
+                                     class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Acciones del formulario -->
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
+
+                        <a href="listado.html"
+                           class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Guardar cambios
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica de edición -->
+    <script src="editar.js"></script>
+
+</body>
+
+</html>

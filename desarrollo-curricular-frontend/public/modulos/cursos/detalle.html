@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del curso | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+    <main id="contenido">
+        <h1>Detalle del curso</h1>
+        <p class="text-secondary">Consulta de la información académica y administrativa del curso.</p>
+
+        <div id="mensaje" class="text-danger" role="status" aria-live="polite"></div>
+
+        <section class="card mb-3" aria-labelledby="identificacion-titulo">
+            <div class="card-body">
+                <h2 class="h5 mb-3" id="identificacion-titulo">Identificación del curso</h2>
+
+                <dl class="row g-3 mb-0">
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Código</dt><dd id="codigo" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Nombre del curso</dt><dd id="nombre" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Nombre en Power Accounts</dt><dd id="nombrePower" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Escuela</dt><dd id="escuela" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Carrera</dt><dd id="carrera" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Estado</dt><dd id="estado" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Última modificación</dt><dd id="fechaModificacion" class="mb-0">—</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="card mb-3" aria-labelledby="academica-titulo">
+            <div class="card-body">
+                <h2 class="h5 mb-3" id="academica-titulo">Información académica</h2>
+
+                <dl class="row g-3 mb-0">
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Modalidad</dt><dd id="modalidad" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Créditos</dt><dd id="creditos" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Horas de clase</dt><dd id="horasClase" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Horas extraclase</dt><dd id="horasExtraclase" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Total de horas</dt><dd id="totalHoras" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Requisitos indispensables</dt><dd id="requisitosIndispensables" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Requisitos deseables</dt><dd id="requisitosDeseables" class="mb-0">—</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="card mb-3" aria-labelledby="comercial-titulo">
+            <div class="card-body">
+                <h2 class="h5 mb-3" id="comercial-titulo">Información comercial</h2>
+
+                <dl class="row g-3 mb-0">
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">¿Es E-commerce?</dt><dd id="ecommerce" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Fecha de apertura</dt><dd id="fechaApertura" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Moneda</dt><dd id="moneda" class="mb-0">—</dd></div>
+                    <div class="col-12 col-md-6 col-xl-4"><dt class="text-secondary small">Programa</dt><dd id="programa" class="mb-0">—</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="card mb-3" aria-labelledby="descripcion-titulo">
+            <div class="card-body">
+                <h2 class="h5 mb-3" id="descripcion-titulo">Descripción del curso</h2>
+
+                <h3 class="h6">Descripción corta</h3>
+                <p id="descripcionCorta">—</p>
+
+                <h3 class="h6">Descripción completa</h3>
+                <p id="descripcionCompleta" class="mb-0">—</p>
+            </div>
+        </section>
+
+        <div class="d-flex flex-wrap justify-content-end gap-2">
+            <a href="listado.html" class="btn btn-secondary">Volver</a>
+            <button type="button" id="editar" class="btn btn-primary">Editar curso</button>
+        </div>
+    </main>
+
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="detalle.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+</body>
+
+</html>

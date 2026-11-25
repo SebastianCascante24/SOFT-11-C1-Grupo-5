@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar usuario | Desarrollo Curricular y Docente</title>
+
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+    <main id="contenido">
+
+        <section class="card" aria-labelledby="usuario-titulo">
+            <div class="card-body">
+
+                <h1 id="usuario-titulo">Registrar usuario</h1>
+
+                <p>
+                    Solo el Administrador puede registrar usuarios.
+                    Los campos con <span class="text-danger">*</span>
+                    son obligatorios.
+                </p>
+
+                <form id="form-usuario" novalidate>
+
+                    <div id="resumen-errores"
+                         class="alert alert-danger"
+                         role="alert"
+                         aria-live="polite"
+                         hidden>
+                    </div>
+
+                    <!-- Datos personales -->
+                    <fieldset class="mb-4">
+
+                        <legend class="h5 mb-3">Datos personales</legend>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-identificacion" class="form-label">
+                                    Identificación
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="u-identificacion"
+                                       name="u-identificacion"
+                                       maxlength="20"
+                                       autocomplete="off"
+                                       required
+                                       aria-describedby="error-u-identificacion">
+
+                                <div id="error-u-identificacion"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-nombre" class="form-label">
+                                    Nombre completo
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="u-nombre"
+                                       name="u-nombre"
+                                       maxlength="80"
+                                       autocomplete="name"
+                                       required
+                                       aria-describedby="error-u-nombre">
+
+                                <div id="error-u-nombre"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-telefono" class="form-label">
+                                    Número telefónico
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="tel"
+                                       class="form-control"
+                                       id="u-telefono"
+                                       name="u-telefono"
+                                       maxlength="15"
+                                       autocomplete="tel"
+                                       placeholder="Ejemplo: 8888-8888"
+                                       required
+                                       aria-describedby="error-u-telefono">
+
+                                <div id="error-u-telefono"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-correo-personal" class="form-label">
+                                    Correo personal
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="email"
+                                       class="form-control"
+                                       id="u-correo-personal"
+                                       name="u-correo-personal"
+                                       maxlength="80"
+                                       autocomplete="email"
+                                       placeholder="ejemplo@gmail.com"
+                                       required
+                                       aria-describedby="error-u-correo-personal">
+
+                                <div id="error-u-correo-personal"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-correo" class="form-label">
+                                    Correo institucional
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="email"
+                                       class="form-control"
+                                       id="u-correo"
+                                       name="u-correo"
+                                       maxlength="80"
+                                       autocomplete="email"
+                                       required
+                                       aria-describedby="error-u-correo">
+
+                                <div id="error-u-correo"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-nacimiento" class="form-label">
+                                    Fecha de nacimiento
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="date"
+                                       class="form-control"
+                                       id="u-nacimiento"
+                                       name="u-nacimiento"
+                                       autocomplete="bday"
+                                       required
+                                       aria-describedby="error-u-nacimiento">
+
+                                <div id="error-u-nacimiento"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="u-genero" class="form-label">
+                                    Sexo / género
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select class="form-select"
+                                        id="u-genero"
+                                        name="u-genero"
+                                        required
+                                        aria-describedby="error-u-genero">
+
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="f">Femenino</option>
+                                    <option value="m">Masculino</option>
+                                    <option value="o">Otro</option>
+                                    <option value="n">Prefiero no indicarlo</option>
+
+                                </select>
+
+                                <div id="error-u-genero"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <hr class="my-4">
+
+                    <!-- Acceso al sistema -->
+                    <fieldset class="mb-4">
+
+                        <legend class="h5 mb-3">Acceso al sistema</legend>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="u-rol" class="form-label">
+                                    Rol
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select class="form-select"
+                                        id="u-rol"
+                                        name="u-rol"
+                                        required
+                                        aria-describedby="error-u-rol">
+
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="rectoria">Rectoría</option>
+                                    <option value="vice">Vicerrectoría</option>
+                                    <option value="dc">Desarrollo Curricular</option>
+                                    <option value="dir">Dirección de Escuela / Carrera</option>
+
+                                </select>
+
+                                <div id="error-u-rol"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="u-password" class="form-label">
+                                    Contraseña
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input type="password"
+                                       class="form-control"
+                                       id="u-password"
+                                       name="u-password"
+                                       minlength="8"
+                                       maxlength="15"
+                                       autocomplete="new-password"
+                                       required
+                                       aria-describedby="u-password-ayuda error-u-password">
+
+                                <div id="error-u-password"
+                                     class="mensaje-error invalid-feedback">
+                                </div>
+
+                                <div id="u-password-ayuda" class="form-text">
+                                    Entre 8 y 15 caracteres, con al menos una
+                                    mayúscula, una minúscula, un número y
+                                    un carácter especial.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Acciones -->
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
+
+                        <a href="listado.html" class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+                            Registrar usuario
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="usuarios.js"></script>
+
+</body>
+
+</html>

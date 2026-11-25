@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar curso | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+    <main id="contenido">
+        <h1>Registrar nuevo curso</h1>
+        <p class="text-secondary">Complete la información académica y administrativa del curso.</p>
+
+        <div id="globalMessage" class="alert" role="alert" aria-live="polite" hidden></div>
+
+        <div class="d-flex justify-content-between small mb-1">
+            <span>Información del curso</span>
+            <span id="completionText">0% completado</span>
+        </div>
+        <div class="progress mb-3" role="progressbar" aria-label="Progreso de captura del curso" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div id="completionBar" class="progress-bar"></div>
+        </div>
+
+        <form id="courseForm" novalidate>
+                    <input type="hidden" id="editingCode" name="editingCode">
+
+                    <!-- SECCIÓN 1 -->
+                    <section class="card mb-3">
+<div class="card-body">
+                        <div class="d-flex align-items-start gap-3 mb-3"><span class="badge text-bg-primary mt-1" aria-hidden="true">01</span><div><h2 class="h5 mb-0">Identificación del curso</h2><p class="text-secondary small mb-0">Datos generales y ubicación académica.</p></div></div>
+
+                        <div class="row g-3">
+                           <div class="field col-12 col-md-6">
+                                <label class="form-label" for="school">Escuela <span class="text-danger">*</span></label>
+                                <select class="form-select" id="school" name="school" required>
+                                    <option value="">Cargando escuelas...</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                          <div class="field col-12 col-md-6">
+                                <label class="form-label" for="career">Carrera <span class="text-danger">*</span></label>
+                                <select class="form-select" id="career" name="career" required disabled>
+                                    <option value="">Primero seleccione una escuela</option>
+                                </select>
+                                <div class="form-text">
+                                    Seleccione la carrera asociada a la escuela.
+                                </div>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="code">Código del curso <span class="text-danger">*</span></label>
+                                <input class="form-control" id="code" name="code" type="text" maxlength="30" required
+                                    placeholder="Ej. SOFT-101" autocomplete="off">
+                                <div class="form-text">Debe ser único dentro del sistema.</div>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="name">Nombre del curso <span class="text-danger">*</span></label>
+                                <input class="form-control" id="name" name="name" type="text" minlength="3" maxlength="150" required
+                                    placeholder="Nombre oficial del curso">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="powerName">Nombre en Power Accounts <span class="text-danger">* </span></label>
+                                <input class="form-control" id="powerName" name="powerName" type="text" maxlength="40"
+                                    placeholder="Máximo 40 caracteres">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="ecommerce">¿Tiene E-commerce? <span class="text-danger">*</span></label>
+                                <select class="form-select" id="ecommerce" name="ecommerce">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6" id="openingDateField">
+                                <label class="form-label" for="openingDate">Fecha de apertura <span class="text-danger">* si E-commerce es Sí</span></label>
+                                <input class="form-control" id="openingDate" name="openingDate" type="date">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="currency">Moneda <span class="text-danger">*</span></label>
+                                <select class="form-select" id="currency" name="currency">
+                                    <option value="">Seleccione una moneda</option>
+                                    <option>Colones</option>
+                                    <option>Dólares</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+
+                    <!-- SECCIÓN 2 -->
+                    <section class="card mb-3">
+<div class="card-body">
+                        <div class="d-flex align-items-start gap-3 mb-3"><span class="badge text-bg-primary mt-1" aria-hidden="true">02</span><div><h2 class="h5 mb-0">Clasificación y carga académica</h2><p class="text-secondary small mb-0">Catálogos, modalidad y distribución de horas.</p></div></div>
+
+                        <div class="row g-3">
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="sfia">Área SFIA <span class="text-danger">*</span></label>
+                                <select class="form-select" id="sfia" name="sfia" required>
+                                    <option value="">Seleccione un área SFIA</option>
+                                    <option>Desarrollo de sistemas</option>
+                                    <option>Gestión de datos</option>
+                                    <option>Ciberseguridad</option>
+                                    <option>Gestión de proyectos</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="topic">Temática <span class="text-danger">*</span></label>
+                                <select class="form-select" id="topic" name="topic" required>
+                                    <option value="">Seleccione una temática</option>
+                                    <option>Programación</option>
+                                    <option>Infraestructura</option>
+                                    <option>Datos e inteligencia artificial</option>
+                                    <option>Gestión y calidad</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="credits">Créditos <span class="text-danger">*</span></label>
+                                <input class="form-control" id="credits" name="credits" type="number" min="1" step="1" required
+                                    placeholder="Ej. 4">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="classHours">Horas de clase <span class="text-danger">*</span></label>
+                                <input class="form-control" id="classHours" name="classHours" type="number" min="0" step="1" required
+                                    value="0">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="extraHours">Horas extraclase <span class="text-danger">*</span></label>
+                                <input class="form-control" id="extraHours" name="extraHours" type="number" min="0" step="1" required
+                                    value="0">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="totalHours">Total de horas</label>
+                                <input class="form-control" id="totalHours" name="totalHours" type="number" readonly value="0">
+                                <div class="form-text">Se calcula automáticamente.</div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="modality">Modalidad <span class="text-danger">*</span></label>
+                                <select class="form-select" id="modality" name="modality" required>
+                                    <option value="">Seleccione una modalidad</option>
+                                    <option>Virtual</option>
+                                    <option>Presencial</option>
+                                    <option>Híbrida</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="complexity">Nivel de complejidad <span class="text-danger">* </span></label>
+                                <select class="form-select" id="complexity" name="complexity">
+                                    <option value="">Seleccione un nivel</option>
+                                    <option>Básico</option>
+                                    <option>Intermedio</option>
+                                    <option>Avanzado</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="field col-12">
+                                <label class="form-label" for="requirements">Requisitos indispensables <span class="text-danger">* </span></label>
+                                <textarea class="form-control" id="requirements" name="requirements" rows="2"
+                                    placeholder="Describa los requisitos o escriba «Ninguno»."></textarea>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="desirable">Requisitos deseables</label>
+                                <textarea class="form-control" id="desirable" name="desirable" rows="2"
+                                    placeholder="Requisitos recomendados "></textarea>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="program">Programa</label>
+                                <input class="form-control" id="program" name="program" type="text" maxlength="100"
+                                    placeholder="Nombre del programa ">
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+
+                    <!-- SECCIÓN 3 -->
+                    <section class="card mb-3">
+<div class="card-body">
+                        <div class="d-flex align-items-start gap-3 mb-3"><span class="badge text-bg-primary mt-1" aria-hidden="true">03</span><div><h2 class="h5 mb-0">Descripción y resultados de aprendizaje</h2><p class="text-secondary small mb-0">Contenido académico y perfiles del curso.</p></div></div>
+
+                        <div class="row g-3">
+                            <div class="field col-12">
+                                <label class="form-label" for="shortDescription">Descripción corta <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="shortDescription" name="shortDescription" maxlength="250" rows="2"
+                                    placeholder="Resumen breve del curso (máximo 250 caracteres)"></textarea>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mt-1">
+                                    <div class="invalid-feedback error-text"></div>
+                                    <small class="text-secondary ms-auto counter"><span id="shortCount">0</span>/250</small>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="metaDescription">Meta descripción <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="metaDescription" name="metaDescription" maxlength="150" rows="2"
+                                    placeholder="Meta descripción (máximo 150 caracteres)"></textarea>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mt-1">
+                                    <div class="invalid-feedback error-text"></div>
+                                    <small class="text-secondary ms-auto counter"><span id="metaCount">0</span>/150</small>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="longDescription">Descripción larga <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="longDescription" name="longDescription" rows="4"
+                                    placeholder="Describa el propósito y contenido del curso."></textarea>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="competencies">Competencia</label>
+                                <textarea class="form-control" id="competencies" name="competencies" rows="3"
+                                    placeholder="Competencia general que desarrolla el curso."></textarea>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="capabilities">Capacidades específicas <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="capabilities" name="capabilities" rows="3"
+                                    placeholder="Enumere las capacidades específicas que desarrollará el estudiante."></textarea>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12 col-md-6">
+                                    <label class="form-label" for="entryProfile">Perfil de ingreso</label>
+                                    <textarea class="form-control" id="entryProfile" name="entryProfile" rows="3"
+                                        placeholder="Conocimientos previos del estudiante."></textarea>
+                                </div>
+
+                                <div class="field col-12 col-md-6">
+                                    <label class="form-label" for="exitProfile">Perfil de salida</label>
+                                    <textarea class="form-control" id="exitProfile" name="exitProfile" rows="3"
+                                        placeholder="Competencias al finalizar el curso."></textarea>
+</div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="keywords">Palabras clave <span class="text-danger">*</span></label>
+                                <input class="form-control" id="keywords" name="keywords" type="text"
+                                    placeholder="Separe las palabras clave con comas">
+                                <div class="form-text">Cada palabra clave debe tener entre 2 y 30 caracteres.</div>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+
+                    <!-- SECCIÓN 4 -->
+                    <section class="card mb-3">
+<div class="card-body">
+                        <div class="d-flex align-items-start gap-3 mb-3"><span class="badge text-bg-primary mt-1" aria-hidden="true">04</span><div><h2 class="h5 mb-0">Certificación y metadata</h2><p class="text-secondary small mb-0">Información complementaria para la administración del curso.</p></div></div>
+
+                        <div class="row g-3">
+                            <div class="field col-12 col-md-6">
+                                <label class="form-label" for="certification">¿Incluye certificación?</label>
+                                <select class="form-select" id="certification" name="certification">
+                                    <option value="No">No</option>
+                                    <option value="Sí">Sí</option>
+                                </select>
+                            </div>
+
+                            <div class="field col-12 col-md-6" id="certifierField">
+                                <label class="form-label" for="certifier">Casa certificadora <span class="text-danger">* si hay certificación</span></label>
+                                <select class="form-select" id="certifier" name="certifier">
+                                    <option value="">Seleccione una casa certificadora</option>
+                                    <option>Microsoft</option>
+                                    <option>Oracle</option>
+                                    <option>Amazon Web Services</option>
+                                    <option>CompTIA</option>
+                                    <option>Otra</option>
+                                </select>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+
+                            <div class="field col-12">
+                                <label class="form-label" for="metadata">Metadata <span class="text-danger">* al enviar</span></label>
+                                <textarea class="form-control" id="metadata" name="metadata" rows="3"
+                                    placeholder="Ingrese la metadata requerida para el curso."></textarea>
+                                <div class="invalid-feedback error-text"></div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+
+                    <!-- ACCIONES DEL FORMULARIO -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <p class="text-secondary small mb-0">
+                            <span class="text-danger" aria-hidden="true">*</span>
+                            Campos obligatorios indicados para el envío a revisión.
+                            Los borradores requieren escuela, código y nombre.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" id="draftBtn">Guardar borrador</button>
+                            <button type="submit" class="btn btn-primary">Enviar a revisión <span aria-hidden="true">→</span></button>
+                        </div>
+                    </div>
+
+                </form>
+
+    </main>
+
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="cursos.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+</body>
+
+</html>

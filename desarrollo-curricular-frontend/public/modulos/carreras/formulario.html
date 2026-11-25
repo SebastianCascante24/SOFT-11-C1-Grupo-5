@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar carrera | Desarrollo Curricular y Docente</title>
+
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+
+    <main id="contenido">
+
+        <h1 id="tituloCarrera">
+            Registrar carrera
+        </h1>
+
+        <p id="descripcionCarrera" class="text-secondary mb-4">
+            Complete los datos para registrar una nueva carrera
+            en el Sistema de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Formulario de registro y modificación -->
+        <form id="form-carrera"
+              class="card mb-4"
+              novalidate>
+
+            <div class="card-body">
+
+                <fieldset>
+
+                    <legend class="h5 mb-3">
+                        Información de la carrera
+                    </legend>
+
+                    <p class="text-secondary mb-4">
+                        Los campos marcados con
+                        <span class="text-danger">*</span>
+                        son obligatorios.
+                    </p>
+
+                    <div class="row g-3">
+
+                        <!-- Código de carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="codigo"
+                                   class="form-label">
+                                Código de carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="codigo"
+                                   name="codigo"
+                                   maxlength="20"
+                                   placeholder="Ingrese el código de la carrera"
+                                   aria-describedby="errorCodigoCarrera"
+                                   required>
+
+                            <div id="errorCodigoCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Nombre de la carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="nombre"
+                                   class="form-label">
+                                Nombre de la carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombre"
+                                   name="nombre"
+                                   maxlength="100"
+                                   placeholder="Ingrese el nombre de la carrera"
+                                   aria-describedby="errorNombreCarrera"
+                                   required>
+
+                            <div id="errorNombreCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Escuela asociada -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="escuela"
+                                   class="form-label">
+                                Escuela
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="escuela"
+                                    name="escuela"
+                                    class="form-select"
+                                    aria-describedby="errorEscuelaCarrera"
+                                    required>
+
+                                <option value="">
+                                    Seleccione una escuela
+                                </option>
+
+                            </select>
+
+                            <div id="errorEscuelaCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                        <!-- Director de carrera -->
+                        <div class="col-12 col-md-6">
+
+                            <label for="director"
+                                   class="form-label">
+                                Director de carrera
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <select id="director"
+                                    name="director"
+                                    class="form-select"
+                                    aria-describedby="errorDirectorCarrera"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un director
+                                </option>
+
+                            </select>
+
+                            <div id="errorDirectorCarrera"
+                                 class="invalid-feedback"
+                                 aria-live="polite">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <!-- Mensajes del sistema -->
+                <div id="mensaje-carrera"
+                     class="mt-3"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+                <!-- Acciones del formulario -->
+                <div class="d-flex flex-wrap justify-content-end gap-2 mt-4">
+
+                    <a href="listado.html"
+                       class="btn btn-secondary"
+                       id="botonSalirCarrera">
+                        Cancelar
+                    </a>
+
+                    <button type="reset"
+                            class="btn btn-secondary"
+                            id="botonRestablecerCarrera"
+                            hidden>
+                        Restablecer
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary"
+                            id="botonGuardarCarrera">
+                        Guardar carrera
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica del módulo de carreras -->
+    <script src="carreras.js"></script>
+
+</body>
+
+</html>

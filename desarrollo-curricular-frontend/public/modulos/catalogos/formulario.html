@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de catálogo | Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+    <main id="contenido">
+
+        <section class="card" id="catalogo-tarjeta" aria-labelledby="catalogo-titulo">
+            <div class="card-body">
+                <h1 id="catalogo-titulo">Formulario de catálogo</h1>
+
+                <form id="catalogo-formulario" novalidate>
+                    <div id="catalogo-error-general" class="alert alert-danger" role="alert" hidden></div>
+
+                    <!-- Cargar csv y Sugerir: solo visuales por ahora, sin funcionalidad -->
+                    <button type="button" class="btn btn-secondary mb-3" id="catalogo-boton-cargar-csv">Cargar csv <span
+                            aria-hidden="true">⌃</span></button>
+
+                    <div class="campo mb-3">
+                        <label class="form-label" for="catalogo-codigo">Código <span class="text-danger"
+                                aria-hidden="true">*</span></label>
+                        <input type="text" class="form-control" id="catalogo-codigo" name="codigo" required>
+                    </div>
+
+                    <div class="campo mb-3">
+                        <label class="form-label" for="catalogo-nombre">Nombre <span class="text-danger"
+                                aria-hidden="true">*</span></label>
+                        <input type="text" class="form-control" id="catalogo-nombre" name="nombre" required
+                            minlength="3">
+                    </div>
+
+                    <div class="campo mb-3" id="catalogo-grupo-descripcion">
+                        <div class="d-flex justify-content-between align-items-end mb-2">
+                            <label class="form-label mb-0" for="catalogo-descripcion">Descripción <span
+                                    class="text-danger" id="catalogo-marca-descripcion"
+                                    aria-hidden="true">*</span></label>
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                id="catalogo-boton-sugerir">Sugerir</button>
+                        </div>
+                        <textarea class="form-control" id="catalogo-descripcion" name="descripcion" rows="5"></textarea>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
+                        <button type="button" class="btn btn-secondary" id="catalogo-boton-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" id="catalogo-boton-limpiar">Limpiar</button>
+                        <button type="submit" class="btn btn-primary" id="catalogo-boton-guardar">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+    <script src="catalogos.js"></script>
+</body>
+
+</html>

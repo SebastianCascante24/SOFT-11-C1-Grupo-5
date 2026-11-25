@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carreras registradas | Desarrollo Curricular y Docente</title>
+
+    <!-- Bootstrap y estilos institucionales -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
+</head>
+
+<body>
+
+    <main id="contenido">
+
+        <h1>Carreras registradas</h1>
+
+        <p class="text-secondary mb-4">
+            Consulte las carreras registradas y sus directores asociados
+            en el Sistema de Gestión Curricular y Docente.
+        </p>
+
+        <!-- Acción de registro -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+
+            <a href="formulario.html"
+               class="btn btn-primary">
+                Registrar carrera
+            </a>
+
+        </div>
+
+        <!-- Listado de carreras -->
+        <section class="card mb-4"
+                 aria-labelledby="tituloListadoCarreras">
+
+            <div class="card-body">
+
+                <h2 id="tituloListadoCarreras"
+                    class="h5 mb-4">
+                    Consultar carreras
+                </h2>
+
+                <!-- Buscador y filtros -->
+                <div class="row g-3 mb-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <label for="buscar-carrera"
+                               class="form-label">
+                            Buscar carrera
+                        </label>
+
+                        <input type="search"
+                               class="form-control"
+                               id="buscar-carrera"
+                               placeholder="Buscar por código o nombre"
+                               autocomplete="off">
+
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <label for="filtrar-escuela"
+                               class="form-label">
+                            Filtrar por escuela
+                        </label>
+
+                        <select id="filtrar-escuela"
+                                class="form-select">
+
+                            <option value="">
+                                Todas las escuelas
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Notificaciones -->
+                <div id="mensaje-carreras"
+                     class="alert alert-info"
+                     role="status"
+                     aria-live="polite"
+                     hidden>
+                </div>
+
+                <!-- Contador -->
+                <p id="total-carreras"
+                   class="text-secondary mb-3"
+                   role="status"
+                   aria-live="polite">
+
+                    Total de carreras registradas: 0
+
+                </p>
+
+                <!-- Tabla de carreras -->
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-primary">
+
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Carrera</th>
+                                <th scope="col">Escuela</th>
+                                <th scope="col">Director</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-carreras">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Modal para cambiar director -->
+    <div class="modal fade"
+         id="modalCambiarDirector"
+         tabindex="-1"
+         aria-labelledby="tituloModalDirector"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2 class="modal-title fs-5"
+                        id="tituloModalDirector">
+                        Cambiar director de carrera
+                    </h2>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Cerrar">
+                    </button>
+
+                </div>
+
+                <form id="formCambiarDirector" novalidate>
+
+                    <div class="modal-body">
+
+                        <p class="text-secondary"
+                           id="nombreCarreraDirector">
+                        </p>
+
+                        <div class="mb-3">
+
+                            <label for="nuevoDirectorCarrera"
+                                   class="form-label">
+
+                                Director de carrera
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+                            <select id="nuevoDirectorCarrera"
+                                    class="form-select"
+                                    aria-describedby="errorNuevoDirector"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un director
+                                </option>
+
+                            </select>
+
+                            <div id="errorNuevoDirector"
+                                 class="invalid-feedback">
+                            </div>
+
+                        </div>
+
+                        <div id="mensajeModalDirector"
+                             class="alert alert-danger"
+                             role="alert"
+                             hidden>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                            Cancelar
+
+                        </button>
+
+                        <button type="submit"
+                                class="btn btn-primary"
+                                id="guardarNuevoDirector">
+
+                            Guardar cambios
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Dependencias compartidas -->
+    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/componentes/layout.js"></script>
+    <script src="../../js/nucleo/almacenamiento.js"></script>
+    <script src="../../js/nucleo/enrutador.js"></script>
+    <script src="../../js/nucleo/autenticacion.js"></script>
+    <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/componentes/notificacion.js"></script>
+
+    <!-- Lógica del listado -->
+    <script src="listado.js"></script>
+
+</body>
+
+</html>

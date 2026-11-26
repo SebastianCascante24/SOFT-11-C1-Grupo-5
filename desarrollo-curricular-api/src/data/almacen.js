@@ -38,5 +38,24 @@ async function crear(coleccion, registro) {
     return registro;
 }
 
+async function actualizar(coleccion, clave, valor, cambios) {
+    const registros = await leer(coleccion);
+    const indice = registros.findIndex((registro) => String(registro[clave]) === String(valor));
+    if (indice === -1) return null;
 
-module.exports = { listar, buscar, crear };
+    registros[indice] = { ...registros[indice], ...cambios, [clave]: registros[indice][clave] };
+    await escribir(coleccion, registros);
+    return registros[indice];
+}
+
+async function eliminar(coleccion, clave, valor) {
+    const registros = await leer(coleccion);
+    const restantes = registros.filter((registro) => String(registro[clave]) !== String(valor));
+
+    if (restantes.length === registros.length) return false;
+
+    await escribir(coleccion, restantes);
+    return true;
+}
+
+module.exports = { listar, buscar, crear, actualizar, eliminar };

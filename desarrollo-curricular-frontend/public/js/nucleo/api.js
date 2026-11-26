@@ -50,4 +50,5 @@ async function pedirApi(metodo, ruta, datos) {
 const Api = {
     obtener: (ruta) => pedirApi('GET', ruta),
     crear: (ruta, datos) => pedirApi('POST', ruta, datos),
+    actualizar: (ruta, datos) => pedirApi('PUT', ruta, datos),
 };

@@ -79,4 +79,31 @@ const crear = manejar(async (req, res) => {
     res.status(201).json(limpiar(config, registro));
 });
 
-module.exports = { validarRecurso, listar, buscar, crear };
+const actualizar = manejar(async (req, res) => {
+    const { config } = req;
+    const cambios = filtrarCampos(config, req.body || {});
+    delete cambios[config.clave];
+
+    if (cambios.activo !== undefined && typeof cambios.activo !== 'boolean') {
+        return res.status(400).json({ mensaje: 'El estado no es válido.' });
+    }
+
+    const registro = await almacen.actualizar(config.coleccion, config.clave, req.params.codigo, cambios);
+    if (!registro) return res.status(404).json({ mensaje: 'Registro no encontrado' });
+    res.json(limpiar(config, registro));
+});
+
+const eliminar = manejar(async (req, res) => {
+    const { config } = req;
+
+    if (!config.permiteEliminar) {
+        return res.status(403).json({ mensaje: 'Este recurso no permite eliminar registros. Use desactivar.' });
+    }
+
+    const eliminado = await almacen.eliminar(config.coleccion, config.clave, req.params.codigo);
+    if (!eliminado) return res.status(404).json({ mensaje: 'Registro no encontrado' });
+
+    res.status(204).send(); // sin cuerpo
+});
+
+module.exports = { validarRecurso, listar, buscar, crear, actualizar, eliminar };

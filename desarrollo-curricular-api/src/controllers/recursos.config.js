@@ -4,6 +4,7 @@
 //   tipoClave: 'entero' o 'texto'
 //   campos: unicos campos que se aceptan al guardar
 //   ocultar: campos que nunca se devuelven al frontend
+//   permiteEliminar: si es true se puede borrar de verdad; si no, solo desactivar
 //   mensajeDuplicado: respuesta cuando la clave ya existe
 
 const RECURSOS = {
@@ -12,6 +13,7 @@ const RECURSOS = {
         clave: 'codigo',
         tipoClave: 'entero',
         campos: ['codigo', 'nombre', 'descripcion', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe un área SFIA con este código.'
     },
     'tematicas': {
@@ -19,6 +21,7 @@ const RECURSOS = {
         clave: 'codigo',
         tipoClave: 'entero',
         campos: ['codigo', 'nombre', 'descripcion', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe una temática con este código.'
     },
     'metodologias': {
@@ -26,6 +29,7 @@ const RECURSOS = {
         clave: 'codigo',
         tipoClave: 'entero',
         campos: ['codigo', 'nombre', 'descripcion', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe una metodología con este código.'
     },
     'casas-certificadoras': {
@@ -33,6 +37,7 @@ const RECURSOS = {
         clave: 'codigo',
         tipoClave: 'entero',
         campos: ['codigo', 'nombre', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe una casa certificadora con este código.'
     },
     'niveles-complejidad': {
@@ -40,14 +45,15 @@ const RECURSOS = {
         clave: 'codigo',
         tipoClave: 'entero',
         campos: ['codigo', 'nombre', 'descripcion', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe un nivel de complejidad con este código.'
     },
-
     'escuelas': {
         coleccion: 'escuelas',
         clave: 'codigo',
         tipoClave: 'texto',
         campos: ['codigo', 'nombre', 'director', 'activo'],
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe una escuela con este código.'
     },
     'carreras': {
@@ -57,9 +63,9 @@ const RECURSOS = {
         campos: ['codigo', 'nombre', 'escuelaCodigo', 'directorId', 'activo'],
         generarId: true,
         registrarFecha: true,
+        permiteEliminar: true,
         mensajeDuplicado: 'Ya existe una carrera con este código.'
     }
-
 };
 
 module.exports = RECURSOS;

@@ -161,6 +161,8 @@ const ListadoCatalogo = (function () {
     botonEstado.textContent = activo ? 'Desactivar' : 'Activar';
     botonEstado.setAttribute('aria-label', `${activo ? 'Desactivar' : 'Activar'} ${registro.nombre}`);
 
+    botonEstado.addEventListener('click', () => cambiarEstadoListado(registro));
+
     celdaAcciones.append(botonModificar, botonEstado);
     fila.appendChild(celdaAcciones);
     return fila;
@@ -239,6 +241,35 @@ const ListadoCatalogo = (function () {
       todosLosRegistros = await Catalogos.obtenerRegistros(idCatalogo);
     } catch (error) {
       todosLosRegistros = [];
+      Notificacion.mostrar('error', error.message);
+    }
+  }
+
+  // solo desactivar pide la confirmacion
+  async function cambiarEstadoListado(registro) {
+    const activar = !Catalogos.esActivo(registro);
+
+    if (!activar) {
+      const confirmado = await Modal.confirmar({
+        titulo: 'Desactivar registro',
+        mensaje: `¿Desea desactivar "${registro.nombre}"?`,
+        textoConfirmar: 'Desactivar',
+        estiloConfirmar: 'danger'
+      });
+      if (!confirmado) return;
+    }
+
+    try {
+      const actualizado = await Catalogos.actualizarRegistro(idCatalogo, registro.codigo, { activo: activar });
+
+      const indice = todosLosRegistros.findIndex(
+        (existente) => String(existente.codigo) === String(registro.codigo)
+      );
+      if (indice !== -1) todosLosRegistros[indice] = actualizado;
+
+      renderizarListado();
+      Notificacion.mostrar('exito', activar ? 'Registro activado correctamente.' : 'Registro desactivado correctamente.');
+    } catch (error) {
       Notificacion.mostrar('error', error.message);
     }
   }

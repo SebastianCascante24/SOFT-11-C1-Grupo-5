@@ -93,4 +93,17 @@ const actualizar = manejar(async (req, res) => {
     res.json(limpiar(config, registro));
 });
 
-module.exports = { validarRecurso, listar, buscar, crear, actualizar };
+const eliminar = manejar(async (req, res) => {
+    const { config } = req;
+
+    if (!config.permiteEliminar) {
+        return res.status(403).json({ mensaje: 'Este recurso no permite eliminar registros. Use desactivar.' });
+    }
+
+    const eliminado = await almacen.eliminar(config.coleccion, config.clave, req.params.codigo);
+    if (!eliminado) return res.status(404).json({ mensaje: 'Registro no encontrado' });
+
+    res.status(204).send(); // sin cuerpo
+});
+
+module.exports = { validarRecurso, listar, buscar, crear, actualizar, eliminar };

@@ -10,5 +10,6 @@ router.get('/:recurso', controlador.listar);
 router.get('/:recurso/:codigo', controlador.buscar);
 router.post('/:recurso', controlador.crear);
 router.put('/:recurso/:codigo', controlador.actualizar);
+router.delete('/:recurso/:codigo', controlador.eliminar);
 
 module.exports = router;

@@ -76,6 +76,7 @@ const ListadoCatalogo = (function () {
 
   const REGISTROS_POR_PAGINA = 10;
   const ETIQUETAS_FILTRO = { codigo: 'Código', nombre: 'Nombre', estado: 'Estado' };
+  const SEPARADOR_EXPORTACION = ';';
   const TEXTO_ESTADO = { activo: 'Activo', inactivo: 'Inactivo' };
 
   let idCatalogo = null;
@@ -87,6 +88,7 @@ const ListadoCatalogo = (function () {
   let contenidoListado = null;
   let tituloListado = null;
   let enlaceAgregarListado = null;
+  let botonExportarCsvListado = null;
   let formularioFiltrosListado = null;
   let botonLimpiarFiltrosListado = null;
   let contenedorFiltrosActivosListado = null;
@@ -168,6 +170,49 @@ const ListadoCatalogo = (function () {
     return fila;
   }
 
+  // la lista que muestra la tabla: con filtros aplicados y ordenada
+  function obtenerRegistrosFiltradosListado() {
+    return todosLosRegistros
+      .filter(coincideConFiltrosListado)
+      .sort(compararPorCodigoListado);
+  }
+
+  function hayFiltrosActivosListado() {
+    return filtros.codigo.trim() !== '' || filtros.nombre.trim() !== '' || filtros.estado !== 'todos';
+  }
+
+  function fechaDeHoyListado() {
+    const hoy = new Date();
+    return [
+      hoy.getFullYear(),
+      String(hoy.getMonth() + 1).padStart(2, '0'),
+      String(hoy.getDate()).padStart(2, '0')
+    ].join('-');
+  }
+
+  // exporta lo que muestra el listado (todas las paginas si hay mas de una)
+  function exportarCsvListado() {
+    const registros = obtenerRegistrosFiltradosListado();
+    if (registros.length === 0) return;
+
+    const encabezados = ['codigo', 'nombre'];
+    if (configuracion.descripcion.visible) encabezados.push('descripcion');
+    encabezados.push('estado');
+
+    const filas = registros.map((registro) => {
+      const fila = [registro.codigo, registro.nombre];
+      if (configuracion.descripcion.visible) fila.push(registro.descripcion || '');
+      fila.push(Catalogos.esActivo(registro) ? TEXTO_ESTADO.activo : TEXTO_ESTADO.inactivo);
+      return fila;
+    });
+
+    const sufijo = hayFiltrosActivosListado() ? '-filtrado' : '';
+    const nombreArchivo = `${idCatalogo}${sufijo}-${fechaDeHoyListado()}.csv`;
+
+    Csv.descargar(Csv.generar([encabezados, ...filas], SEPARADOR_EXPORTACION), nombreArchivo);
+    Notificacion.mostrar('exito', `Se exportaron ${registros.length} ${registros.length === 1 ? 'registro' : 'registros'}.`);
+  }
+
   function renderizarFiltrosActivosListado() {
     const activos = [];
     if (filtros.codigo.trim() !== '') activos.push({ campo: 'codigo', valor: filtros.codigo.trim() });
@@ -211,10 +256,7 @@ const ListadoCatalogo = (function () {
   }
 
   function renderizarListado() {
-    const registros = todosLosRegistros
-      .filter(coincideConFiltrosListado)
-      .sort(compararPorCodigoListado);
-
+    const registros = obtenerRegistrosFiltradosListado();
     const totalPaginas = Math.max(1, Math.ceil(registros.length / REGISTROS_POR_PAGINA));
     paginaActual = Math.min(paginaActual, totalPaginas);
 
@@ -225,6 +267,8 @@ const ListadoCatalogo = (function () {
     contadorListado.textContent = textoContadorListado(registros.length, inicio, registrosPagina.length);
 
     const hayFiltros = renderizarFiltrosActivosListado() > 0;
+    botonExportarCsvListado.textContent = hayFiltros ? 'Exportar filtrados' : 'Exportar csv';
+    botonExportarCsvListado.disabled = registros.length === 0;
     mensajeVacioListado.hidden = registros.length > 0;
     mensajeVacioListado.textContent = hayFiltros
       ? 'No hay registros que coincidan con los filtros.'
@@ -328,6 +372,7 @@ const ListadoCatalogo = (function () {
       paginaActual += 1;
       renderizarListado();
     });
+    botonExportarCsvListado.addEventListener('click', exportarCsvListado);
   }
 
   function mostrarAvisoResultadoListado() {
@@ -352,6 +397,7 @@ const ListadoCatalogo = (function () {
 
     tituloListado = document.getElementById('listado-catalogo-titulo');
     enlaceAgregarListado = document.getElementById('listado-catalogo-agregar');
+    botonExportarCsvListado = document.getElementById('listado-catalogo-exportar-csv');
     formularioFiltrosListado = document.getElementById('listado-catalogo-formulario');
     botonLimpiarFiltrosListado = document.getElementById('listado-catalogo-limpiar-filtros');
     contenedorFiltrosActivosListado = document.getElementById('listado-catalogo-filtros-activos');
@@ -408,6 +454,8 @@ const FormularioCatalogo = (function () {
   let botonCancelarCatalogo = null;
   let botonGuardarCatalogo = null;
   let botonCargarCsvCatalogo = null;
+  let entradaArchivoCsv = null;
+  let resultadoCsvCatalogo = null;
   const camposCatalogo = {};
 
   const reglasCatalogo = [];
@@ -565,7 +613,7 @@ const FormularioCatalogo = (function () {
     document.title = `${accion} ${configuracion.titulo} | Desarrollo Curricular y Docente`;
     tituloCatalogo.textContent = `${accion} ${configuracion.titulo}`;
     botonGuardarCatalogo.textContent = registroOriginal ? 'Guardar cambios' : 'Crear';
-    botonCargarCsvCatalogo.hidden = Boolean(registroOriginal);
+    botonCargarCsvCatalogo.parentElement.hidden = Boolean(registroOriginal);
 
     camposCatalogo.codigo.type = 'number';
     camposCatalogo.codigo.min = '1';
@@ -602,6 +650,173 @@ const FormularioCatalogo = (function () {
     botonCancelarCatalogo.addEventListener('click', () => {
       Enrutador.irA(`listado.html?catalogo=${encodeURIComponent(idCatalogo)}`);
     });
+    botonCargarCsvCatalogo.addEventListener('click', () => entradaArchivoCsv.click());
+    entradaArchivoCsv.addEventListener('change', manejarArchivoCsv);
+  }
+
+  // carga de csv
+
+  const MAXIMO_FILAS_CSV = 500;
+  const MAXIMO_PROBLEMAS_VISIBLES = 10;
+
+  function textoRegistros(cantidad) {
+    return `${cantidad} ${cantidad === 1 ? 'registro' : 'registros'}`;
+  }
+
+  function mostrarMensajeCsv(tipo, texto) {
+    resultadoCsvCatalogo.className = `alert alert-${tipo} mb-3`;
+    resultadoCsvCatalogo.textContent = texto;
+    resultadoCsvCatalogo.hidden = false;
+  }
+
+  function mostrarResultadoCsv(resultado) {
+    let tipo = 'danger';
+    if (resultado.creados > 0) tipo = resultado.omitidos > 0 ? 'warning' : 'success';
+
+    resultadoCsvCatalogo.className = `alert alert-${tipo} mb-3`;
+    resultadoCsvCatalogo.replaceChildren();
+
+    const resumen = document.createElement('p');
+    resumen.className = 'fw-semibold mb-1';
+    resumen.textContent = `Se crearon ${textoRegistros(resultado.creados)}.`
+      + (resultado.omitidos > 0 ? ` Se omitieron ${textoRegistros(resultado.omitidos)}.` : '');
+    resultadoCsvCatalogo.appendChild(resumen);
+
+    if (resultado.problemas.length > 0) {
+      const lista = document.createElement('ul');
+      lista.className = 'mb-2';
+      resultado.problemas.slice(0, MAXIMO_PROBLEMAS_VISIBLES).forEach((problema) => {
+        const elemento = document.createElement('li');
+        elemento.textContent = problema;
+        lista.appendChild(elemento);
+      });
+      resultadoCsvCatalogo.appendChild(lista);
+
+      const restantes = resultado.problemas.length - MAXIMO_PROBLEMAS_VISIBLES;
+      if (restantes > 0) {
+        const mas = document.createElement('p');
+        mas.className = 'mb-2';
+        mas.textContent = `Y ${restantes} más.`;
+        resultadoCsvCatalogo.appendChild(mas);
+      }
+    }
+
+    if (resultado.creados > 0) {
+      const enlace = document.createElement('a');
+      enlace.className = 'alert-link';
+      enlace.href = `listado.html?catalogo=${encodeURIComponent(idCatalogo)}`;
+      enlace.textContent = 'Ver listado';
+      resultadoCsvCatalogo.appendChild(enlace);
+    }
+
+    resultadoCsvCatalogo.hidden = false;
+  }
+
+  // valida con las mismas reglas del formulario.
+  function validarFilaCsv(valores, columnas) {
+    const leer = (nombre) => (columnas[nombre] === undefined ? '' : (valores[columnas[nombre]] || '').trim());
+
+    const codigo = leer('codigo');
+    const nombre = leer('nombre');
+    const descripcion = leer('descripcion');
+
+    if (!Validadores.esEnteroPositivo(codigo)) {
+      return { error: 'el código debe ser un entero positivo' };
+    }
+    if (Validadores.estaVacio(nombre) || !Validadores.tieneLongitudMinima(nombre, Catalogos.NOMBRE_MINIMO)) {
+      return { error: `el nombre debe tener al menos ${Catalogos.NOMBRE_MINIMO} caracteres` };
+    }
+
+    const registro = {
+      codigo: Catalogos.normalizarCodigo(idCatalogo, codigo),
+      nombre,
+      activo: true
+    };
+
+    if (configuracion.descripcion.visible) {
+      if (configuracion.descripcion.obligatoria && Validadores.estaVacio(descripcion)) {
+        return { error: 'la descripción es obligatoria' };
+      }
+      if (Validadores.superaLongitudMaxima(descripcion, Catalogos.DESCRIPCION_MAXIMA)) {
+        return { error: `la descripción no puede superar ${Catalogos.DESCRIPCION_MAXIMA} caracteres` };
+      }
+      registro.descripcion = descripcion;
+    }
+
+    return { registro };
+  }
+
+  async function importarCsvCatalogo(archivo) {
+    resultadoCsvCatalogo.hidden = true;
+
+    const filas = Csv.analizar(await Csv.leerArchivo(archivo));
+    if (filas.length < 2) {
+      mostrarMensajeCsv('danger', 'El archivo no tiene datos. Debe tener una fila de encabezados y al menos un registro.');
+      return;
+    }
+    if (filas.length - 1 > MAXIMO_FILAS_CSV) {
+      mostrarMensajeCsv('danger', `El archivo tiene demasiadas filas. El máximo es ${MAXIMO_FILAS_CSV}.`);
+      return;
+    }
+
+    const encabezados = filas[0].map(Formateadores.normalizarTexto);
+    const columnas = {};
+    ['codigo', 'nombre', 'descripcion'].forEach((nombre) => {
+      const posicion = encabezados.indexOf(nombre);
+      if (posicion !== -1) columnas[nombre] = posicion;
+    });
+
+    if (columnas.codigo === undefined || columnas.nombre === undefined) {
+      mostrarMensajeCsv('danger', 'La primera fila debe tener los encabezados "codigo" y "nombre".');
+      return;
+    }
+    if (configuracion.descripcion.obligatoria && columnas.descripcion === undefined) {
+      mostrarMensajeCsv('danger', 'Este catálogo exige descripción: agregue la columna "descripcion".');
+      return;
+    }
+
+    const resultado = { creados: 0, omitidos: 0, problemas: [] };
+
+    for (let i = 1; i < filas.length; i++) {
+      if (filas[i].every((celda) => celda.trim() === '')) continue; // fila vacia
+
+      const numeroFila = i + 1;
+      const validacion = validarFilaCsv(filas[i], columnas);
+
+      if (validacion.error) {
+        resultado.omitidos += 1;
+        resultado.problemas.push(`Fila ${numeroFila}: ${validacion.error}.`);
+        continue;
+      }
+
+      try {
+        await Catalogos.agregarRegistro(idCatalogo, validacion.registro);
+        resultado.creados += 1;
+      } catch (error) {
+        resultado.omitidos += 1;
+        resultado.problemas.push(`Fila ${numeroFila}: ${error.message}`);
+
+        if (error.estado === undefined) {
+          resultado.problemas.push('Se detuvo la carga.');
+          break;
+        }
+      }
+    }
+
+    mostrarResultadoCsv(resultado);
+  }
+
+  async function manejarArchivoCsv() {
+    const archivo = entradaArchivoCsv.files[0];
+    if (!archivo) return;
+
+    botonCargarCsvCatalogo.disabled = true;
+    try {
+      await importarCsvCatalogo(archivo);
+    } finally {
+      botonCargarCsvCatalogo.disabled = false;
+      entradaArchivoCsv.value = '';
+    }
   }
 
   // inicio
@@ -618,6 +833,8 @@ const FormularioCatalogo = (function () {
     botonCancelarCatalogo = document.getElementById('catalogo-boton-cancelar');
     botonGuardarCatalogo = document.getElementById('catalogo-boton-guardar');
     botonCargarCsvCatalogo = document.getElementById('catalogo-boton-cargar-csv');
+    entradaArchivoCsv = document.getElementById('catalogo-archivo-csv');
+    resultadoCsvCatalogo = document.getElementById('catalogo-resultado-csv');
     camposCatalogo.codigo = document.getElementById('catalogo-codigo');
     camposCatalogo.nombre = document.getElementById('catalogo-nombre');
     camposCatalogo.descripcion = document.getElementById('catalogo-descripcion');

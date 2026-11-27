@@ -21,8 +21,15 @@
                     <div id="catalogo-error-general" class="alert alert-danger" role="alert" hidden></div>
 
                     <!-- Cargar csv y Sugerir: solo visuales por ahora, sin funcionalidad -->
-                    <button type="button" class="btn btn-secondary mb-3" id="catalogo-boton-cargar-csv">Cargar csv <span
-                            aria-hidden="true">⌃</span></button>
+                    <!-- Cargar csv: columnas codigo, nombre y descripcion -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" id="catalogo-boton-cargar-csv">Cargar csv <span
+                                aria-hidden="true">⌃</span></button>
+                        <input type="file" id="catalogo-archivo-csv" accept=".csv,text/csv" hidden>
+                        <div class="form-text">Columnas: codigo, nombre y descripcion. La primera fila son los
+                            encabezados.</div>
+                    </div>
+                    <div id="catalogo-resultado-csv" class="alert mb-3" role="status" hidden></div>
 
                     <div class="campo mb-3">
                         <label class="form-label" for="catalogo-codigo">Código <span class="text-danger"
@@ -65,6 +72,8 @@
     <script src="../../js/nucleo/enrutador.js"></script>
     <script src="../../js/nucleo/autenticacion.js"></script>
     <script src="../../js/utilidades/validadores.js"></script>
+    <script src="../../js/utilidades/formateadores.js"></script>
+    <script src="../../js/utilidades/csv.js"></script>
     <script src="../../js/componentes/notificacion.js"></script>
     <script src="../../js/componentes/modal.js"></script>
     <script src="catalogos.js"></script>

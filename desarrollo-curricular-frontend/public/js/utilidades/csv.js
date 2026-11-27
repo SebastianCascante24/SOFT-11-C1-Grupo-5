@@ -65,5 +65,36 @@ const Csv = {
         const comas = (primeraLinea.match(/,/g) || []).length;
         const puntosYComa = (primeraLinea.match(/;/g) || []).length;
         return puntosYComa > comas ? ';' : ',';
+    },
+
+    // convierte una lista de filas (listas de valores) en texto csv
+    generar(filas, separador = ',') {
+        return filas
+            .map((fila) => fila.map((valor) => Csv.escribirCampo(valor, separador)).join(separador))
+            .join('\r\n');
+    },
+
+    escribirCampo(valor, separador) {
+        let texto = valor === null || valor === undefined ? '' : String(valor);
+        if (/^[=+\-@\t\r]/.test(texto)) texto = "'" + texto;
+
+        // si contiene el separador, comillas o saltos de linea, va entre comillas
+        if (texto.includes(separador) || /["\r\n]/.test(texto)) {
+            texto = '"' + texto.replace(/"/g, '""') + '"';
+        }
+        return texto;
+    },
+
+    descargar(texto, nombreArchivo) {
+        const archivo = new Blob(['\uFEFF' + texto], { type: 'text/csv;charset=utf-8' });
+        const url = URL.createObjectURL(archivo);
+
+        const enlace = document.createElement('a');
+        enlace.href = url;
+        enlace.download = nombreArchivo;
+        document.body.appendChild(enlace);
+        enlace.click();
+        enlace.remove();
+        URL.revokeObjectURL(url);
     }
 };

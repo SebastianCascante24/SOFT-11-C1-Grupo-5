@@ -76,6 +76,7 @@ const ListadoCatalogo = (function () {
 
   const REGISTROS_POR_PAGINA = 10;
   const ETIQUETAS_FILTRO = { codigo: 'Código', nombre: 'Nombre', estado: 'Estado' };
+  const SEPARADOR_EXPORTACION = ';';
   const TEXTO_ESTADO = { activo: 'Activo', inactivo: 'Inactivo' };
 
   let idCatalogo = null;
@@ -87,6 +88,7 @@ const ListadoCatalogo = (function () {
   let contenidoListado = null;
   let tituloListado = null;
   let enlaceAgregarListado = null;
+  let botonExportarCsvListado = null;
   let formularioFiltrosListado = null;
   let botonLimpiarFiltrosListado = null;
   let contenedorFiltrosActivosListado = null;
@@ -168,6 +170,49 @@ const ListadoCatalogo = (function () {
     return fila;
   }
 
+  // la lista que muestra la tabla: con filtros aplicados y ordenada
+  function obtenerRegistrosFiltradosListado() {
+    return todosLosRegistros
+      .filter(coincideConFiltrosListado)
+      .sort(compararPorCodigoListado);
+  }
+
+  function hayFiltrosActivosListado() {
+    return filtros.codigo.trim() !== '' || filtros.nombre.trim() !== '' || filtros.estado !== 'todos';
+  }
+
+  function fechaDeHoyListado() {
+    const hoy = new Date();
+    return [
+      hoy.getFullYear(),
+      String(hoy.getMonth() + 1).padStart(2, '0'),
+      String(hoy.getDate()).padStart(2, '0')
+    ].join('-');
+  }
+
+  // exporta lo que muestra el listado (todas las paginas si hay mas de una)
+  function exportarCsvListado() {
+    const registros = obtenerRegistrosFiltradosListado();
+    if (registros.length === 0) return;
+
+    const encabezados = ['codigo', 'nombre'];
+    if (configuracion.descripcion.visible) encabezados.push('descripcion');
+    encabezados.push('estado');
+
+    const filas = registros.map((registro) => {
+      const fila = [registro.codigo, registro.nombre];
+      if (configuracion.descripcion.visible) fila.push(registro.descripcion || '');
+      fila.push(Catalogos.esActivo(registro) ? TEXTO_ESTADO.activo : TEXTO_ESTADO.inactivo);
+      return fila;
+    });
+
+    const sufijo = hayFiltrosActivosListado() ? '-filtrado' : '';
+    const nombreArchivo = `${idCatalogo}${sufijo}-${fechaDeHoyListado()}.csv`;
+
+    Csv.descargar(Csv.generar([encabezados, ...filas], SEPARADOR_EXPORTACION), nombreArchivo);
+    Notificacion.mostrar('exito', `Se exportaron ${registros.length} ${registros.length === 1 ? 'registro' : 'registros'}.`);
+  }
+
   function renderizarFiltrosActivosListado() {
     const activos = [];
     if (filtros.codigo.trim() !== '') activos.push({ campo: 'codigo', valor: filtros.codigo.trim() });
@@ -211,10 +256,7 @@ const ListadoCatalogo = (function () {
   }
 
   function renderizarListado() {
-    const registros = todosLosRegistros
-      .filter(coincideConFiltrosListado)
-      .sort(compararPorCodigoListado);
-
+    const registros = obtenerRegistrosFiltradosListado();
     const totalPaginas = Math.max(1, Math.ceil(registros.length / REGISTROS_POR_PAGINA));
     paginaActual = Math.min(paginaActual, totalPaginas);
 
@@ -225,6 +267,8 @@ const ListadoCatalogo = (function () {
     contadorListado.textContent = textoContadorListado(registros.length, inicio, registrosPagina.length);
 
     const hayFiltros = renderizarFiltrosActivosListado() > 0;
+    botonExportarCsvListado.textContent = hayFiltros ? 'Exportar filtrados' : 'Exportar csv';
+    botonExportarCsvListado.disabled = registros.length === 0;
     mensajeVacioListado.hidden = registros.length > 0;
     mensajeVacioListado.textContent = hayFiltros
       ? 'No hay registros que coincidan con los filtros.'
@@ -328,6 +372,7 @@ const ListadoCatalogo = (function () {
       paginaActual += 1;
       renderizarListado();
     });
+    botonExportarCsvListado.addEventListener('click', exportarCsvListado);
   }
 
   function mostrarAvisoResultadoListado() {
@@ -352,6 +397,7 @@ const ListadoCatalogo = (function () {
 
     tituloListado = document.getElementById('listado-catalogo-titulo');
     enlaceAgregarListado = document.getElementById('listado-catalogo-agregar');
+    botonExportarCsvListado = document.getElementById('listado-catalogo-exportar-csv');
     formularioFiltrosListado = document.getElementById('listado-catalogo-formulario');
     botonLimpiarFiltrosListado = document.getElementById('listado-catalogo-limpiar-filtros');
     contenedorFiltrosActivosListado = document.getElementById('listado-catalogo-filtros-activos');
